@@ -40,11 +40,10 @@ sections:
     Here's a second paragraph to that test paragraph.
 ---
 
-@misc{li2023slog,
+
+@inproceedings{li2023slog,
       title={SLOG: A Structural Generalization Benchmark for Semantic Parsing}, 
       author={Bingzhi Li and Lucia Donatelli and Alexander Koller and Tal Linzen and Yuekun Yao and Najoung Kim},
       year={2023},
-      eprint={2310.15040},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+      booktitle={Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP)}
 }
