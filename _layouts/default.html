@@ -32,7 +32,7 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+  <link rel="icon" href="./static/images/favicon.ico">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -129,12 +129,10 @@
     <div class="container is-max-desktop">
   
       <div class="columns is-centered">
-  
-        <!-- Visual Effects. -->
-        <div class="column">
+          <div class="column">
           <div class="content">
-            <h2 class="title is-3">{{ section.title }}</h2>
-            {{ section.content | markdownify }}
+            {% if section.title %}<h2 class="title is-3">{{ section.title }}</h2>{% endif %}
+            {% if section.centered %}<center>{{ section.centered | markdownify }}</center>{% else %}{{ section.content | markdownify }}{% endif %}
           </div>
         </div>
       </div>
