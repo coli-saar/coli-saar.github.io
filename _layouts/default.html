@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+  {% if page.keywords %}<meta name="keywords" content="{{ page.keywords }}">{% endif %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }}</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <!-- <script src="./static/js/index.js"></script> -->
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">{{ page.title }}</h1>
+          <div class="is-size-5 publication-authors">
+            {% for author in page.authors %}
+            <span class="author-block">
+                <a href="{{ author.homepage }}">{{ author.name }}</a><sup>{{ author.affiliation }}</sup>{% if forloop.last != true %},{% endif %}
+            </span>
+            {% endfor %}
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            {% for affiliation in page.affiliations %}
+            <span class="author-block"><sup>{{ affiliation.id }}</sup>{{ affiliation.name }}{% if forloop.last != true %},{% endif %}</span>
+            {% endfor %}
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              {% if page.paper %}
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="{{ page.paper }}"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              {% endif %}
+
+              {% if page.video %}
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="{{ page.video }}"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              {% endif %}
+
+              {% if page.code %}
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="{{ page.code }}"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              {% endif %}
+
+              {% if page.data %}
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="{{ page.data }}"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% for section in page.sections %}
+<section class="section">
+    <div class="container is-max-desktop">
+  
+      <div class="columns is-centered">
+  
+        <!-- Visual Effects. -->
+        <div class="column">
+          <div class="content">
+            <h2 class="title is-3">{{ section.title }}</h2>
+            {{ section.content | markdownify }}
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+{% endfor %}
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>{{ content | remove: '<p>' | remove: '</p>'}}</code></pre>
+  </div>
+</section>
+
+
+
+<footer class="footer">
+    <div class="container">
+        <!--
+      <div class="columns is-centered">
+        <div class="publication-links">
+          <span class="link-block">
+            <img src="./website/images/ai2-logo-header.png" display="block" style="max-width: 20%; align-items: center; margin: auto;">
+          </span>
+          <br>
+          <span class="link-block">
+            <img src="./website/images/aristo-logo-header.png" display="block" style="max-width: 15%; align-items: center; margin: auto;">
+          </span>
+        </div>
+      </div>
+      <br>
+-->
+
+      <p><center><a href="https://www.lst.uni-saarland.de/">Department of Language Science and Technology</a><br/>
+        <a href="https://www.uni-saarland.de/">Saarland University</a><br/>
+        The website template is borrowed from <a href="https://nerfies.github.io/">here</a>.</center></p>
+    </div>
+  </div>
+  </footer>
+
+
+</body>
+</html>
