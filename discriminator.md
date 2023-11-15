@@ -1,0 +1,23 @@
+---
+layout: default
+title: "SLOG: A Structural Generalization Benchmark for Semantic Parsing"
+authors:
+- name: Yuekun Yao
+  affiliation: 1
+- name: Alexander Koller
+  homepage: https://www.coli.uni-saarland.de/~koller/
+  affiliation: 1
+affiliations:
+- id: 1
+  name: Saarland University
+---
+
+
+<center>
+    <img src="static/images/discriminator/intro.pdf" width="80%" />
+</center>
+
+
+## Abstract
+
+The ability to predict an NLP model's accuracy on unseen, potentially out-of-distribution data is a prerequisite for trustworthiness. We present a novel model that establishes upper and lower bounds on the accuracy, without requiring gold labels for the unseen data. We achieve this by training a *discriminator* which predicts whether the output of a given sequence-to-sequence model is correct or not. We show across a variety of tagging, parsing, and semantic parsing tasks that the gold accuracy is reliably between the predicted upper and lower bounds, and that these bounds are remarkably close together.
