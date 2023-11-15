@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "SLOG: A Structural Generalization Benchmark for Semantic Parsing"
+title: "Predicting generalization performance with correctness discriminators"
 authors:
 - name: Yuekun Yao
   affiliation: 1
@@ -12,10 +12,10 @@ affiliations:
   name: Saarland University
 ---
 
-
 <center>
-    <img src="static/images/discriminator/intro.pdf" width="80%" />
+    <img src="static/images/discriminator/intro.png" width="100%" />
 </center>
+
 
 
 ## Abstract
