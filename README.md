@@ -19,12 +19,9 @@ The following entries in the YAML are optional, but highly recommended (where ap
 - `code`: The URL of the code for the paper.
 - `data`: The URL to a dataset described in the paper.
 - `video`: The URL to a video about the paper.
+- `bibtex`: The Bibtex entry for the paper. See the `slog.md` file to see how multi-line content can be specified using YAML's `|` operator.
 
-You can then specify the page content in the YAML under the `sections` entry. Each section consists of a `title` and a `content`. See the `slog.md` file to see how multi-line content can be specified using YAML's `|` operator. You can use any Markdown formatting in the content, e.g. to include images. It is a good idea to include lots of images to avoid the feeling of a wall of text. Feel free to add the images to the `static/images` directory; they can then be accessed as `/static/images/image.png` from the Markdown file.
-
-It would be great if we could simply make the sections the page content (below the header), but the HTML template we use uses HTML `<section>` elements to split the page into visually nice parts, and I (Alexander) haven't been able to figure out how to translate Markdown sections into HTML sections like that. Perhaps we can improve this in the future.
-
-So instead, include a Bibtex entry as the page content.
+You can then specify the page content as Markdown. Use h2 (`##`) to separate sections. You can use any Markdown formatting in the content, e.g. to include images. It is a good idea to include lots of images to avoid the feeling of a wall of text. Feel free to add the images to the `static/images` directory; they can then be accessed as `/static/images/image.png` from the Markdown file.
 
 
 ## Offline use

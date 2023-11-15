@@ -131,11 +131,14 @@
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
+    {{ content }}
+
+    {% if page.bibtex %}
     <h2 class="title">BibTeX</h2>
-    <pre><code>{{ content | remove: '<p>' | remove: '</p>'}}</code></pre>
+    <pre><code>{{ page.bibtex | remove: '<p>' | remove: '</p>'}}</code></pre>
+    {% endif %}
   </div>
 </section>
-
 
 
 <footer class="footer">
