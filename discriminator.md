@@ -20,11 +20,11 @@ paper: https://github.com/coli-saar/coli-saar.github.io/tree/main/static/images/
 
 ## Abstract
 
-The ability to predict an NLP model's accuracy on unseen, potentially out-of-distribution data is a prerequisite for trustworthiness. We present a novel model that establishes upper and lower bounds on the accuracy, without requiring gold labels for the unseen data. We achieve this by training a ***discriminator*** which predicts whether the output of a given sequence-to-sequence model is correct or not. We show across a variety of tagging, parsing, and semantic parsing tasks that the gold accuracy is reliably between the predicted **upper and lower bounds**, and that these bounds are remarkably close together.
+The ability to predict an NLP model's accuracy on unseen, potentially out-of-distribution data is a prerequisite for trustworthiness. We present a novel model that establishes upper and lower bounds on the accuracy, without requiring gold labels for the unseen data. We achieve this by training a **discriminator** which predicts whether the output of a given sequence-to-sequence model is correct or not. We show across a variety of tagging, parsing, and semantic parsing tasks that the gold accuracy is reliably between the predicted **upper and lower bounds**, and that these bounds are remarkably close together.
 
 
 
-In this paper,  we present a method for predicting ***upper and lower bounds***  for the accuracy of a model on unlabeled test data. The example above illustrates how our method works compared to previous confidence-based methods. On an unseen OOD test set, the confidence from a parser is usually an unreliable estimate of its performance. Instead of using such confidence scores, our discriminators discriminates whether an input sentence matches its output sequence (the predicted meaning representation) or not. By using ensemble and a special voting mechanism, our method provides reliable upper and lower bounds that capture the gold accuracy.  
+In this paper,  we present a method for predicting upper and lower bounds  for the accuracy of a model on unlabeled test data. The example above illustrates how our method works compared to previous confidence-based methods. On an unseen OOD test set, the confidence from a parser is usually an unreliable estimate of its performance. Instead of using such confidence scores, our discriminators **discriminate** whether an input sentence matches its output sequence (the predicted meaning representation) or not. By using **ensemble** and a special **voting mechanism**, our method provides reliable upper and lower bounds that capture the gold accuracy.  
 
 
 
@@ -65,9 +65,8 @@ The core of our method is a "correctness discriminator model." This model is cru
 
 
 
-our predicted upper and lower bounds accurately capture the gold accuracy (i.e. high reliability). This pattern holds for 9 of 10 our datasets, and even for POS-COGS, where this conclusion is not true, the gold accuracy only violates the bounds by a small amount. Meanwhile, the predicted upper and lower bounds are usually close (i.e. high tightness). 
+our predicted upper and lower bounds accurately capture the gold accuracy (i.e. **high reliability**). This pattern holds for 9 of 10 our datasets, and even for POS-COGS, where this conclusion is not true, the gold accuracy only violates the bounds by a small amount. Meanwhile, the predicted upper and lower bounds are usually close (i.e. **high tightness**). 
 
 
 
-We also compare our method with other point estimation methods by using the mean of bounds as our predicted accuracy (e.g. *Mean* row in *Ours* results).  Although our method is not specifically designed for point estimation, it substantially outperforms previous methods and achieves a relatively low AE score on semantic parsing and POS tagging tasks. On constituency parsing tasks, our method does not outperform \textit{ATC} \cite{garg2022leveraging}, but is still better than other baselines.
-Our method is also especially useful for OOD test sets, where confidence-based methods yield a much larger AE. 
+We also compare our method with other point estimation methods by using the mean of bounds as our predicted accuracy (e.g. *Mean* row in *Ours* results).  Although our method is not specifically designed for point estimation, it substantially outperforms previous methods and achieves a relatively low AE score on semantic parsing and POS tagging tasks. On constituency parsing tasks, our method does not outperform *ATC*, a strong baseline for predicting generalization performance, but is still better than other baselines. Our method is also especially useful for OOD test sets, where confidence-based methods yield a much larger AE. 
