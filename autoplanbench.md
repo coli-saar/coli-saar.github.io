@@ -14,7 +14,7 @@ paper: https://github.com/coli-saar/coli-saar.github.io/blob/main/static/images/
 ---
 
 <center>
-    <img src="static/images/autoplanbench/autoplanbench.svg" width="90%" />
+    <img src="static/images/autoplanbench/autoplanbench.svg" width="80%" />
 </center>
 
 
