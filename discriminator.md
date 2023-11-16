@@ -70,7 +70,7 @@ making it applicable even if only unlabeled test data is available.
 
 Our predicted upper and lower bounds accurately capture the gold accuracy (i.e. **high reliability**), across a number of datasets that involve tagging, parsing, and semantic parsing, in both in-distribution and out-of-distribution settings. This pattern holds for 9 of 10 our datasets, and even for POS-COGS, where this conclusion is not true, the gold accuracy only violates the bounds by a small amount. Meanwhile, the predicted upper and lower bounds are usually close (i.e. **high tightness**). 
 
-Although this is not the main goal of our work, our method also compares favorably to earlier work for predicting point estimates of the accuracy, by taking the mean of the upper and lower bound (*Mean* row in *Ours* results).  It substantially outperforms previous methods and achieves a relatively low AE score (absolute estimation error) on semantic parsing and POS tagging tasks. On constituency parsing tasks, our method does not outperform [ATC](https://arxiv.org/abs/2201.04234), a strong baseline for predicting generalization performance, but is still better than other baselines. Our method is also especially useful for OOD test sets, where confidence-based methods yield a much larger AE. 
+Although this is not the main goal of our work, our method also compares favorably to earlier work for predicting point estimates of the accuracy, by taking the mean of the upper and lower bound (*Mean* row in *Ours* results).  It substantially outperforms previous methods and achieves a very low AE score (absolute estimation error) on semantic parsing and POS tagging tasks. In particular, we outperform [ATC](https://arxiv.org/abs/2201.04234), a recent SOTA model that serves as a strong baseline. Our method is especially useful for OOD test sets, where confidence-based methods yield a much larger AE. 
 
 
 <center>
@@ -78,7 +78,7 @@ Although this is not the main goal of our work, our method also compares favorab
 </center>
 
 
-## Impact of test sample
+## Impact of the test sample
 
 The accuracy of the bound predictors is robust to the choice of sample from the test set; even with relatively small sample sizes, we already obtain good estimates. With increasing sample size, the variation of predictions across samples diminishes.
 
