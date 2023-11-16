@@ -10,7 +10,7 @@ authors:
 affiliations:
 - id: 1
   name: Saarland University
-paper: https://github.com/coli-saar/coli-saar.github.io/tree/main/static/images/discriminator/paper.pdf
+paper: https://github.com/ykyaol7/ykyaol7.github.io/blob/master/static/images/discriminator/paper.pdf
 ---
 
 <center>
