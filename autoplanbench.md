@@ -3,6 +3,7 @@ layout: default
 title: "AUTOPLANBENCH: Automatically generating benchmarks for LLM planners from PDDL"
 authors:
 - name: Katharina Stein
+  homepage: https://kastein.github.io/
   affiliation: 1
 - name: Alexander Koller
   homepage: https://www.coli.uni-saarland.de/~koller/
