@@ -10,7 +10,7 @@ authors:
 affiliations:
 - id: 1
   name: Saarland University
-paper: 
+paper: https://github.com/coli-saar/coli-saar.github.io/blob/main/static/images/autoplanbench/AutoPlanBench.pdf
 ---
 
 <center>
