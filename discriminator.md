@@ -78,3 +78,13 @@ Although this is not the main goal of our work, our method also compares favorab
 </center>
 
 
+## Bound prediction accuracy
+
+The accuracy of the bound predictors is robust to the choice of sample from the test set; even with relatively small sample sizes, we already obtain good estimates. With increasing sample size, the variation of predictions across samples diminishes.
+
+
+
+<center>
+    <img src="static/images/discriminator/cogs-curves.png" width="40%" />
+    <img src="static/images/discriminator/top-curve.png" width="40%" />
+</center>
