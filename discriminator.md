@@ -14,7 +14,7 @@ paper: https://github.com/coli-saar/coli-saar.github.io/tree/main/static/images/
 ---
 
 <center>
-    <img src="static/images/discriminator/intro.png" width="100%" />
+    <img src="static/images/discriminator/intro.png" width="90%" />
 </center>
 
 
@@ -78,7 +78,7 @@ Although this is not the main goal of our work, our method also compares favorab
 </center>
 
 
-## Bound prediction accuracy
+## Impact of test sample
 
 The accuracy of the bound predictors is robust to the choice of sample from the test set; even with relatively small sample sizes, we already obtain good estimates. With increasing sample size, the variation of predictions across samples diminishes.
 
@@ -86,5 +86,6 @@ The accuracy of the bound predictors is robust to the choice of sample from the 
 
 <center>
     <img src="static/images/discriminator/cogs-curves.png" width="40%" />
+    &nbsp; &nbsp;
     <img src="static/images/discriminator/top-curve.png" width="40%" />
 </center>
