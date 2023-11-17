@@ -10,7 +10,7 @@ authors:
 affiliations:
 - id: 1
   name: Saarland University
-paper: https://github.com/ykyaol7/ykyaol7.github.io/blob/master/static/images/discriminator/paper.pdf
+paper: https://arxiv.org/abs/2311.09422
 ---
 
 <center>
