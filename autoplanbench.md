@@ -14,6 +14,15 @@ affiliations:
 paper: https://arxiv.org/abs/2311.09830
 code: https://github.com/minecraft-saar/autoplanbench/tree/main
 data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_dataset
+bibtex: |
+    @misc{li2023slog,
+          title={AutoPlanBench: : Automatically generating benchmarks for LLM planners from PDDL}, 
+          author={Katharina Stein and Alexander Koller},
+          year={2023},
+          eprint={2311.09830},
+          archivePrefix={arXiv},
+          primaryClass={cs.AI}
+    }
 ---
 
 <center>
@@ -34,4 +43,8 @@ others remain out of reach of current methods.
 
 ## Contribution 
 We present AutoPlanBench, a method for automatically converting PDDL problem specifications into benchmarks for LLMs. AutoPlanBench requires no manual effort for running LLM planning on new domains; the PDDL specification is converted into natural language automatically. This makes it possible, for the first time, to investigate the planning capabilities of LLMs at a larger scale, and it ensures that knowledge that the human problem converter might have about the planning domain doesn't accidentally slip into the natural language task. In addition to the code for converting PDDL into language, we are also releasing an initial set of natural-language conversions of complex PDDL problems from 12 domains.
+
+## Bibtext
+
+
 
