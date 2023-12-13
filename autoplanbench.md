@@ -15,7 +15,7 @@ paper: https://arxiv.org/abs/2311.09830
 code: https://github.com/minecraft-saar/autoplanbench/tree/main
 data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_dataset
 bibtex: |
-    @misc{li2023slog,
+    @misc{stein2023autoplanbench,
           title={AutoPlanBench: : Automatically generating benchmarks for LLM planners from PDDL}, 
           author={Katharina Stein and Alexander Koller},
           year={2023},
