@@ -55,7 +55,9 @@ Blocksworld Example
 
 <img src="static/images/autoplanbench/blocksworld_domain_conv.png" width="70%" />
 
+
 <br>
+
 
 <img src="static/images/autoplanbench/blocksworld_problem_conv.png" width="70%" />
 
@@ -67,7 +69,9 @@ Blocksworld Example
 
 <img src="static/images/autoplanbench/visitall_domain_conv.png" width="70%" />
 
+
 <br>
+
 
 <img src="static/images/autoplanbench/visitall_problem_conv.png" width="70%" />
 
@@ -77,7 +81,7 @@ Blocksworld Example
 
 ### Overall Set-up
 
-<img src="static/images/autoplanbench/setup.png">
+<img src="static/images/autoplanbench/setup.png" width="60%" />
 
 * **P-LLM**: does the planning, i.e. predicts a complete plan / the next action given the domain and problem descriptions
 * **L-LLM**: translates natural language output of the P-LLM back to PDDL
