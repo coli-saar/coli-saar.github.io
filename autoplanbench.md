@@ -57,7 +57,7 @@ Blocksworld Example
 
 
 <br>
-
+<br>
 
 <img src="static/images/autoplanbench/blocksworld_problem_conv.png" width="70%" />
 
@@ -71,7 +71,7 @@ Blocksworld Example
 
 
 <br>
-
+<br>
 
 <img src="static/images/autoplanbench/visitall_problem_conv.png" width="70%" />
 
