@@ -26,7 +26,7 @@ bibtex: |
 ---
 
 <center>
-    <img src="static/images/autoplanbench/autoplanbench2.png" width="50%" />
+    <img src="static/images/autoplanbench/autoplanbench2.png" width="70%" />
 </center>
 
 
@@ -35,8 +35,8 @@ bibtex: |
 
 We present AutoPlanBench, a tool for automatically converting classical planning benchmarks from PDDL (Planning Domain Definition Language) into natural language planning tasks. PDDL planning domains are very popular in the classical AI planning research community and available domains differ with respect to a number of characteristics designed to compare the performance classical planning approaches in different settings.
 
-AutoPlanBench makes these planning tasks available for research on reasoning and planning with Large Language Models (LLMs) at a large scale without requiring manual effort or detailed knowledge about PDDL and the domains. 
-Evaluating LLM planners across such a broad range of planning domains, enables us to pinpoint features of planning domains and specific planning problems that make them hard to for LLMs. 
+AutoPlanBench makes these planning tasks available for research on reasoning and planning with Large Language Models (LLMs) at a large scale without requiring manual effort or detailed knowledge about PDDL and the domains. We show that the automatically converted planning domains yield comparable results as manually created domain descriptions (from Valmeekam et al. 2023: [PlanBench](https://github.com/karthikv792/LLMs-Planning/tree/main/plan-bench)) across different planning domains and LLM planning approaches.
+Evaluating LLM planners across a broad range of planning domains, enables us to pinpoint features of planning domains and specific planning problems that make them hard to for LLMs. 
 
 We release the dataset of natural-language conversions of 12 PDDL domains and a small set of NL planning problems for each of them. Additionally, we provide the code for converting more PDDL domains and problems into natural-language planning tasks for LLMs. 
 
@@ -46,20 +46,24 @@ In addition to the code for creating LLM planning problems, we provide the imple
 ## PDDL to NL Methodology
 
 **Example Blocksworld Domain**
+
 <center>
     <img src="static/images/autoplanbench/blocksworld_domain_conv.png" width="70%" />
 </center>
+
 <br>
+
 <center>
     <img src="static/images/autoplanbench/blocksworld_problem_conv.png" width="70%" />
 </center>
-
 
 **Example Visitall Domain**
 <center>
     <img src="static/images/autoplanbench/visitall_domain_conv.png" width="70%" />
 </center>
+
 <br>
+
 <center>
     <img src="static/images/autoplanbench/visitall_problem_conv.png" width="70%" />
 </center>
@@ -68,6 +72,12 @@ In addition to the code for creating LLM planning problems, we provide the imple
 
 ## LLM Planning Results 
 
-In LLM planning experiments on a new suite of 12 planning domains, we find that the planning performance differs considerably between the domains. We show that while the best LLM planners do well on some planning tasks, many remain out of reach of current search-based planning methods.
+We find that the automatically converted planning domains (APB) yield comparable results as manually created domain descriptions (Manual; from Valmeekam et al. 2023: [PlanBench](https://github.com/karthikv792/LLMs-Planning/tree/main/plan-bench)) across the different planning domains and LLM planning approaches.
 
 
+<img src="static/images/autoplanbench/comparison_table.png" width="60%" />
+
+
+Overall, we find that the planning performance differs considerably between the 12 tested domains. While the best LLM planners (ReAct) do well on some planning tasks, many remain out of reach of current search-based planning methods.
+
+<img src="static/images/autoplanbench/additional_domain_table.png" width="60%" />
