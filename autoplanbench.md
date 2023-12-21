@@ -26,8 +26,9 @@ bibtex: |
 ---
 
 <center>
-    <img src="static/images/autoplanbench/autoplanbench2.pdf" width="70%" />
+    <img src="static/images/autoplanbench/autoplanbench2.png" width="70%" />
 </center>
+
 
 
 ## AutoPlanBench
@@ -45,19 +46,19 @@ In addition to the code for creating LLM planning problems, we provide the imple
 ## PDDL to NL Methodology
 
 <center>
-    <img src="static/images/autoplanbench/blocksworld_domain_conv.pdf" width="70%" />
+    <img src="static/images/autoplanbench/blocksworld_domain_conv.png" width="70%" />
 </center>
 
 <center>
-    <img src="static/images/autoplanbench/blocksworld_problem_conv.pdf" width="70%" />
+    <img src="static/images/autoplanbench/blocksworld_problem_conv.png" width="70%" />
 </center>
 
 <center>
-    <img src="static/images/autoplanbench/visitall_domain_conv.pdf" width="70%" />
+    <img src="static/images/autoplanbench/visitall_domain_conv.png" width="70%" />
 </center>
 
 <center>
-    <img src="static/images/autoplanbench/visitall_problem_conv.pdf" width="70%" />
+    <img src="static/images/autoplanbench/visitall_problem_conv.png" width="70%" />
 </center>
 
 ## LLM Planning Approaches
