@@ -26,7 +26,7 @@ bibtex: |
 ---
 
 <center>
-    <img src="static/images/autoplanbench/autoplanbench2.png" width="70%" />
+    <img src="static/images/autoplanbench/autoplanbench2.png" width="50%" />
 </center>
 
 
