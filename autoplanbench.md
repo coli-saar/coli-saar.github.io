@@ -45,18 +45,21 @@ In addition to the code for creating LLM planning problems, we provide the imple
 
 ## PDDL to NL Methodology
 
+**Example Blocksworld Domain**
 <center>
     <img src="static/images/autoplanbench/blocksworld_domain_conv.png" width="70%" />
 </center>
-
+<br>
 <center>
     <img src="static/images/autoplanbench/blocksworld_problem_conv.png" width="70%" />
 </center>
 
+
+**Example Visitall Domain**
 <center>
     <img src="static/images/autoplanbench/visitall_domain_conv.png" width="70%" />
 </center>
-
+<br>
 <center>
     <img src="static/images/autoplanbench/visitall_problem_conv.png" width="70%" />
 </center>
