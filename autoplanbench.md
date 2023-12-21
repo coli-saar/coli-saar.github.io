@@ -26,7 +26,7 @@ bibtex: |
 ---
 
 <center>
-    <img src="static/images/autoplanbench/autoplanbench2.png" width="70%" />
+    <img src="static/images/autoplanbench/autoplanbench2.png" width="50%" />
 </center>
 
 
@@ -45,10 +45,12 @@ In addition to the code for creating LLM planning problems, we provide the imple
 
 ## PDDL to NL Methodology
 
+PDDL planning tasks consist of a domain file and a problem file that defines a specific problem instance with respect to the domain. AutoPlanBench converts both the domain PDDL file and problem files into natural language encodings as illustrated below. The details about the LLM-based conversion methodology can be found in our paper.  
+
 **Example Blocksworld Domain**
 
 
-<img src="static/images/autoplanbench/blocksworld_domain_conv.png" width="50%" />
+<img src="static/images/autoplanbench/blocksworld_domain_conv.png" width="70%" />
 
 
 <br>
@@ -69,6 +71,28 @@ In addition to the code for creating LLM planning problems, we provide the imple
 
 
 ## LLM Planning Approaches
+
+
+
+<details>
+  <summary>Full ReAct Example</summary>
+  
+  <img src="static/images/autoplanbench/interactive_example/step1.png" width="70%" />
+  <img src="static/images/autoplanbench/interactive_example/step2.png" width="70%" />
+  <img src="static/images/autoplanbench/interactive_example/step3.png" width="70%" />
+  <img src="static/images/autoplanbench/interactive_example/step4.png" width="70%" />
+  <img src="static/images/autoplanbench/interactive_example/step5.png" width="70%" />
+  <img src="static/images/autoplanbench/interactive_example/step6.png" width="70%" />
+  <img src="static/images/autoplanbench/interactive_example/step7.png" width="70%" />
+  <img src="static/images/autoplanbench/interactive_example/step8.png" width="70%" />
+  <img src="static/images/autoplanbench/interactive_example/step9.png" width="70%" />
+  <img src="static/images/autoplanbench/interactive_example/step10.png" width="70%" />
+  <img src="static/images/autoplanbench/interactive_example/step11.png" width="70%" />
+  <img src="static/images/autoplanbench/interactive_example/step12.png" width="70%" />
+  
+
+</details>
+
 
 ## LLM Planning Results 
 
