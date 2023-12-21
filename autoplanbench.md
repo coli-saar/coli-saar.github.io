@@ -47,32 +47,33 @@ In addition to the code for creating LLM planning problems, we provide the imple
 
 **Example Blocksworld Domain**
 
-<center>
-    <img src="static/images/autoplanbench/blocksworld_domain_conv.png" width="70%" />
-</center>
+
+<img src="static/images/autoplanbench/blocksworld_domain_conv.png" width="50%" />
+
 
 <br>
 
-<center>
-    <img src="static/images/autoplanbench/blocksworld_problem_conv.png" width="70%" />
-</center>
+
+<img src="static/images/autoplanbench/blocksworld_problem_conv.png" width="70%" />
+
 
 **Example Visitall Domain**
-<center>
-    <img src="static/images/autoplanbench/visitall_domain_conv.png" width="70%" />
-</center>
+
+<img src="static/images/autoplanbench/visitall_domain_conv.png" width="70%" />
+
 
 <br>
 
-<center>
-    <img src="static/images/autoplanbench/visitall_problem_conv.png" width="70%" />
-</center>
+
+<img src="static/images/autoplanbench/visitall_problem_conv.png" width="70%" />
+
 
 ## LLM Planning Approaches
 
 ## LLM Planning Results 
 
-Accuracy (Acc): A plan is considered as correct if the goal state is reached with the last predicted step. The Acc<sup>0</sup> metric measures the number of plans that would be correct under the stricter constraint that the generated plan is correct and directly executable, i.e. no non-executable actions are predicted in the interactive approaches. <br>
+Accuracy (Acc): A plan is considered as correct if the goal state is reached with the last predicted step. The Acc<sup>0</sup> metric measures the number of plans that would be correct under the stricter constraint that the generated plan is correct and directly executable, i.e. no non-executable actions are predicted in the interactive approaches.
+
 Optimal Plan Length Factor (LF): Average length factor of the correct predicted plans compared to the optimal plans (only counting executable actions).
 
 We find that the automatically converted planning domains (APB) yield comparable results as manually created domain descriptions (Manual; from Valmeekam et al. 2023: [PlanBench](https://github.com/karthikv792/LLMs-Planning/tree/main/plan-bench)) across the different planning domains and LLM planning approaches.
@@ -83,4 +84,4 @@ We find that the automatically converted planning domains (APB) yield comparable
 
 Overall, we find that the planning performance differs considerably between the 12 tested domains. While the best LLM planners (ReAct) do well on some planning tasks, many remain out of reach of current search-based planning methods.
 
-<img src="static/images/autoplanbench/additional_domain_table.png" width="60%" />
+<img src="static/images/autoplanbench/additional_domain_table.png" width="80%" />
