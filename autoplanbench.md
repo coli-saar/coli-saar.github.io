@@ -5,6 +5,12 @@ authors:
 - name: Katharina Stein
   homepage: https://kastein.github.io/
   affiliation: 1
+- name: Daniel Fišer
+  homepage: https://www.danfis.cz/
+  affiliation: 1
+- name: Jörg Hoffmann
+  homepage: http://fai.cs.uni-saarland.de/hoffmann/
+  affiliation: 1
 - name: Alexander Koller
   homepage: https://www.coli.uni-saarland.de/~koller/
   affiliation: 1
@@ -15,14 +21,14 @@ paper: https://arxiv.org/abs/2311.09830
 code: https://github.com/minecraft-saar/autoplanbench/tree/main
 data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_dataset
 bibtex: |
-    @misc{stein2023autoplanbench,
-          title={AutoPlanBench: : Automatically generating benchmarks for LLM planners from PDDL}, 
-          author={Katharina Stein and Alexander Koller},
-          year={2023},
-          eprint={2311.09830},
-          archivePrefix={arXiv},
-          primaryClass={cs.AI}
-    }
+    @misc{stein2024autoplanbench,
+      title={AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL}, 
+      author={Katharina Stein and Daniel Fišer and Jörg Hoffmann and Alexander Koller},
+      year={2024},
+      eprint={2311.09830v2},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI}
+}
 ---
 
 <center>
@@ -120,14 +126,23 @@ Blocksworld Example
 * Accuracy (Acc): A plan is considered as correct if the goal state is reached with the last predicted step. The Acc<sup>0</sup> metric measures the number of plans that would be correct under the stricter constraint that the generated plan is correct and directly executable, i.e. no non-executable actions are predicted in the interactive approaches.
 * Optimal Plan Length Factor (LF): Average length factor of the correct predicted plans compared to the optimal plans (only counting executable actions).
 
+<img src="static/images/autoplanbench/table_results_new.png" width="60%" />
+
 
 **Results: AutoPlanBench vs. Manual Conversions**<br>
-We find that the automatically converted planning domains (APB) yield comparable results as manually created domain descriptions (Manual; from Valmeekam et al. 2023: [PlanBench](https://github.com/karthikv792/LLMs-Planning/tree/main/plan-bench)) across the different planning domains and LLM planning approaches.
+We find that the automatically converted planning domains (APB) yield comparable results as manually created domain descriptions (Manual; from Valmeekam et al. 2023: [PlanBench](https://github.com/karthikv792/LLMs-Planning/tree/main/plan-bench)) across the different planning domains and LLM planning approaches. (See upper part of Table 2)
 
-
-<img src="static/images/autoplanbench/comparison_table.png" width="60%" />
 
 **Results: LLM Planning Performance**<br>
-Overall, we find that the planning performance differs considerably between the 12 tested domains. While the best LLM planners (ReAct) do well on some planning tasks, many remain out of reach of current search-based planning methods.
+Overall, we find that the planning performance differs considerably between the 12 tested domains. While the best LLM planners (ReAct) do well on some planning tasks, many remain out of reach of current search-based planning methods (see Table 2).
 
-<img src="static/images/autoplanbench/additional_domain_table.png" width="80%" />
+<img src="static/images/autoplanbench/results_length.png" width="60%" />
+
+One potential factor influencing the different results across domains is the plan length. Overall, the LLM planners performed better on domains with shorter problems. This could indicate that LLMs are worse at long-term planning or at generalization from shorter demonstrations to larger test problems. 
+
+Additionally, we find that domains with actions that have irreversible effects on the state and where hence dead-end states can occur pose a problem for LLM planners.
+
+
+
+
+
