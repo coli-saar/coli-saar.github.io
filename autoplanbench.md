@@ -23,7 +23,7 @@ data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_da
 bibtex: |
     @misc{li2023slog,
           title={AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL}, 
-          author={Katharina Stein and Daniel Fiser and Joerg Hoffmann and Alexander Koller},
+          author={Katharina Stein and Daniel Fi\v{s}er and J\"org Hoffmann and Alexander Koller},
           year={2024},
           eprint={2311.09830v2},
           archivePrefix={arXiv},
@@ -126,7 +126,7 @@ Blocksworld Example
 * Accuracy (Acc): A plan is considered as correct if the goal state is reached with the last predicted step. The Acc<sup>0</sup> metric measures the number of plans that would be correct under the stricter constraint that the generated plan is correct and directly executable, i.e. no non-executable actions are predicted in the interactive approaches.
 * Optimal Plan Length Factor (LF): Average length factor of the correct predicted plans compared to the optimal plans (only counting executable actions).
 
-<img src="static/images/autoplanbench/table_results_new.png" width="70%" />
+<img src="static/images/autoplanbench/table_results_new.png" width="80%" />
 
 
 **Results: AutoPlanBench vs. Manual Conversions**<br>
@@ -136,7 +136,7 @@ We find that the automatically converted planning domains (APB) yield comparable
 **Results: LLM Planning Performance**<br>
 Overall, we find that the planning performance differs considerably between the 12 tested domains. While the best LLM planners (ReAct) do well on some planning tasks, many remain out of reach of current search-based planning methods (see Table 2).
 
-<img src="static/images/autoplanbench/results_length.png" width="450%" />
+<img src="static/images/autoplanbench/results_length.png" width="45%" />
 
 One potential factor influencing the different results across domains is the plan length. Overall, the LLM planners performed better on domains with shorter problems. This could indicate that LLMs are worse at long-term planning or at generalization from shorter demonstrations to larger test problems. 
 
