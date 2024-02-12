@@ -21,38 +21,9 @@ paper: https://arxiv.org/abs/2311.09830
 code: https://github.com/minecraft-saar/autoplanbench/tree/main
 data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_dataset
 bibtex: |
-    @misc{stein2024autoplanbench,
-      title={AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL}, 
-      author={Katharina Stein and Daniel Fiser and Joerg Hoffmann and Alexander Koller},
-      year={2024},
-      eprint={2311.09830v2},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI}
-}
----
-authors:
-- name: Katharina Stein
-  homepage: https://kastein.github.io/
-  affiliation: 1
-- name: Daniel Fiser
-  homepage: https://www.danfis.cz/
-  affiliation: 1
-- name: Jörg Hoffmann
-  homepage: http://fai.cs.uni-saarland.de/hoffmann/
-  affiliation: 1
-- name: Alexander Koller
-  homepage: https://www.coli.uni-saarland.de/~koller/
-  affiliation: 1
-affiliations:
-- id: 1
-  name: Saarland University
-paper: https://arxiv.org/abs/2311.09830
-code: https://github.com/minecraft-saar/autoplanbench/tree/main
-data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_dataset
-bibtex: |
     @misc{li2023slog,
           title={AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL}, 
-          author={Katharina Stein and Daniel Fišer and Jörg Hoffmann and Alexander Koller},
+          author={Katharina Stein and Daniel Fiser and Joerg Hoffmann and Alexander Koller},
           year={2024},
           eprint={2311.09830v2},
           archivePrefix={arXiv},
