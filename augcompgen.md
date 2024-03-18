@@ -11,7 +11,8 @@ authors:
 affiliations:
 - id: 1
   name: Saarland University
-paper: 
+paper: https://arxiv.org/abs/2401.09815
+code: https://github.com/coli-saar/data-augmentation-compgen
 ---
 
 <center>
