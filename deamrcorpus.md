@@ -4,10 +4,10 @@ title: "A Corpus of German Abstract Meaning Representation (DeAMR)"
 authors:
 - name: Christoph Otto
   homepage: https://github.com/chriott/
-  affiliation: 3
+  affiliation: 5
 - name: Jonas Groschwitz
   homepage: https://jgroschwitz.github.io
-  affiliation: 1
+  affiliation: 3
 - name: Alexander Koller
   homepage: https://www.coli.uni-saarland.de/~koller/
   affiliation: 1
@@ -23,9 +23,11 @@ affiliations:
 - id: 2
   name: Vrije Universiteit Amsterdam
 - id: 3
-  name: University of Potsdam
+  name: University of Amsterdam
 - id: 4
   name: Georgetown University
+- id: 5
+  name: University of Potsdam
 paper: 
 code: 
 data: https://github.com/chriott/DeAMR/
@@ -89,7 +91,6 @@ The sources for the DeAMR corpus are two different corpora (for which EnAMR anno
 | Consensus (FT) | 100        | 77    | 12.86     |
 | Xinhua (FT)    | 86         | 29    | 12.31     |
 | LLP            | 1562       | 100   | 10.4      |
-| 
 Total          | 2933       | 400   | 12.92     |
 
 
