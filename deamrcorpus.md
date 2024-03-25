@@ -37,6 +37,8 @@ bibtex:
 
 ## A Corpus of German Abstract Meaning Representation (DeAMR)
 
+<br>
+
 <center>
     <img src="static/images/deamrcorpus/dummy_deamr.png" width="50%"/>
 </center>
