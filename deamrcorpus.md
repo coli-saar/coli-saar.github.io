@@ -4,30 +4,31 @@ title: "A Corpus of German Abstract Meaning Representation (DeAMR)"
 authors:
 - name: Christoph Otto
   homepage: https://github.com/chriott/
-  affiliation: 5
+  affiliation: 1
 - name: Jonas Groschwitz
   homepage: https://jgroschwitz.github.io
-  affiliation: 3
+  affiliation: 2
 - name: Alexander Koller
   homepage: https://www.coli.uni-saarland.de/~koller/
-  affiliation: 1
+  affiliation: 3
 - name: Xiulin Yang
   homepage: https://xiulinyang.github.io
   affiliation: 4
 - name: Lucia Donatelli
   homepage: https://luciaelizabeth.github.io
-  affiliation: 2
+  affiliation: 5
 affiliations:
 - id: 1
-  name: Saarland University
+  name: University of Potsdam
 - id: 2
-  name: Vrije Universiteit Amsterdam
-- id: 3
   name: University of Amsterdam
+- id: 3
+  name: Saarland University
 - id: 4
   name: Georgetown University
 - id: 5
-  name: University of Potsdam
+  name: Vrije Universiteit Amsterdam
+  
 paper: 
 code: 
 data: https://github.com/chriott/DeAMR/
