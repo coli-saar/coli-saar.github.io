@@ -37,6 +37,10 @@ bibtex:
 
 ## A Corpus of German Abstract Meaning Representation (DeAMR)
 
+<center>
+    <img src="static/images/deamrcorpus/dummy_deamr.png" width="50%"/>
+</center>
+
 ## Abstract
 
 We present the first comprehensive set of guidelines for German Abstract Meaning Representation (Deutsche AMR, DeAMR) along with an annotated corpus of 400 DeAMRs. Taking English AMR (EnAMR) as our starting point, we propose significant adaptations to faithfully represent the structure and semantics of German, focusing particularly on verb frames, compound words, and modality. We validate our annotation through inter-annotator agreement and further evaluate our corpus with a comparison of structural divergences between EnAMR and DeAMR on parallel sentences, replicating previous work that finds both cases of cross-lingual structural alignment and cases of meaningful linguistic divergence. Finally, we fine-tune state-of-the-art multi-lingual and cross-lingual AMR parsers on our corpus and find that, while our small corpus is insufficient to produce quality output, there is a need to continue develop and evaluate against gold non-English AMR data.
@@ -64,7 +68,7 @@ the native guidelines.
 **Formal pronouns.** Formal pronouns are annotated with an
 additional :polite + label.
 
-**Compounds**. Compounds are quite productive in German, such that new words are frequently invented. Here, the sparsity of coverage of German Propbank noted above can be problematic. To tackle this issue, we develop a heuristic to ensure consistent annotation of compounds in DeAMR
+**Compounds**. Compounds are quite productive in German, such that new words are frequently invented. Here, the sparsity of coverage of German Propbank can be problematic. To tackle this issue, we develop a heuristic to ensure consistent annotation of compounds in DeAMR.
 
 <center>
     <img src="static/images/deamrcorpus/compound_heuristics.png" width="50%"/>
@@ -72,7 +76,7 @@ additional :polite + label.
 
 <br>
 
-**Modality** The meaning of modal markers, such as modal verbs, are mapped to a matching predicate frame that approximates the modal semantic meaning as illustrated below. Further, To handle MPs in DeAMR, we introduce a set of six new labels that leverage the existing :mode-role to indicate grammatical mood: suprised, conclusive, confirmation-
+**Modality** The meaning of modal markers, such as modal verbs, are mapped to a matching predicate frame that approximates the modal semantic meaning as illustrated below. Further, to handle the meaning of modal particles in DeAMR, we introduce a set of six new labels that leverage the existing :mode-role to indicate grammatical mood: suprised, conclusive, confirmation-
 seeking, irony/sarcasm, confirming and resigning.
 
 <center>
