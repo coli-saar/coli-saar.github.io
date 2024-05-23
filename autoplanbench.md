@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "AUTOPLANBENCH: Automatically generating benchmarks for LLM planners from PDDL"
+title: "Automating the Generation of Prompts for LLM-based Action Choice in PDDL Planning"
 authors:
 - name: Katharina Stein
   homepage: https://kastein.github.io/
@@ -21,6 +21,14 @@ paper: https://arxiv.org/abs/2311.09830
 code: https://github.com/minecraft-saar/autoplanbench/tree/main
 data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_dataset
 bibtex: |
+    @misc{stein2024autoplanbench,
+          title={AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL}, 
+          author={Katharina Stein and Daniel Fi\v{s}er and J\"org Hoffmann and Alexander Koller},
+          year={2024},
+          eprint={2311.09830v2},
+          archivePrefix={arXiv},
+          primaryClass={cs.AI}
+    }
     @misc{stein2024autoplanbench,
           title={AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL}, 
           author={Katharina Stein and Daniel Fi\v{s}er and J\"org Hoffmann and Alexander Koller},
