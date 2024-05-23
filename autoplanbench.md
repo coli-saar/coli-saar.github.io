@@ -29,19 +29,16 @@ bibtex: |
           archivePrefix={arXiv},
           primaryClass={cs.AI}
     }
-    @misc{stein2024autoplanbench,
-          title={AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL}, 
-          author={Katharina Stein and Daniel Fi\v{s}er and J\"org Hoffmann and Alexander Koller},
-          year={2024},
-          eprint={2311.09830v2},
-          archivePrefix={arXiv},
-          primaryClass={cs.AI}
-    }
 ---
 
 <center>
     <img src="static/images/autoplanbench/autoplanbench2.png" width="50%" />
 </center>
+
+
+**Note on different versions**: <br>
+the previous version of this paper had been published on Arxiv under the title "AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL" which is currently linked above. This version of the paper will be soon replaced by the updated version "Automating the Generation of Prompts for LLM-based Action Choice in PDDL Planning" that will be published as part of the ICAPS Workshop on Bridging the Gap Between AI Planning and Reinforcement Learning (PRL). <br>
+The repository are already updated and the website is currently being updated. 
 
 
 
@@ -91,22 +88,22 @@ Blocksworld Example
 
 </details>
 
-## LLM Planning Approaches
+## LLM Action-Choice Mechanisms
 
 ### Overall Set-up
 
 <img src="static/images/autoplanbench/setup.png" width="50%" />
 
-* **P-LLM**: does the planning, i.e. predicts a complete plan / the next action given the domain and problem descriptions
+* **P-LLM**: does the action selection, i.e. predicts a complete plan / the next action given the domain and problem descriptions
 * **L-LLM**: translates natural language output of the P-LLM back to PDDL
-* **Domain Engine**: simulates the world state; outputs an observation for an input action; checks plan validity
+* **Simulator**: simulates the world state; outputs an observation for an input action; checks plan validity; determines whether the goal is satisfied
 
 ### Tested Approaches
 
-|                 | Non-interactive                                                                                   | Interactive                                                                                                                                  |
+|                 | Plan Generation (Non-interactive)                                                                                   | LLM as a policy (Interactive)                                                                                                                                  |
 |-----------------|---------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| **No Thoughts** | *Basic* <br> * one complete plan                                                                  | *Act* <br> * step by step prediction of next action <br> * observation from domain engine                                                    |
-| **Thoughts**    | *CoT* <br> * Chain-of-Thought (Wei et al. 2022) <br> * on complete plan <br> * reasoning thoughts | *ReAct* <br> * Yao et al. 2023 <br> * step by step prediction of next action <br> * observation from domain engine <br> * reasoning thoughts |
+| **No Thoughts** | *Basic* <br> * one complete plan                                                                  | *Act* <br> * step by step prediction of next action <br> * observation from the simulator                                                    |
+| **Thoughts**    | *CoT* <br> * Chain-of-Thought (Wei et al. 2022) <br> * on complete plan <br> * reasoning thoughts | *ReAct* <br> * Yao et al. 2023 <br> * step by step prediction of next action <br> * observation from the simulator <br> * reasoning thoughts |
 
 <details>
   <summary>Full ReAct Example</summary>
@@ -131,8 +128,9 @@ Blocksworld Example
 ## LLM Planning Results 
 
 **Metrics**<br>
-* Accuracy (Acc): A plan is considered as correct if the goal state is reached with the last predicted step. The Acc<sup>0</sup> metric measures the number of plans that would be correct under the stricter constraint that the generated plan is correct and directly executable, i.e. no non-executable actions are predicted in the interactive approaches.
-* Optimal Plan Length Factor (LF): Average length factor of the correct predicted plans compared to the optimal plans (only counting executable actions).
+* Coverage: The absolute number of correctly solved instances
+    * Plan generation: an instance is considered to be solved correctly in case the goal is satisfied after executing all predicted actions from the generated plan
+    * Policy: an instance is considered to be solved correctly in case the goal is satisfied within the specified number of steps; the simulator itself takes care of stopping the generation of further actions in that case
 
 <img src="static/images/autoplanbench/table_results_new.png" width="80%" />
 
@@ -144,7 +142,6 @@ We find that the automatically converted planning domains (APB) yield comparable
 **Results: LLM Planning Performance**<br>
 Overall, we find that the planning performance differs considerably between the 12 tested domains. While the best LLM planners (ReAct) do well on some planning tasks, many remain out of reach of current search-based planning methods (see Table 2).
 
-<img src="static/images/autoplanbench/results_length.png" width="45%" />
 
 One potential factor influencing the different results across domains is the plan length. Overall, the LLM planners performed better on domains with shorter problems. This could indicate that LLMs are worse at long-term planning or at generalization from shorter demonstrations to larger test problems. 
 
