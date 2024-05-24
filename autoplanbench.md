@@ -38,8 +38,10 @@ bibtex: |
 
 **Note on different versions**: <br>
 the previous version of this paper had been published on Arxiv under the title ["AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL"](https://arxiv.org/abs/2311.09830). This version of the paper will be soon replaced by the updated version "Automating the Generation of Prompts for LLM-based Action Choice in PDDL Planning" when it is published as part of the ICAPS Workshop on Bridging the Gap Between AI Planning and Reinforcement Learning (PRL). Meanwhile, the latest version can be accessed using the linkg above. <br>
-The repository is already updated and the website is currently being updated. 
+The repository is already updated. 
 
+
+**The website is currently being updated.**
 
 
 ## AutoPlanBench
