@@ -17,7 +17,7 @@ authors:
 affiliations:
 - id: 1
   name: Saarland University
-paper: https://arxiv.org/abs/2311.09830
+paper: https://github.com/coli-saar/coli-saar.github.io/blob/main/static/images/autoplanbench/AutoPlanBench_ICAPS_Camera-ready.pdf
 code: https://github.com/minecraft-saar/autoplanbench/tree/main
 data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_dataset
 bibtex: |
@@ -37,8 +37,8 @@ bibtex: |
 
 
 **Note on different versions**: <br>
-the previous version of this paper had been published on Arxiv under the title "AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL" which is currently linked above. This version of the paper will be soon replaced by the updated version "Automating the Generation of Prompts for LLM-based Action Choice in PDDL Planning" that will be published as part of the ICAPS Workshop on Bridging the Gap Between AI Planning and Reinforcement Learning (PRL). <br>
-The repository are already updated and the website is currently being updated. 
+the previous version of this paper had been published on Arxiv under the title ["AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL"](https://arxiv.org/abs/2311.09830). This version of the paper will be soon replaced by the updated version "Automating the Generation of Prompts for LLM-based Action Choice in PDDL Planning" when it is published as part of the ICAPS Workshop on Bridging the Gap Between AI Planning and Reinforcement Learning (PRL). Meanwhile, the latest version can be accessed using the linkg above. <br>
+The repository is already updated and the website is currently being updated. 
 
 
 
@@ -125,29 +125,52 @@ Blocksworld Example
 </details>
 
 
-## LLM Planning Results 
+## Experiments and Results 
 
 **Metrics**<br>
 * Coverage: The absolute number of correctly solved instances
     * Plan generation: an instance is considered to be solved correctly in case the goal is satisfied after executing all predicted actions from the generated plan
     * Policy: an instance is considered to be solved correctly in case the goal is satisfied within the specified number of steps; the simulator itself takes care of stopping the generation of further actions in that case
 
-<img src="static/images/autoplanbench/table_results_new.png" width="80%" />
+
+**Symbolic Baselines**<br>
+* rnd: selects an action at random from all actions applicable in the current state 
+* BrFS: Breadth-first search
+* lmc: optimal A* and the LM-Cut heuristic (Helmert et al. 2009)
+* ff: satisficing greedy best-first search with FF heuristic (Hoffmann and Nebel, 2001)
+We restrict the number of selected actions for rnd to the same number as the maximum number of steps for the LLM policy mechanisms. <br>
+For the other three baselines we impose a memory and time limit of 8 GB and 30 minutes respectively. 
 
 
 **Results: AutoPlanBench vs. Manual Conversions**<br>
-We find that the automatically converted planning domains (APB) yield comparable results as manually created domain descriptions (Manual; from Valmeekam et al. 2023: [PlanBench](https://github.com/karthikv792/LLMs-Planning/tree/main/plan-bench)) across the different planning domains and LLM planning approaches. (See upper part of Table 2)
+We find that the automatically converted planning domains (Auto) yield comparable results as manually created domain descriptions (Manual; from Valmeekam et al. 2023: [PlanBench](https://github.com/karthikv792/LLMs-Planning/tree/main/plan-bench)) across the different planning domains and LLM action-choice mechanisms. 
+
+<img src="static/images/autoplanbench/comparison_table.png" width="80%" />
 
 
-**Results: LLM Planning Performance**<br>
-Overall, we find that the planning performance differs considerably between the 12 tested domains. While the best LLM planners (ReAct) do well on some planning tasks, many remain out of reach of current search-based planning methods (see Table 2).
+**Results: LLM Action-choice Performance**<br>
+Overall, we find that the planning performance differs considerably between the 12 tested domains. While the best LLM action-choice performance (ReAct) do well on some planning tasks, many remain out of reach of current search-based planning methods.
 
+<img src="static/images/autoplanbench/main_results_table.png" width="80%" />
 
 One potential factor influencing the different results across domains is the plan length. Overall, the LLM planners performed better on domains with shorter problems. This could indicate that LLMs are worse at long-term planning or at generalization from shorter demonstrations to larger test problems. 
 
-Additionally, we find that domains with actions that have irreversible effects on the state and where hence dead-end states can occur pose a problem for LLM planners.
+We find that domains with actions that have irreversible effects on the state and where hence dead-end states can occur pose a problem for LLM planners (Floortile, Goldminer).
+
+## Results: Scaling Experiments
+
+
+<img src="static/images/autoplanbench/scaled_results_table.png" width="80%" />
 
 
 
+## References
+
+M. Helmert and C. Domshlak. Landmarks, critical paths and abstractions: What’s the difference anyway? In *Proceedings of the 19th International Conference on Automated Planning and Scheduling, ICAPS*. AAAI, 2009.<br>
+J. Hoffmann and B. Nebel. The FF planning system: Fast plan generation through heuristic search. 'Journal of Artificial Intelligence Research*, 14:253–302, 2001.<br>
+K. Valmeekam, M. Marquez, A. Olmo, S. Sreedharan, and S. Kambhampati. Planbench: An extensible benchmark for evaluating large language models on planning and reasoning about change. In *Thirty-seventh Conference on Neural Information Processing Systems Datasets and Benchmarks Track*, 2023.<br>
+K. Valmeekam, M. Marquez, S. Sreedharan, and S. Kambhampati. On the planning abilities of large language models - a critical investigation. In *Advances in Neural Information Processing Systems*, pages 75993– 76005. Curran Associates, Inc., 2023.<br>
+J. Wei, X. Wang, D. Schuurmans, M. Bosma, b. ichter, F. Xia, E. Chi, Q. V. Le, and D. Zhou. Chain-of-thought prompting elicits reasoning in large language models. In *Advances in Neural Information Processing Systems*, volume 35, pages 24824–24837. Curran Associates, Inc., 2022.<br>
+S. Yao, J. Zhao, D. Yu, N. Du, I. Shafran, K. R. Narasimhan, and Y. Cao. React: Synergizing reasoning and acting in language models. In *The Eleventh International Conference on Learning Representations*, 2023.
 
 
