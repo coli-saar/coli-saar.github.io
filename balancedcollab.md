@@ -16,10 +16,9 @@ affiliations:
   name: Saarland University
 - id: 2
   name: University of Potsdam
-#   IS THERE A DEMO FLAG? 
 paper: https://arxiv.org/abs/2406.08202  
 code: https://github.com/coli-saar/placement-game/ 
-data: https://github.com/coli-saar/placement-game/data/
+data: https://github.com/coli-saar/placement-game/tree/main/data
 bibtex: | 
     @misc{jeknić2024dialogue, 
         title={A Dialogue Game for Eliciting Balanced Collaboration}, 
@@ -32,7 +31,6 @@ bibtex: |
 ---
 
 <center>
-<!-- BIG IMAGE -->
     <img src="static/images/balancedcollab/view.png" width="100%" />
 </center>
 
@@ -56,7 +54,6 @@ by dragging it with the mouse. Players cannot see each other’s scene; they can
 
 <div style="width: 49%;">
 
-<!-- <span style="font-size: 24px;"> **Assets ↆ** </span> -->
 <details>
 <summary> <span style="font-size: 20px;"> Assets</span> </summary>
 <center>
