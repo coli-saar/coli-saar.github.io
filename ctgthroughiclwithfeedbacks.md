@@ -3,11 +3,14 @@ layout: default
 title: "Fine-grained Controllable Text Generation through In-context Learning with Feedback"
 authors:
 - name: Sarubi Thillainathan
+  affiliation: 1
   homepage: https://www.sarubi.com/
 - name: Alexander Koller
+  affiliation: 1
   homepage: https://www.coli.uni-saarland.de/~koller/
 affiliations:
-- name: Saarland University
+- id: 1 
+  name: Saarland University
 paper: https://arxiv.org/pdf/2406.11338
 code:  
 data:  
