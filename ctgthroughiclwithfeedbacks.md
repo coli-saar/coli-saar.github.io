@@ -132,7 +132,7 @@ Example Explanation of Linguistic Feature Value Calculation
 <center>
     <img src="static/images/ctgthroughiclwithfeedbacks/ctg_workflow.svg" width="100%" />
     <br>
-    <b>Figure 3: CTG-LF workflow (ZS - Zero-shot, FS - Few-shot) </b>
+    <b>Figure 3: Workflow of CTG-LF  (ZS - Zero-shot, FS - Few-shot) </b>
 </center>
 
 <br>
