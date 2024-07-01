@@ -100,7 +100,7 @@ A model that predicts values for the features given the input sentence *w* and t
 [//]: # (    <img src="static/images/ctgthroughiclwithfeedbacks/fvp.svg" width="100%" />)
 
 <center>
-    <img src="static/images/ctgthroughiclwithfeedbacks/fvp_wo_caption.svg" width="100%" />
+    <img src="static/images/ctgthroughiclwithfeedbacks/fvp.svg" width="100%" />
     <br>
     <b>Figure 2: Feature value predictor based on decision tree classifier. (SG - Source Grade and TG - desired Target Grade) </b>
 </center>
