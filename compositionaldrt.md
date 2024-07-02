@@ -34,7 +34,7 @@ bibtex: |
 
 
 <center>
-    <img src="static/images/compositionaldrt/pipeline.pdf" width="70%" />
+    <img src="static/images/compositionaldrt/pipeline.png" width="70%" />
 </center>
 
 
@@ -50,16 +50,16 @@ We show that the AMS parser reliably produces well-formed outputs and performs w
 
 We introduce the **AMS parser**, an accurate compositional DRT parser. The AMS parser extends the AM parser, which predicts meaning representations compositionally and has achieved high accuracy across a range of sembanks. The AM parser by itself struggles to predict structural nesting in DRT. The key challenge is to predict scope because differences in scope assignment affect the represented meaning significantly (as shown in the figure below).
 
-<center><img src="static/images/compositionaldrt/drt.pnb" width="80%" /></center>
+<center><img src="static/images/compositionaldrt/drt.png" width="50%" /></center>
 
 We proposed a novel mechanism for predicting scope assignments in DRT parsing. We train a dependency parser to predict scope relations between word tokens and project this information into the DRT representation using word-to-box alignments. 
 
 By combining it with the compositional AM parser, the AMS parser outperforms existing DRT parsers trained on the same dataset, especially for complex sentences. It also avoids the prediction of ill-formed DRGs that plague other models. The prediction of scope information has been a long-standing challenge in computational semantics; our dependency parsing mechanism achieves very high accuracy on this task.
 
-<center><img src="static/images/compositionaldrt/eval1.png" width="80%" /></center>
+<center><img src="static/images/compositionaldrt/eval1.png" width="50%" /></center>
 
 Additionally, compared to other models trained on gold data, the AMS parser excels at maintaining its accuracy as the DRGs grow more complex.
-<center><img src="static/images/compositionaldrt/eval2.png" width="80%" /></center>
+<center><img src="static/images/compositionaldrt/eval2.png" width="50%" /></center>
 <br/>
 
 <!-- <center><img src="static/images/slog/fig2.png" width="60%" /></center> -->
