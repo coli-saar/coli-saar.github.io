@@ -56,10 +56,10 @@ We proposed a novel mechanism for predicting scope assignments in DRT parsing. W
 
 By combining it with the compositional AM parser, the AMS parser outperforms existing DRT parsers trained on the same dataset, especially for complex sentences. It also avoids the prediction of ill-formed DRGs that plague other models. The prediction of scope information has been a long-standing challenge in computational semantics; our dependency parsing mechanism achieves very high accuracy on this task.
 
-<center><img src="static/images/compositionaldrt/eval1.png" width="50%" /></center>
-
+<left><img src="static/images/compositionaldrt/eval1.png" width="50%" /></left>
+<right><img src="static/images/compositionaldrt/eval2.png" width="50%" /></right>
 Additionally, compared to other models trained on gold data, the AMS parser excels at maintaining its accuracy as the DRGs grow more complex.
-<center><img src="static/images/compositionaldrt/eval2.png" width="50%" /></center>
+
 <br/>
 
 <!-- <center><img src="static/images/slog/fig2.png" width="60%" /></center> -->
