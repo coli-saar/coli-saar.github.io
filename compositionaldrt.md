@@ -20,16 +20,18 @@ affiliations:
   name: Saarland University
 - id: 4
   name: University of Groningen
-paper: https://arxiv.org/abs/2310.15040
+paper: https://www.arxiv.org/abs/2407.01899
 code: https://github.com/xiulinyang/compositional_drs_parsing?tab=readme-ov-file
 data: https://pmb.let.rug.nl/
 bibtex: |
-    @inproceedings{li2023slog,
-          title={SLOG: A Structural Generalization Benchmark for Semantic Parsing}, 
-          author={Bingzhi Li and Lucia Donatelli and Alexander Koller and Tal Linzen and Yuekun Yao and Najoung Kim},
-          year={2023},
-          booktitle={Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP)}
-    }
+   @misc{yang2024scopeenhanced,
+    title={Scope-enhanced Compositional Semantic Parsing for DRT},
+    author={Xiulin Yang and Jonas Groschwitz and Alexander Koller and Johan Bos},
+    year={2024},
+    eprint={2407.01899},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
 ---
 
 
@@ -48,11 +50,11 @@ We show that the AMS parser reliably produces well-formed outputs and performs w
 
 ## AMS Parser
 
-We introduce the **AMS parser**, an accurate compositional DRT parser. The AMS parser extends the AM parser, which predicts meaning representations compositionally and has achieved high accuracy across a range of sembanks. The AM parser by itself struggles to predict structural nesting in DRT. The key challenge is to predict scope because differences in scope assignment affect the represented meaning significantly (as shown in the figure below).
+We introduce the **AMS parser**, an accurate compositional DRT parser. The AMS parser extends the AM parser, which predicts meaning representations compositionally and has achieved high accuracy across a range of sembanks. The AM parser by itself struggles to predict structural nesting in DRT. Hence, the key challenge is to predict scope because differences in scope assignment affect the represented meaning significantly (as shown in the figure below).
 
 <center><img src="static/images/compositionaldrt/drt.png" width="50%" /></center>
 
-We proposed a novel mechanism for predicting scope assignments in DRT parsing. We train a dependency parser to predict scope relations between word tokens and project this information into the DRT representation using word-to-box alignments. 
+We proposed a novel mechanism for predicting scope assignments in DRT parsing by training a dependency parser to predict scope relations between word tokens and projecting this information into the DRT representation using word-to-box alignments. 
 
 By combining it with the compositional AM parser, the AMS parser outperforms existing DRT parsers trained on the same dataset, especially for complex sentences. It also avoids the prediction of ill-formed DRGs that plague other models. The prediction of scope information has been a long-standing challenge in computational semantics; our dependency parsing mechanism achieves very high accuracy on this task.
 
