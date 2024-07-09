@@ -24,14 +24,14 @@ paper: https://www.arxiv.org/abs/2407.01899
 code: https://github.com/xiulinyang/compositional_drs_parsing?tab=readme-ov-file
 data: https://pmb.let.rug.nl/
 bibtex: |
-   @misc{yang2024scopeenhanced,
+    @misc{yang2024scopeenhanced,
     title={Scope-enhanced Compositional Semantic Parsing for DRT},
     author={Xiulin Yang and Jonas Groschwitz and Alexander Koller and Johan Bos},
     year={2024},
     eprint={2407.01899},
     archivePrefix={arXiv},
-    primaryClass={cs.CL}
-}
+    primaryClass={cs.CL}}
+
 ---
 
 
