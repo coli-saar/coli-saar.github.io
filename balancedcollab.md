@@ -16,18 +16,33 @@ affiliations:
   name: Saarland University
 - id: 2
   name: University of Potsdam
-paper: https://arxiv.org/abs/2406.08202  
+paper: https://aclanthology.org/2024.sigdial-1.41/  
 code: https://github.com/coli-saar/placement-game/ 
 data: https://github.com/coli-saar/placement-game/tree/main/data
 bibtex: | 
-    @misc{jeknić2024dialogue, 
-        title={A Dialogue Game for Eliciting Balanced Collaboration}, 
-        author={Isidora Jeknić and David Schlangen and Alexander Koller},
-        year={2024},
-        eprint={2406.08202},
-        archivePrefix={arXiv},
-        primaryClass={cs.CL}
-    }
+    @inproceedings{jeknic-etal-2024-dialogue,
+    title = "A Dialogue Game for Eliciting Balanced Collaboration",
+    author = "Jeknic, Isidora  and
+      Schlangen, David  and
+      Koller, Alexander",
+    editor = "Kawahara, Tatsuya  and
+      Demberg, Vera  and
+      Ultes, Stefan  and
+      Inoue, Koji  and
+      Mehri, Shikib  and
+      Howcroft, David  and
+      Komatani, Kazunori",
+    booktitle = "Proceedings of the 25th Annual Meeting of the Special Interest Group on Discourse and Dialogue",
+    month = sep,
+    year = "2024",
+    address = "Kyoto, Japan",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.sigdial-1.41",
+    doi = "10.18653/v1/2024.sigdial-1.41",
+    pages = "477--489",
+    abstract = "Collaboration is an integral part of human dialogue. Typical task-oriented dialogue games assign asymmetric roles to the participants, which limits their ability to elicit naturalistic role-taking in collaboration and its negotiation. We present a novel and simple online setup that favors balanced collaboration: a two-player 2D object placement game in which the players must negotiate the goal state themselves. We show empirically that human players exhibit a variety of role distributions, and that balanced collaboration improves task performance. We also present an LLM-based baseline agent which demonstrates that automatic playing of our game is an interesting challenge for artificial systems.",
+}
+
 ---
 
 <center>
