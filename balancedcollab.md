@@ -18,7 +18,7 @@ affiliations:
   name: University of Potsdam
 paper: https://aclanthology.org/2024.sigdial-1.41/  
 code: https://github.com/coli-saar/placement-game/ 
-data: https://github.com/coli-saar/placement-game/tree/main/data
+data: https://github.com/coli-saar/placement-game/tree/main/crowdsourced_data
 bibtex: |
   @inproceedings{jeknic2024dialogue, 
         title={A Dialogue Game for Eliciting Balanced Collaboration}, 
