@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Automating the Generation of Prompts for LLM-based Action Choice in PDDL Planning"
+title: "Automating the Generation of Prompts for LLM-based Action Choice in PDDL Planning <br>(AutoPlanBench 1.0)"
 authors:
 - name: Katharina Stein
   homepage: https://kastein.github.io/
@@ -18,7 +18,7 @@ affiliations:
 - id: 1
   name: Saarland University
 paper: https://github.com/coli-saar/coli-saar.github.io/blob/main/static/images/autoplanbench/AutoPlanBench_ICAPS_Camera-ready.pdf
-code: https://github.com/minecraft-saar/autoplanbench/tree/main
+code: https://github.com/minecraft-saar/autoplanbench/releases/tag/v1.0
 data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_dataset
 bibtex: |
     @misc{stein2024autoplanbench,
@@ -37,12 +37,11 @@ bibtex: |
 
 
 **Note on different versions**: <br>
-the previous version of this paper had been published on Arxiv under the title ["AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL"](https://arxiv.org/abs/2311.09830). This version of the paper will be soon replaced by the updated version "Automating the Generation of Prompts for LLM-based Action Choice in PDDL Planning" when it is published as part of the ICAPS Workshop on Bridging the Gap Between AI Planning and Reinforcement Learning (PRL). Meanwhile, the latest version can be accessed using the linkg above. <br>
-The repository is already updated. 
+This website corresponds to the version of the paper that has been presented at the [Workshop on Bridging the Gap Between AI Planning and Reinforcement Learning](https://prl-theworkshop.github.io/prl2024-icaps/) (PRL) at ICAPS 2024. The workshop version of the paper can be accessed using their website or the link above. <br>
 
+The newest version of the paper with an extended dataset (Autoplanbench 2.0) is available at a [separate website]().<br>
 
-**The website is currently being updated.**
-
+A previous version of this paper had been published on Arxiv under the title ["AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL"](https://arxiv.org/abs/2311.09830). <br> 
 
 ## AutoPlanBench
 
@@ -102,10 +101,10 @@ Blocksworld Example
 
 ### Tested Approaches
 
-|                 | Plan Generation (Non-interactive)                                                                                   | LLM as a policy (Interactive)                                                                                                                                  |
-|-----------------|---------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| **No Thoughts** | *Basic* <br> * one complete plan                                                                  | *Act* <br> * step by step prediction of next action <br> * observation from the simulator                                                    |
-| **Thoughts**    | *CoT* <br> * Chain-of-Thought (Wei et al. 2022) <br> * on complete plan <br> * reasoning thoughts | *ReAct* <br> * Yao et al. 2023 <br> * step by step prediction of next action <br> * observation from the simulator <br> * reasoning thoughts |
+|                 | Plan Generation (Non-interactive)                                                                  | LLM as a policy (Interactive)                                                                                                                                  |
+|-----------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| **No Thoughts** | *Basic* <br> * one complete plan                                                                   | *Act* <br> * step by step prediction of next action <br> * observation from the simulator                                                    |
+| **Thoughts**    | *CoT* <br> * Chain-of-Thought (Wei et al. 2022) <br> * one complete plan <br> * reasoning thoughts | *ReAct* <br> * Yao et al. 2023 <br> * step by step prediction of next action <br> * observation from the simulator <br> * reasoning thoughts |
 
 <details>
   <summary>Full ReAct Example</summary>
@@ -147,13 +146,13 @@ For the other three baselines we impose a memory and time limit of 8 GB and 30 m
 **Results: AutoPlanBench vs. Manual Conversions**<br>
 We find that the automatically converted planning domains (Auto) yield comparable results as manually created domain descriptions (Manual; from Valmeekam et al. 2023: [PlanBench](https://github.com/karthikv792/LLMs-Planning/tree/main/plan-bench)) across the different planning domains and LLM action-choice mechanisms. 
 
-<img src="static/images/autoplanbench/comparison_table.png" width="80%" />
+<img src="static/images/autoplanbench/results_version1/comparison_table.png" width="80%" />
 
 
 **Results: LLM Action-choice Performance**<br>
 Overall, we find that the planning performance differs considerably between the 12 tested domains. While the best LLM action-choice performance (ReAct) do well on some planning tasks, many remain out of reach of current search-based planning methods.
 
-<img src="static/images/autoplanbench/main_results_table.png" width="80%" />
+<img src="static/images/autoplanbench/results_version1/main_results_table.png" width="80%" />
 
 One potential factor influencing the different results across domains is the plan length. Overall, the LLM planners performed better on domains with shorter problems. This could indicate that LLMs are worse at long-term planning or at generalization from shorter demonstrations to larger test problems. 
 
@@ -162,7 +161,7 @@ We find that domains with actions that have irreversible effects on the state an
 ## Results: Scaling Experiments
 
 
-<img src="static/images/autoplanbench/scaled_results_table.png" width="80%" />
+<img src="static/images/autoplanbench/results_version1/scaled_results_table.png" width="80%" />
 
 
 
