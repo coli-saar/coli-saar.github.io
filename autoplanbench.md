@@ -37,8 +37,9 @@ bibtex: |
 
 
 **Note on different versions**: <br>
-This website corresponds to the latest version of the AutoPlanBench work. For information about previous versions of the paper and data see Other versions at the end of the website.
-APB 2.0:<br>
+This website corresponds to the latest version of the AutoPlanBench work. For information about previous versions of the paper and data (e.g. the arxiv and PRL workshop versions) see the "Other versions" section at the end of the website.
+
+**APB 2.0**:<br>
 * latest version of the dataset
 * containing the same 12 domains as APB 1.0 plus a large number of IPC datasets
 * NL versions generated using OpenAI's GPT-4o model between Aug-Nov, 2024
