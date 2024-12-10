@@ -75,35 +75,34 @@ Blocksworld PDDL Example
 </summary>
 
 <img src="static/images/autoplanbench/blocksworld_example.png" width="70%" />
-
+<br>
 </details>
-
-
+<br>
+<br>
+<br>
 AutoPlanBench / NL2PDDL converts both the domain PDDL file and problem files into natural language encodings as illustrated below. This conversion consists of the following main steps:
 1. conversion of each individual PDDL predicate and PDDL action into NL snippets
 2. renaming of object names, e.g. 'a' -> 'object_0' (untyped domain), 't1' -> 'truck_0' (typed domain)
 3. creation of NL descriptions of the domain and problem definitions based on the outputs of step 1. and 2.
 More details about the LLM-based conversion methodology can be found in our paper.
-
+<br>
+<br>
 **Example: conversion of predicates**
-<img src="static/images/autoplanbench/conversion_preds.png" width="70%" />
 
+<img src="static/images/autoplanbench/conversion_preds.png" width="60%" />
+<br>
+<br>
 **Example: converting Blocksworld**
+
 <img src="static/images/autoplanbench/conversion_overview.png" width="70%" />
-
-
+<br>
+<br>
 
 ## LLM Action-Choice Mechanisms
 
-### Overall Set-up
 
-<img src="static/images/autoplanbench/approaches.png" width="50%" />
+<img src="static/images/autoplanbench/approaches.png" width="70%" />
 
-* **P-LLM**: does the action selection, i.e. predicts a complete plan / the next action given the domain and problem descriptions
-* **L-LLM**: translates natural language output of the P-LLM back to PDDL
-* **Simulator**: simulates the world state; outputs an observation for an input action; checks plan validity; determines whether the goal is satisfied
-
-### Tested Approaches
 
 |                 | Plan Generation (Non-interactive)                                                                  | LLM as a policy (Interactive)                                                                                                                                  |
 |-----------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -147,16 +146,16 @@ We restrict the number of selected actions for rnd to the same number as the max
 For the other three baselines we impose a memory and time limit of 8 GB and 30 minutes respectively. 
 
 
-**Results: LLM Action-choice Performance**<br>
+### Results: LLM Action-choice Performance
 
-Results on the custom datasets: 
+**Results on the custom datasets:**
 
-<img src="static/images/autoplanbench/results_version2/main_table.png" width="60%" />
+<img src="static/images/autoplanbench/results_version2/main_table.png" width="50%" />
 
 
-Results on IPC datasets:
+**Results on IPC datasets:**
 
-<img src="static/images/autoplanbench/results_version2/IPC_results.png" width="60%" />
+<img src="static/images/autoplanbench/results_version2/IPC_results.png" width="50%" />
 
 ## Other Versions
 
