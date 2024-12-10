@@ -102,13 +102,37 @@ More details about the LLM-based conversion methodology can be found in our pape
 ## LLM Action-Choice Mechanisms
 
 
-<img src="static/images/autoplanbench/approaches.png" width="70%" />
+<img src="static/images/autoplanbench/approaches.png" width="80%" />
 
 
 |                 | Plan Generation (Non-interactive)                                                                  | LLM as a policy (Interactive)                                                                                                                                  |
 |-----------------|----------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
 | **No Thoughts** | *Basic* <br> * one complete plan                                                                   | *Act* <br> * step by step prediction of next action <br> * observation from the simulator                                                    |
 | **Thoughts**    | *CoT* <br> * Chain-of-Thought (Wei et al. 2022) <br> * one complete plan <br> * reasoning thoughts | *ReAct* <br> * Yao et al. 2023 <br> * step by step prediction of next action <br> * observation from the simulator <br> * reasoning thoughts |
+
+
+<details open>
+<summary> 
+LLM Plan Generation illustration:
+</summary>
+**Basic:**<br>
+<img src="static/images/autoplanbench/illustration_basic.png" width="70%" />
+<br>
+**CoT:**<br>
+<img src="static/images/autoplanbench/illustration_cot.png" width="70%" />
+
+</details>
+
+<details open>
+<summary> 
+LLM as an Action Policy illustration:
+</summary>
+**Act:**<br>
+<img src="static/images/autoplanbench/illustration_act.png" width="70%" />
+<br>
+</details>
+
+
 
 <details>
   <summary>Full ReAct Example</summary>
