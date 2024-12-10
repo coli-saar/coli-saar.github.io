@@ -102,7 +102,7 @@ More details about the LLM-based conversion methodology can be found in our pape
 ## LLM Action-Choice Mechanisms
 
 
-<img src="static/images/autoplanbench/approaches.png" width="80%" />
+<img src="static/images/autoplanbench/approaches.png" width="90%" />
 
 
 |                 | Plan Generation (Non-interactive)                                                                  | LLM as a policy (Interactive)                                                                                                                                  |
