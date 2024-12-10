@@ -49,14 +49,13 @@ APB 2.0:<br>
 
 We present **AutoPlanBench**, a tool for **automatically converting classical planning benchmarks from PDDL into natural language** planning tasks. PDDL (Planning Domain Definition Language) planning domains are very popular in the classical AI planning research community and available domains differ with respect to a number of characteristics designed to compare the performance of classical planning approaches in different settings.
 
-AutoPlanBench makes these planning tasks available for research on **reasoning and planning with Large Language Models** (LLMs) at a large scale without requiring manual effort or detailed knowledge about PDDL and the domains. We show that the automatically converted planning domains **yield comparable results as manually created** domain descriptions (from Valmeekam et al. 2023: [PlanBench](https://github.com/karthikv792/LLMs-Planning/tree/main/plan-bench)) across different planning domains and LLM planning approaches.
-Evaluating LLM planners across a broad range of planning domains, enables us to pinpoint features of planning domains and specific planning problems that make them hard to for LLMs. 
+AutoPlanBench makes these planning tasks available for research on **reasoning and planning with Large Language Models** (LLMs) at a large scale without requiring manual effort or detailed knowledge about PDDL and the domains. We show that the automatically converted planning domains **yield comparable results as manually created** domain descriptions (from Valmeekam et al. 2023: [PlanBench](https://github.com/karthikv792/LLMs-Planning/tree/main/plan-bench)) across different planning domains and different approaches of using LLMs to solve planning problems.
 
 We release the dataset of PDDL domains and problems and their corresponding NL descriptions created by AutoPlanBench / PDDL2NL. Our APB 2.0 dataset consists of:
-* 16 custom datasets spanning 12 domains
+* **16 custom datasets** spanning 12 domains
   * 12 consisting of rather small problems
   * 4 consisting of problems created by systematically scaling up the size of the problems
-* 41 IPC datasets spanning 33 domains
+* **41 IPC datasets** spanning 33 domains
   * we include those problem instances for which we could obtain plans using symbolic planners when imposing 30min and 8GB constraints
 * one few-shot example per domain in the four different formats required for the Basic and CoT plan generation approaches and Act and ReAct action-choice approaches.
 
@@ -65,45 +64,40 @@ Additionally, we provide the code for converting more PDDL domains and problems 
 In addition to the code for creating NL planning tasks, we provide the implementation of the four different LLM planning approaches for NL input as well as of the Basic and Act approaches on PDDL inputs. 
 
 
-## PDDL to NL Planning Problems
+## Converting PDDL into NL Planning Problems
 
-PDDL planning tasks consist of a domain file and a problem file that defines a specific problem instance with respect to the domain. AutoPlanBench converts both the domain PDDL file and problem files into natural language encodings as illustrated below. The details about the LLM-based conversion methodology can be found in our paper.  
+PDDL planning tasks consist of a domain file and a problem file that defines a specific problem instance with respect to the domain. The task is to generate a plan, i.e. a sequence of actions, that transform the initial state of the problem instance into the goal state.
+ 
 
-**Blocksworld Domain**
 <details open>
 <summary> 
-Blocksworld Example
+Blocksworld PDDL Example
 </summary>
 
-<img src="static/images/autoplanbench/blocksworld_domain_conv.png" width="70%" />
-
-
-<br>
-<br>
-
-<img src="static/images/autoplanbench/blocksworld_problem_conv.png" width="70%" />
+<img src="static/images/autoplanbench/blocksworld_example.png" width="70%" />
 
 </details>
 
-**Visitall Domain**
-<details>
-<summary>Visitall Example</summary>
 
-<img src="static/images/autoplanbench/visitall_domain_conv.png" width="70%" />
+AutoPlanBench / NL2PDDL converts both the domain PDDL file and problem files into natural language encodings as illustrated below. This conversion consists of the following main steps:
+1. conversion of each individual PDDL predicate and PDDL action into NL snippets
+2. renaming of object names, e.g. 'a' -> 'object_0' (untyped domain), 't1' -> 'truck_0' (typed domain)
+3. creation of NL descriptions of the domain and problem definitions based on the outputs of step 1. and 2.
+More details about the LLM-based conversion methodology can be found in our paper.
+
+**Example: conversion of predicates**
+<img src="static/images/autoplanbench/conversion_preds.png" width="70%" />
+
+**Example: converting Blocksworld**
+<img src="static/images/autoplanbench/conversion_overview.png" width="70%" />
 
 
-<br>
-<br>
-
-<img src="static/images/autoplanbench/visitall_problem_conv.png" width="70%" />
-
-</details>
 
 ## LLM Action-Choice Mechanisms
 
 ### Overall Set-up
 
-<img src="static/images/autoplanbench/setup.png" width="50%" />
+<img src="static/images/autoplanbench/approaches.png" width="50%" />
 
 * **P-LLM**: does the action selection, i.e. predicts a complete plan / the next action given the domain and problem descriptions
 * **L-LLM**: translates natural language output of the P-LLM back to PDDL
