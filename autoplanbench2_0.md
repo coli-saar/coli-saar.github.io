@@ -37,7 +37,7 @@ bibtex: |
 
 
 **Note on different versions**: <br>
-This website corresponds to the latest version of the AutoPlanBench work. For information about previous versions of the paper and data see [Other versions]().
+This website corresponds to the latest version of the AutoPlanBench work. For information about previous versions of the paper and data see Other versions at the end of the website.
 APB 2.0:<br>
 * latest version of the dataset
 * containing the same 12 domains as APB 1.0 plus a large number of IPC datasets
@@ -157,12 +157,12 @@ For the other three baselines we impose a memory and time limit of 8 GB and 30 m
 
 Results on the custom datasets: 
 
-<img src="static/images/autoplanbench/results_version2/main_table.png" width="80%" />
+<img src="static/images/autoplanbench/results_version2/main_table.png" width="60%" />
 
 
 Results on IPC datasets:
 
-<img src="static/images/autoplanbench/results_version2/IPC_results.png" width="80%" />
+<img src="static/images/autoplanbench/results_version2/IPC_results.png" width="60%" />
 
 ## Other Versions
 

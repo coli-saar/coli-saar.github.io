@@ -17,7 +17,7 @@ authors:
 affiliations:
 - id: 1
   name: Saarland University
-paper: https://github.com/coli-saar/coli-saar.github.io/blob/main/static/images/autoplanbench/AutoPlanBench_ICAPS_Camera-ready.pdf
+paper: https://github.com/coli-saar/coli-saar.github.io/blob/main/static/images/autoplanbench/AutoPlanBench_PRL_Camera-ready.pdf
 code: https://github.com/minecraft-saar/autoplanbench/releases/tag/v1.0
 data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_dataset
 bibtex: |
@@ -39,7 +39,7 @@ bibtex: |
 **Note on different versions**: <br>
 This website corresponds to the version of the paper that has been presented at the [Workshop on Bridging the Gap Between AI Planning and Reinforcement Learning](https://prl-theworkshop.github.io/prl2024-icaps/) (PRL) at ICAPS 2024. The workshop version of the paper can be accessed using their website or the link above. <br>
 
-The newest version of the paper with an extended dataset (Autoplanbench 2.0) is available at a [separate website]().<br>
+The newest version of the paper with an extended dataset (Autoplanbench 2.0) is available at a [separate website](https://coli-saar.github.io/autoplanbench2_0).<br>
 
 A previous version of this paper had been published on Arxiv under the title ["AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL"](https://arxiv.org/abs/2311.09830). <br> 
 
