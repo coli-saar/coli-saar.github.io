@@ -17,15 +17,15 @@ authors:
 affiliations:
 - id: 1
   name: Saarland University
-paper: https://github.com/coli-saar/coli-saar.github.io/blob/main/static/images/autoplanbench/AutoPlanBench_PRL_Camera-ready.pdf
+paper: https://arxiv.org/abs/2311.09830
 code: https://github.com/minecraft-saar/autoplanbench/tree/main
 data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_dataset
 bibtex: |
     @misc{stein2024autoplanbench,
-          title={AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL}, 
+          title={Automating the Generation of Prompts for LLM-based Action Choice in PDDL Planning}, 
           author={Katharina Stein and Daniel Fi\v{s}er and J\"org Hoffmann and Alexander Koller},
-          year={2024},
-          eprint={2311.09830v2},
+          year={2025},
+          eprint={2311.09830},
           archivePrefix={arXiv},
           primaryClass={cs.AI}
     }
@@ -37,14 +37,14 @@ bibtex: |
 
 
 **Note on different versions**: <br>
-This website corresponds to the latest version of the AutoPlanBench work. For information about previous versions of the paper and data (e.g. the arxiv and PRL workshop versions) see the "Other versions" section at the end of the website.
+This website corresponds to the latest version of the AutoPlanBench work. For information about previous versions of the paper and data (e.g. the first arxiv and PRL workshop versions) see the "Other versions" section at the end of the website.
 
 **APB 2.0**:<br>
 * latest version of the dataset
 * containing the same 12 domains as APB 1.0 plus a large number of IPC datasets
 * NL versions generated using OpenAI's GPT-4o model between Aug-Nov, 2024
 * corresponds to the newest version of the paper that will soon be made publicly available
-* newest version of the paper _AutoPlanBench_ is called _NL2PDDL_
+* in the newest version of the paper _AutoPlanBench_ is called _NL2PDDL_
 
 ## AutoPlanBench
 
@@ -184,9 +184,9 @@ For the other three baselines we impose a memory and time limit of 8 GB and 30 m
 
 ## Other Versions
 
-The first version of this paper had been published on Arxiv under the title ["AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL"](https://arxiv.org/abs/2311.09830). 
+The first version of this paper had been published on Arxiv under the title ["AutoPlanBench: Automatically generating benchmarks for LLM planners from PDDL"](https://arxiv.org/abs/2311.09830v2). 
 
-A revised version of the paper that has been presented at the [Workshop on Bridging the Gap Between AI Planning and Reinforcement Learning](https://prl-theworkshop.github.io/prl2024-icaps/) (PRL) at ICAPS 2024. The workshop version of the paper can be accessed using their website or the link above. <br>
+A revised version of the paper has been presented at the [Workshop on Bridging the Gap Between AI Planning and Reinforcement Learning](https://prl-theworkshop.github.io/prl2024-icaps/) (PRL) at ICAPS 2024. The workshop version of the paper can be accessed on their [website](https://icaps24.icaps-conference.org/program/workshops/prl-papers/20.pdf). <br>
 The previous version of this website - corresponding to that paper - is still available [here](https://coli-saar.github.io/autoplanbench1_0)
 
 
