@@ -18,7 +18,7 @@ affiliations:
 # paper: 
 ---
 
-## NOTE: This page is still being developed
+## 🚧NOTE: This page is currently under construction🚧
 
 ## Abstract
 
@@ -63,11 +63,28 @@ We again see that GPT ILP Python performs well and is more robust than other met
 
 ### Textbook is Easier than Other Variants
 
-| Test | Table |
-| --- | --- |
-| `+test`{:.diff} | x |
+In general, we find that LLMs perform substantially better when problems are presented in the textbook variant than when the problems are costumed or inverted.
 
-```diff
-+test
--test
-```
+<center>
+    <img src="static/images/ehop/Variant_Table_Random.png" alt="Variant comparison table for the EHOP-RANDOM dataset." />
+</center>
+
+The drop is especially pronounced for the inverted problems, which are worded in ways that make them recognizably related to well-documented archetypes of NP-hard problems. This very likely confuses the LLM, which might not register any difference from the standard problem.
+
+While the ILP Python prompting strategy outperforms the others, it is still sensitive to deviations from the textbook presentations.
+This suggests that while the model no longer struggles to perform the right computation, the task of translating a problem to code is nevertheless affected by the ability to recognize the problem (when it is costumed) or to recognize how it deviates from the standard assumptions (when it is inverted).
+
+We show results for EHOP-HARD below. The overall pattern in Table 3 is still that the Textbook variant is easier than the others, except for methods that already perform very poorly on Textbook.
+
+<center>
+    <img src="static/images/ehop/Variant_Table_Hard.png" alt="Variant comparison table for the EHOP-HARD dataset." />
+</center>
+
+## Conclusion
+
+We have shown that current LLMs are much better at solving NP-hard optimization problems when they are
+presented in their well-documented textbook form than when they arise as everyday problems or are subtly distorted. This is further evidence that LLMs are often reciting when they appear to be reasoning.
+
+<!-- | Test | Table |
+| --- | --- |
+| `+test`{:.diff} | `-test`{:.diff} | -->
