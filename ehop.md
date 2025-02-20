@@ -15,14 +15,20 @@ affiliations:
   name: Saarland University
 - id: 2
   name: Brown University
-# paper: 
+paper: https://arxiv.org/abs/2502.13776 
 ---
-
-## 🚧NOTE: This page is currently under construction🚧
 
 ## Abstract
 
 We introduce the dataset of Everyday Hard Optimization Problems (EHOP), a collection of NP-hard optimization problems expressed in natural language. EHOP includes problem formulations that could be found in computer science textbooks, versions that are dressed up as problems that could arise in real life, and variants of well-known problems with inverted rules. We find that state-of-the-art LLMs, across multiple prompting strategies, systematically solve textbook problems more accurately than their real-life and inverted counterparts. We argue that this constitutes evidence that LLMs adapt solutions seen during training, rather than leveraging reasoning abilities that would enable them to generalize to novel problems.
+
+## Background
+
+Many real-world tasks that people face in their personal and professional lives are NP-hard optimization problems. One of the most exciting promises of large language models (LLMs) is that they can help non-experts solve their real-world computational problems when they express them in natural language (NL). The hope is that a wide range of users across a wide range of tasks will be able to describe their problem to the LLM, and the LLM will handle the difficult task of "problem solving," i.e., recognizing that the real-world problem can be described in terms of a known computational problem and then solving that problem efficiently and optimally. In the case of NP-hard problems, this could potentially be accomplished with the LLM solving the problem by itself, e.g., through chain-of-thought (CoT) reasoning, or the LLM could convert the NL description into a linear program (LP) and solve it with specialized tools.
+
+However, recent work has raised the question of "reasoning vs. reciting": are LLMs actually carrying out systematic problem-solving, or are they simply adapting solutions for similar problems in their training data? LLMs that can only solve problems whose solution paths are documented on the Internet will not fulfill the promise of opening general problem-solving to lay users.
+
+We contribute to the reasoning vs. reciting debate by introducing the dataset of Everyday Hard Optimization Problems (EHOP), which consists of NP-hard optimization problems presented in both textbook and real-world variants.
 
 ## Methods
 
