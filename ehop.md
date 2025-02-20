@@ -18,6 +18,10 @@ affiliations:
 paper: https://arxiv.org/abs/2502.13776 
 ---
 
+<center>
+    <img src="static/images/ehop/Illustrations.png" alt="Illustrations of problems used in EHOP." />
+</center>
+
 ## Abstract
 
 We introduce the dataset of Everyday Hard Optimization Problems (EHOP), a collection of NP-hard optimization problems expressed in natural language. EHOP includes problem formulations that could be found in computer science textbooks, versions that are dressed up as problems that could arise in real life, and variants of well-known problems with inverted rules. We find that state-of-the-art LLMs, across multiple prompting strategies, systematically solve textbook problems more accurately than their real-life and inverted counterparts. We argue that this constitutes evidence that LLMs adapt solutions seen during training, rather than leveraging reasoning abilities that would enable them to generalize to novel problems.
@@ -43,7 +47,7 @@ The EHOP dataset comprises two parts: EHOP-RANDOM and EHOP-HARD. EHOP-RANDOM con
 We test GPT-4o and Llama 3.1 70B Instruct on the EHOP dataset using several prompting strategies:
 
 - One-Shot
-- Zero-Shot Chain-of-Thought (CoT)
+- Zero-Shot (CoT)
 - One-Shot CoT
 - ILP Python
 
