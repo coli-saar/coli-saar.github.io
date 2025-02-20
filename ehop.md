@@ -19,7 +19,7 @@ paper: https://arxiv.org/abs/2502.13776
 ---
 
 <center>
-    <img src="static/images/ehop/Illustrations.png" alt="Illustrations of problems used in EHOP." />
+    <img src="static/images/ehop/Variant_Figure.png" width="80%" alt="Illustrations of problems used in EHOP." />
 </center>
 
 ## Abstract
@@ -37,6 +37,10 @@ We contribute to the reasoning vs. reciting debate by introducing the dataset of
 ## Methods
 
 ### Dataset
+
+<center>
+    <img src="static/images/ehop/Problem_Illustrations.png" width="80%" alt="Illustrations of problems used in EHOP." />
+</center>
 
 The EHOP dataset consists of generated instances of three base problems: Graph Coloring, Knapsack, and Traveling Salesman. These instances are presented in standard textbook formulations as well as _costumed_ ones which present the problem in another context. For example, the Graph Coloring problem can be expressed as a teacher wanting to put students (vertices) into groups (colors) without having two students who are friends (connected by an edge) in the same group. The instances are also _inverted_, meaning they are modified to have a similar yet different set of rules. In the case of Graph Coloring, we change the constraint from banning connected nodes with the same color to banning **unconnected** nodes with the same color. The details of inversion are crafted such that an instance is equivalent to its inverted counterpart, in the sense that a solution to one version can be translated in linear time (or faster) to a solution to the other version.
 
