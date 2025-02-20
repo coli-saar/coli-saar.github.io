@@ -19,7 +19,7 @@ paper: https://arxiv.org/abs/2502.13776
 ---
 
 <center>
-    <img src="static/images/ehop/Variant_Figure.png" width="80%" alt="Illustrations of problems used in EHOP." />
+    <img src="static/images/ehop/Variant_Figure.png" width="60%" alt="Illustrations of problems used in EHOP." />
 </center>
 
 ## Abstract
