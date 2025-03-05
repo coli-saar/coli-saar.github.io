@@ -15,7 +15,8 @@ affiliations:
   name: Saarland University
 - id: 2
   name: Brown University
-paper: https://arxiv.org/abs/2502.13776 
+paper: https://arxiv.org/abs/2502.13776
+code: https://github.com/coli-saar/ehop
 ---
 
 <center>
