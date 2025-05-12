@@ -22,11 +22,11 @@ code: https://github.com/minecraft-saar/autoplanbench/tree/main
 data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_dataset
 bibtex: |
     @inproceedings{stein2025llmactionchoice,
-    title={Automating the Generation of Prompts for LLM-based Action Choice in PDDL Planning}, 
-    author={Katharina Stein and Daniel Fi\v{s}er and J\"org Hoffmann and Alexander Koller},
-    year={2025},
-    booktitle={Proceedings of the 35th International Conference on Automated Planning and Scheduling (ICAPS'25)}
-  }
+          title={Automating the Generation of Prompts for LLM-based Action Choice in PDDL Planning}, 
+          author={Katharina Stein and Daniel Fi\v{s}er and J\"org Hoffmann and Alexander Koller},
+          year={2025},
+          booktitle={Proceedings of the 35th International Conference on Automated Planning and Scheduling (ICAPS)}
+    }
 ---
 
 <center>
