@@ -53,6 +53,11 @@ The key corollary of the LKCH is that LFLMs can learn with less data: the lingui
 2. Demonstrate the viability of pretrained LFLMs: we show that GFoLDS outperforms BERT models pretrained on the same data on all evaluation benchmarks.
 3. Establish the scalability of GFoLDS: we present evidence that GFoLDS is likely to scale with respect to parameter count and pretraining dataset size, indicating that LFLMs have the potential to compete with textual LLMs at scale.
 
+# GFoLDS
+
+<center>
+    <img src="static/images/gfolds/ch4_gfolds_overall.png" width="65%" />
+</center>
 
 
 
