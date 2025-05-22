@@ -76,7 +76,7 @@ We first evaluated the validity of the LKCH. Note that this hypothesis can be br
 
 To compare GFoLDS' learining-acceleration to a similarly-sized textual model, we pretrained two BERT comparison (BERT-C) models on the same data (the surface sentences, not the logical forms) for the same number of epochs (four).
 
-To test (1), we evaluated the model on two tasks designed to probe its elementary linguistic knowledge: POS-prediction and quantifier prediction. For (2), we evaluated the model on the RELPRON dataset (Rimell et al., 2016). Due to the claim made in the \refhyp that linguistically-informed LMs learning of complex patterns is *accelerated*, we evaluated the model at regular intervals throughout pretraining (80 evenly-spaced chackpoints), in order to measure the rate at which it is learning. 
+To test (1), we evaluated the model on two tasks designed to probe its elementary linguistic knowledge: POS-prediction and quantifier prediction. For (2), we evaluated the model on the RELPRON dataset (Rimell et al., 2016). Due to the claim made in the LKCH that linguistically-informed LMs learning of complex patterns is *accelerated*, we evaluated the model at regular intervals throughout pretraining (80 evenly-spaced chackpoints), in order to measure the rate at which it is learning. 
 
 Assuming that the LKCH holds, we should expect to see GFoLDS outperform the BERT-C models on the complex task (RELPRON) throughout the pretraining process, as&mdash;according to the hypothesis&mdash;GFoLDS is able to learn complex patterns faster than textual LMs. 
 
