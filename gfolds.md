@@ -95,7 +95,6 @@ These results show that GFoLDS can model the elementary phenomena almost from th
 To demonstrate the viability of LFLMs, we compared GFoLDS to BERT-C and the original BERT models on four downstream benchmarks: RELPRON, SNLI (Bowman et al., 2015), the MegaVeridicality V2.1 binary factuality-classification task (White et al., 2018), and the
 McRae et al. (2005) property inference dataset.
 
-
 | | RELPRON (MAP) | SNLI (Acc) | MegaVeridicality V2.1 (Acc) | McRae et al. (Spearman ρ)|
 | :--- | :--- | :--- | :--- | :--- |
 | **GFoLDS:** | 0.651 | 81.0% | 81.3% | 0.205 |
@@ -106,6 +105,21 @@ McRae et al. (2005) property inference dataset.
 
 Although the original BERT models outperform GFoLDS, they were both trained on 6.5x more data for 10x more epochs than our model. On the other hand, the BERT comparison models trained on the same data as our model (BERT-C) both lag behind GFoLDS on all four benchmarks&mdash;particularly on RELPRON&mdash;demonstrating across a wide range of downstream tasks that our model is able to learn useful representations with less data than its textual counterparts.
 
+## Scalability
+
+While GFoLDS outperforms textual models trained on similar amounts of data, this model is still outperformed by the original BERT models. It is therefore crucial to establish the scalability of GFoLDS: the degree to which we would expect its downstream performance to scale if it were larger and/or pretrained on more data. To that end, we applied the techniques of Muennighoff et al. (2024) to GFoLDS, to determine the degree to which our model is under- or over-parameterized&mdash;and therefore, by the scaling laws established in Muennighoff et al. (2024), over- or under-trained.
+
+Specifically, we pretrained five GFoLDS models on 50%, 25%, 12.5%, 6.25%, and 3.125% of the pretraining data used in the model introduced above. We then evaluated the impact of pretraining token count on final pretraining loss and performance on a validation task: the RELPRON dataset, which does not require fine-tuning (which in turn could introduce confounding factors).
+
+<center>
+    <img src="static/images/gfolds/ch6_scalability_res.png" width="70%" />
+</center>
+
+Final pretraining loss (left) consistently decreases with as the number of pretraining tokens increases from 3.125% to 50% of the data. After this point, the final loss value plateaus: we prove that&mdash;assuming that an analogue of the Muennighoff et al. (2024) scaling laws holds for the GFoLDS architecture&mdash;it can only be the case that the final loss for the 100% run is (roughly) equal to that for the 50% run if GFoLDS is underparameterized for both the 100% run *and* the 50% run. This means that GFoLDS requires much less pretraining data per parameter than textual models: the Chinchilla Scaling Laws (Hoffmann et al., 2022) predict that a textual LLM with the same parameter count (174 million) as GFoLDS necessitates ~5 billion pretraining tokens. This is roughly twenty times more than the 254 million tokens for which GFoLDS is overparameterized.
+
+On the RELPRON validation task (right), we observe improvement of +0.082 in MAP score from the 50% (0.569) to the 100% (0.651) run, which is *higher* than the +0.062 increase from the 25% (0.507) to the 50% run.
+
+Taken together, these results lead to the conclusion that GFoLDS is likely scalable in terms of model size and pretraining data.
 
 # References
 Zhanghao Wu, Paras Jain, Matthew Wright, Azalia Mirhoseini, Joseph E Gonzalez, and Ion Stoica. 2021. Representing Long-Range Context for Graph Neural Networks with Global Attention. *Advances in Neural Information Processing Systems*, 34:13266–13279.
@@ -119,3 +133,7 @@ Samuel R Bowman, Gabor Angeli, Christopher Potts, and Christopher D Manning. 201
 Aaron Steven White, Rachel Rudinger, Kyle Rawlins, and Benjamin Van Durme. 2018. Lexicosyntactic Inference in Neural Models. In *Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing*, 4717–4724.
 
 Ken McRae, George S Cree, Mark S Seidenberg, and Chris McNorgan. 2005. Semantic Feature Production Norms for a Large Set of Living and Nonliving Things. *Behavior Research Methods*, 37(4):547–559.
+
+Niklas Muennighoff, Alexander Rush, Boaz Barak, Teven Le Scao, Nouamane Tazi, Aleksandra Piktus, Sampo Pyysalo, Thomas Wolf, and Colin A Raffel. 2024. Scaling Data-Constrained Language Models. *Advances in Neural Information Processing Systems*, 36.
+
+Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, Elena Buchatskaya, Trevor Cai, Eliza Rutherford, Diego de Las Casas, Lisa Anne Hendricks, Johannes Welbl, Aidan Clark, Tom Hennigan, Eric Noland, Katie Millican, George van den Driessche, Bogdan Damoc, Aurelia Guy, Simon Osindero, Karen Simonyan, Erich Elsen, Jack W Rae, Oriol Vinyals, and Laurent Sifre. 2022. Training Compute-Optimal Large Language Models. *arXiv preprint arXiv:2203.15556*.
