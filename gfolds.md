@@ -96,6 +96,15 @@ To demonstrate the viability of LFLMs, we compared GFoLDS to BERT-C and the orig
 McRae et al. (2005) property inference dataset.
 
 
+| | RELPRON (MAP) | SNLI (Acc) | MegaVeridicality V2.1 (Acc) | McRae et al. (Spearman ρ)|
+| :--- | :--- | :--- | :--- | :--- |
+| GFoLDS | 0.651 | 81.0% | 81.3% | 0.205 |
+| BERT<sub>large</sub> | 0.769 | 91.1% | 85.6% | 0.241 |
+| BERT<sub>base</sub> | 0.690 | 90.7% | 84.2% | 0.247 |
+| BERT-C<sub>large</sub> | 0.056 | 62.0% | 76.2% | 0.134 |
+| BERT-C<sub>base</sub> | 0.193 | 79.9% | 78.1% | 0.167 |
+
+
 # References
 Zhanghao Wu, Paras Jain, Matthew Wright, Azalia Mirhoseini, Joseph E Gonzalez, and Ion Stoica. 2021. Representing Long-Range Context for Graph Neural Networks with Global Attention. *Advances in Neural Information Processing Systems*, 34:13266–13279.
 
