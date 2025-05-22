@@ -98,11 +98,13 @@ McRae et al. (2005) property inference dataset.
 
 | | RELPRON (MAP) | SNLI (Acc) | MegaVeridicality V2.1 (Acc) | McRae et al. (Spearman ρ)|
 | :--- | :--- | :--- | :--- | :--- |
-| GFoLDS | 0.651 | 81.0% | 81.3% | 0.205 |
-| BERT<sub>large</sub> | 0.769 | 91.1% | 85.6% | 0.241 |
-| BERT<sub>base</sub> | 0.690 | 90.7% | 84.2% | 0.247 |
-| BERT-C<sub>large</sub> | 0.056 | 62.0% | 76.2% | 0.134 |
-| BERT-C<sub>base</sub> | 0.193 | 79.9% | 78.1% | 0.167 |
+| **GFoLDS:** | 0.651 | 81.0% | 81.3% | 0.205 |
+| **BERT<sub>large</sub>:** | 0.769 | 91.1% | 85.6% | 0.241 |
+| **BERT<sub>base</sub>:** | 0.690 | 90.7% | 84.2% | 0.247 |
+| **BERT-C<sub>large</sub>:** | 0.056 | 62.0% | 76.2% | 0.134 |
+| **BERT-C<sub>base</sub>:** | 0.193 | 79.9% | 78.1% | 0.167 |
+
+Although the original BERT models outperform GFoLDS, they were both trained on 6.5x more data for 10x more epochs than our model. On the other hand, the BERT comparison models trained on the same data as our model (BERT-C) both lag behind GFoLDS on all four benchmarks&mdash;particularly on RELPRON&mdash;demonstrating across a wide range of downstream tasks that our model is able to learn useful representations with less data than its textual counterparts.
 
 
 # References
