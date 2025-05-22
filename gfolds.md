@@ -76,12 +76,19 @@ We first evaluated the validity of the LKCH. Note that this hypothesis can be br
 
 To compare GFoLDS' learining-acceleration to a similarly-sized textual model, we pretrained two BERT comparison (BERT-C) models on the same data (the surface sentences, not the logical forms) for the same number of epochs (four).
 
-To test (1), we evaluated the model on two tasks designed to probe its elementary linguistic knowledge: POS-prediction and quantifier prediction. For (2), we evaluated the model on the RELPRON dataset (Rimell et al., 2016). Due to the claim made in the \refhyp that linguistically-informed LMs learning of complex patterns is *accelerated*, we evaluated the model at regular intervals throughout pretraining, in order to measure the rate at which it is learning. 
+To test (1), we evaluated the model on two tasks designed to probe its elementary linguistic knowledge: POS-prediction and quantifier prediction. For (2), we evaluated the model on the RELPRON dataset (Rimell et al., 2016). Due to the claim made in the \refhyp that linguistically-informed LMs learning of complex patterns is *accelerated*, we evaluated the model at regular intervals throughout pretraining (80 evenly-spaced chackpoints), in order to measure the rate at which it is learning. 
 
 Assuming that the LKCH holds, we should expect to see GFoLDS outperform the BERT-C models on the complex task (RELPRON) throughout the pretraining process, as&mdash;according to the hypothesis&mdash;GFoLDS is able to learn complex patterns faster than textual LMs. 
 
 On the elementary tasks, we again expect GFoLDS to outperform BERT-C, but also that GFoLDS' performance will improve substantially faster than it does on the complex tasks: the LKCH predicts that an LFLM's accelerated learning of elementary phenomena catalyzes its learning of complex patterns, so its learning of the former should therefore accelerate at a faster rate than that of the latter.
 
+<center>
+    <img src="static/images/gfolds/analysis_res.png" width="100%" />
+</center>
+
+The results of this experiment conform almost exactly to the behavior predicted by the LKCH: on the elementary tasks, GFoLDS starts near peak performance from the first checkpoint&mdash;this indicates that its learning of elementary patterns was complete within 5% of the first epoch. On the complex task, GFoLDS begins improving immediately, BERT-C<sub>large</sub> does not improve substantially, and the performance of BERT-C<sub>base</sub> doesn't begin to meaningfully increase until the latter half of the first epoch (and at a lower rate than that of GFoLDS): the point at which it began to improve on the elementary tasks.
+
+These results show that GFoLDS can model the elementary phenomena almost from the onset (and retains this ability throughout pretraining) and GFoLDS' performance on the RELPRON test set suggests that this vastly accelerated learning of elementary phenomena translates to more rapid learning of more complex patterns, as predicted by the LKCH.
 
 
 
