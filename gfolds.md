@@ -4,7 +4,7 @@ title: "Exploring Graph Representations of Logical Forms for Language Modeling"
 authors:
 - name: Michael Sullivan
   homepage: https://mjs227.github.io/home/
-  affiliation: 1, 2
+  affiliation: 1,2
 affiliations:
 - id: 1
   name: Saarland University
