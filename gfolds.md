@@ -59,6 +59,8 @@ The key corollary of the LKCH is that LFLMs can learn with less data: the lingui
     <img src="static/images/gfolds/ch4_gfolds_overall.png" width="65%" />
 </center>
 
+<br>
+
 GFoLDS is a graph transformer architecture (Wu et al., 2021): a graph neural network (GNN) that encodes local neighborhood information, whose output is then fed to a permutation-invariant (i.e. without linear positional embeddings) transformer encoder for global message-passing (attention). Unique to this work is the GNN component of the model, which is specially adapted to the directed, edge-/node-labeled structure of GFoLDS' DMRS input graphs. 
 
 At 174 million parameters, the size of GFoLDS is roughly halfway between that of BERT<sub>base</sub> (110 million) and BERT<sub>large</sub> (335 million).
