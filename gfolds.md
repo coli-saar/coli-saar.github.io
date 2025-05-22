@@ -21,4 +21,8 @@ bibtex: |
     }
 ---
 
+<center>
+    <img src="static/images/gfolds/dmrs_ex.png" width="50%" />
+</center>
+
 # Test
