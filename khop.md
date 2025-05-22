@@ -6,11 +6,11 @@ authors:
   affiliation: 1
   homepage: https://ykyaol7.github.io/
 - name: Yupei Du
-  affiliation: 1
+  affiliation: 2
   homepage: https://yupei.nl/
 - name: Dawei Zhu
   affiliation: 1
--name: Michael Hahn
+- name: Michael Hahn
   affiliation: 1
   homepage: https://www.mhahn.info/
 - name: Alexander Koller
@@ -19,6 +19,8 @@ authors:
 affiliations:
 - id: 1
   name: Saarland University
+- id: 2
+  name: Utrecht University
 ---
 
 
