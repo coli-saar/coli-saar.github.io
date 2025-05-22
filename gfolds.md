@@ -61,9 +61,26 @@ The key corollary of the LKCH is that LFLMs can learn with less data: the lingui
 
 GFoLDS is a graph transformer architecture (Wu et al., 2021): a graph neural network (GNN) that encodes local neighborhood information, whose output is then fed to a permutation-invariant (i.e. without linear positional embeddings) transformer encoder for global message-passing (attention). Unique to this work is the GNN component of the model, which is specially adapted to the directed, edge-/node-labeled structure of GFoLDS' DMRS input graphs. 
 
-We pretrained GFoLDS for four epochs on ~17.5 million sentences drawn from English Wikipedia: ~6.5x smaller than BERT's pretraining corpus. GFoLDS' pretraining objective was masked-node modeling (MNM), which is analogous to the MLM objective used to pretrain encoder transformer LMs.
+At 174 million parameters, the size of GFoLDS is roughly halfway between that of BERT<sub>base</sub> (110 million) and BERT<sub>large</sub> (335 million).
 
+We pretrained GFoLDS for four epochs on ~17.5 million sentences drawn from English Wikipedia: ~6.5x smaller than BERT's pretraining corpus. The model's pretraining objective was masked-node modeling (MNM), which is analogous to the MLM objective used to pretrain encoder transformer LMs.
 
+# Experiments
+
+## LKCH
+
+We first evaluated the validity of the LKCH. Note that this hypothesis can be broken down into two distinct claims:
+
+1. The (aspects of) linguistic knowledge incorporated into LFLMs greatly accelerates their learning of elementary linguistic phenomena.
+2. This accelerates the learning of more complex patterns.
+
+To compare GFoLDS' learining-acceleration to a similarly-sized textual model, we pretrained two BERT comparison (BERT-C) models on the same data (the surface sentences, not the logical forms) for the same number of epochs (four).
+
+To test (1), we evaluated the model on two tasks designed to probe its elementary linguistic knowledge: POS-prediction and quantifier prediction. For (2), we evaluated the model on the RELPRON dataset (Rimell et al., 2016). Due to the claim made in the \refhyp that linguistically-informed LMs learning of complex patterns is *accelerated*, we evaluated the model at regular intervals throughout pretraining, in order to measure the rate at which it is learning. 
+
+Assuming that the LKCH holds, we should expect to see GFoLDS outperform the BERT-C models on the complex task (RELPRON) throughout the pretraining process, as&mdash;according to the hypothesis&mdash;GFoLDS is able to learn complex patterns faster than textual LMs. 
+
+On the elementary tasks, we again expect GFoLDS to outperform BERT-C, but also that GFoLDS' performance will improve substantially faster than it does on the complex tasks: the LKCH predicts that an LFLM's accelerated learning of elementary phenomena catalyzes its learning of complex patterns, so its learning of the former should therefore accelerate at a faster rate than that of the latter.
 
 
 
@@ -72,4 +89,6 @@ We pretrained GFoLDS for four epochs on ~17.5 million sentences drawn from Engli
 Zhanghao Wu, Paras Jain, Matthew Wright, Azalia Mirhoseini, Joseph E Gonzalez, and Ion Stoica. 2021. Representing Long-Range Context for Graph
 Neural Networks with Global Attention. *Advances in Neural Information Processing Systems*, 34:13266–13279.
 
+Ann Copestake. 2009. Invited Talk: Slacker Semantics: Why Superficiality, Dependency and Avoidance of Commitment can be the Right Way to Go. In *Proceedings of the 12th Conference of the European Chapter of the ACL (EACL 2009)*, 1–9.
 
+Laura Rimell, Jean Maillard, Tamara Polajnar, and Stephen Clark. 2016. RELPRON: A Relative Clause Evaluation Data Set for Compositional Distributional Semantics. Computational Linguistics, 42(4):661–701.
