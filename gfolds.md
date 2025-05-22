@@ -84,9 +84,13 @@ Assuming that the LKCH holds, we should expect to see GFoLDS outperform the BERT
 
 On the elementary tasks, we again expect GFoLDS to outperform BERT-C, but also that GFoLDS' performance will improve substantially faster than it does on the complex tasks: the LKCH predicts that an LFLM's accelerated learning of elementary phenomena catalyzes its learning of complex patterns, so its learning of the former should therefore accelerate at a faster rate than that of the latter.
 
+<br>
+
 <center>
     <img src="static/images/gfolds/analysis_res.png" width="100%" />
 </center>
+
+<br>
 
 The results of this experiment conform almost exactly to the behavior predicted by the LKCH: on the elementary tasks, GFoLDS starts near peak performance from the first checkpoint&mdash;this indicates that its learning of elementary patterns was complete within 5% of the first epoch. On the complex task, GFoLDS begins improving immediately, BERT-C<sub>large</sub> does not improve substantially, and the performance of BERT-C<sub>base</sub> doesn't begin to meaningfully increase until the latter half of the first epoch (and at a lower rate than that of GFoLDS): the point at which it began to improve on the elementary tasks.
 
@@ -97,6 +101,8 @@ These results show that GFoLDS can model the elementary phenomena almost from th
 To demonstrate the viability of LFLMs, we compared GFoLDS to BERT-C and the original BERT models on four downstream benchmarks: RELPRON, SNLI (Bowman et al., 2015), the MegaVeridicality V2.1 binary factuality-classification task (White et al., 2018), and the
 McRae et al. (2005) property inference dataset.
 
+<br>
+
 | | RELPRON (MAP) | SNLI (Acc) | MegaVeridicality V2.1 (Acc) | McRae et al. (Spearman ρ)|
 | :--- | :--- | :--- | :--- | :--- |
 | **GFoLDS:** | 0.651 | 81.0% | 81.3% | 0.205 |
@@ -104,6 +110,8 @@ McRae et al. (2005) property inference dataset.
 | **BERT<sub>base</sub>:** | 0.690 | 90.7% | 84.2% | 0.247 |
 | **BERT-C<sub>large</sub>:** | 0.056 | 62.0% | 76.2% | 0.134 |
 | **BERT-C<sub>base</sub>:** | 0.193 | 79.9% | 78.1% | 0.167 |
+
+<br>
 
 Although the original BERT models outperform GFoLDS, they were both trained on 6.5x more data for 10x more epochs than our model. On the other hand, the BERT comparison models trained on the same data as our model (BERT-C) both lag behind GFoLDS on all four benchmarks&mdash;particularly on RELPRON&mdash;demonstrating across a wide range of downstream tasks that our model is able to learn useful representations with less data than its textual counterparts.
 
@@ -113,9 +121,13 @@ While GFoLDS outperforms textual models trained on similar amounts of data, this
 
 Specifically, we pretrained five GFoLDS models on 50%, 25%, 12.5%, 6.25%, and 3.125% of the pretraining data used in the model introduced above. We then evaluated the impact of pretraining token count on final pretraining loss and performance on a validation task: the RELPRON dataset, which does not require fine-tuning (which in turn could introduce confounding factors).
 
+<br>
+
 <center>
     <img src="static/images/gfolds/ch6_scalability_res.png" width="70%" />
 </center>
+
+<br>
 
 Final pretraining loss (left) consistently decreases with as the number of pretraining tokens increases from 3.125% to 50% of the data. After this point, the final loss value plateaus: we prove that&mdash;assuming that an analogue of the Muennighoff et al. (2024) scaling laws holds for the GFoLDS architecture&mdash;it can only be the case that the final loss for the 100% run is (roughly) equal to that for the 50% run if GFoLDS is underparameterized for both the 100% run *and* the 50% run. This means that GFoLDS requires much less pretraining data per parameter than textual models: the Chinchilla Scaling Laws (Hoffmann et al., 2022) predict that a textual LLM with the same parameter count (174 million) as GFoLDS necessitates ~5 billion pretraining tokens. This is roughly twenty times more than the 254 million tokens for which GFoLDS is overparameterized.
 
