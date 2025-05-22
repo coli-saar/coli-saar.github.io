@@ -67,7 +67,7 @@ We pretrained GFoLDS for four epochs on ~17.5 million sentences drawn from Engli
 
 # Experiments
 
-## LKCH
+### LKCH
 
 We first evaluated the validity of the LKCH. Note that this hypothesis can be broken down into two distinct claims:
 
@@ -90,7 +90,7 @@ The results of this experiment conform almost exactly to the behavior predicted 
 
 These results show that GFoLDS can model the elementary phenomena almost from the onset (and retains this ability throughout pretraining) and GFoLDS' performance on the RELPRON test set suggests that this vastly accelerated learning of elementary phenomena translates to more rapid learning of more complex patterns, as predicted by the LKCH.
 
-## Downstream Tasks
+### Downstream Tasks
 
 To demonstrate the viability of LFLMs, we compared GFoLDS to BERT-C and the original BERT models on four downstream benchmarks: RELPRON, SNLI (Bowman et al., 2015), the MegaVeridicality V2.1 binary factuality-classification task (White et al., 2018), and the
 McRae et al. (2005) property inference dataset.
@@ -105,7 +105,7 @@ McRae et al. (2005) property inference dataset.
 
 Although the original BERT models outperform GFoLDS, they were both trained on 6.5x more data for 10x more epochs than our model. On the other hand, the BERT comparison models trained on the same data as our model (BERT-C) both lag behind GFoLDS on all four benchmarks&mdash;particularly on RELPRON&mdash;demonstrating across a wide range of downstream tasks that our model is able to learn useful representations with less data than its textual counterparts.
 
-## Scalability
+### Scalability
 
 While GFoLDS outperforms textual models trained on similar amounts of data, this model is still outperformed by the original BERT models. It is therefore crucial to establish the scalability of GFoLDS: the degree to which we would expect its downstream performance to scale if it were larger and/or pretrained on more data. To that end, we applied the techniques of Muennighoff et al. (2024) to GFoLDS, to determine the degree to which our model is under- or over-parameterized&mdash;and therefore, by the scaling laws established in Muennighoff et al. (2024), over- or under-trained.
 
