@@ -21,7 +21,7 @@ bibtex: |
 ---
 
 <center>
-    <img src="static/images/randomworld/figure1.png" width="50%" />
+    <img src="static/images/randomworld/figure1.png" width="65%" />
 </center>
 
 # RandomWorld
