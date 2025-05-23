@@ -32,7 +32,9 @@ We make the case for language models over logical forms (LFLMs), arguing that su
 
 # Why Logical Forms?
 
-We argue that there are two main advantages of LFLMs versus models over plain text, that allow them to learn from less data:
+Given the Chinchilla Scaling Laws (Hoffmann et al., 2022) and the rate at which SoTA LLMs are expanding, (Villalobos et al., 2024) estimate that high-quality English training data will be exhausted at some point between 2026 and 2032: language model expansion is outpacing available natural language production. This suggests that&mdash;without models that use significantly less data than current approaches&mdash;LLMs' performance increases will begin to decelerate substantially in the near future.
+
+To address this, we argue that there are two main advantages of LFLMs versus models over plain text, that allow them to learn from less data:
 
 1. The function-argument structure of logical forms has a syntactic equivalence-classing/de-noising effect: all syntactic paraphrases of the same proposition&mdash;for example, an active sentence and its passive counterpart&mdash;are mapped to the same representation. This means that an LFLM does not need to learn to equate periphrastic structures, so it can immediately begin learning co-occurrence relations between predicates.
 
@@ -42,16 +44,16 @@ These observations lead us to the following hypothesis:
 
 <pre>
 <b>The Linguistic Knowledge Catalysis Hypothesis (LKCH):</b>
-The (aspects of) linguistic knowledge incorporated into LFLMs greatly<br>accelerates their learning of elementary linguistic phenomena, in turn<br>accelerating the learning of more complex patterns
+The (aspects of) linguistic knowledge incorporated into LFLMs greatly<br>accelerates their learning of elementary linguistic phenomena, in turn<br>accelerating the learning of more complex patterns.
 </pre>
 
 The key corollary of the LKCH is that LFLMs can learn with less data: the linguistic knowledge built into LFLMs facilitates more rapid learning of advanced phenomena.
 
 # Key Contributions
 
-1. Provide experimental support towards the validity of the LKCH: we demonstrate that&mdash;from the start of pretraining&mdash;GFoLDS achieves near-peak performance on tasks designed to evaluate its elementary linguistic knowledge, and that this translates to more rapid learning of complex phenomena.
-2. Demonstrate the viability of pretrained LFLMs: we show that GFoLDS outperforms BERT models pretrained on the same data on all evaluation benchmarks.
-3. Establish the scalability of GFoLDS: we present evidence that GFoLDS is likely to scale with respect to parameter count and pretraining dataset size, indicating that LFLMs have the potential to compete with textual LLMs at scale.
+1. **Provide experimental support towards the validity of the LKCH:** we demonstrate that&mdash;from the start of pretraining&mdash;GFoLDS achieves near-peak performance on tasks designed to evaluate its elementary linguistic knowledge, and that this translates to more rapid learning of complex phenomena.
+2. **Demonstrate the viability of pretrained LFLMs:** we show that GFoLDS outperforms BERT models pretrained on the same data on all evaluation benchmarks.
+3. **Establish the scalability of GFoLDS:** we present evidence that GFoLDS is likely to scale with respect to parameter count and pretraining dataset size, indicating that LFLMs have the potential to compete with textual LLMs at scale.
 
 # GFoLDS
 
@@ -63,9 +65,9 @@ The key corollary of the LKCH is that LFLMs can learn with less data: the lingui
 
 GFoLDS is a graph transformer architecture (Wu et al., 2021): a graph neural network (GNN) that encodes local neighborhood information, whose output is then fed to a permutation-invariant (i.e. without linear positional embeddings) transformer encoder for global message-passing (attention). Unique to this work is the GNN component of the model, which is specially adapted to the directed, edge-/node-labeled structure of GFoLDS' DMRS input graphs. 
 
-At 174 million parameters, the size of GFoLDS is roughly halfway between that of BERT<sub>base</sub> (110 million) and BERT<sub>large</sub> (335 million).
-
 We pretrained GFoLDS for four epochs on ~17.5 million sentences drawn from English Wikipedia: ~6.5x smaller than BERT's pretraining corpus. The model's pretraining objective was masked-node modeling (MNM), which is analogous to the MLM objective used to pretrain encoder transformer LMs.
+
+At 174 million parameters, the size of GFoLDS is roughly halfway between that of BERT<sub>base</sub> (110 million) and BERT<sub>large</sub> (335 million).
 
 # Experiments
 
@@ -78,7 +80,7 @@ We first evaluated the validity of the LKCH. Note that this hypothesis can be br
 
 To compare GFoLDS' learining-acceleration to a similarly-sized textual model, we pretrained two BERT comparison (BERT-C) models on the same data (the surface sentences, not the logical forms) for the same number of epochs (four).
 
-To test (1), we evaluated the model on two tasks designed to probe its elementary linguistic knowledge: POS-prediction and quantifier prediction. For (2), we evaluated the model on the RELPRON dataset (Rimell et al., 2016). Due to the claim made in the LKCH that linguistically-informed LMs learning of complex patterns is *accelerated*, we evaluated the model at regular intervals throughout pretraining (80 evenly-spaced chackpoints), in order to measure the rate at which it is learning. 
+To test (1), we evaluated the model on two tasks designed to probe its elementary linguistic knowledge: POS prediction and quantifier prediction. For (2), we evaluated the model on the RELPRON dataset (Rimell et al., 2016). Due to the claim made in the LKCH that linguistically-informed LMs' learning of complex patterns is *accelerated*, we evaluated the model at regular intervals throughout pretraining (80 evenly-spaced chackpoints), in order to measure the rate at which GFoLDS is learning. 
 
 Assuming that the LKCH holds, we should expect to see GFoLDS outperform the BERT-C models on the complex task (RELPRON) throughout the pretraining process, as&mdash;according to the hypothesis&mdash;GFoLDS is able to learn complex patterns faster than textual LMs. 
 
@@ -119,7 +121,7 @@ Although the original BERT models outperform GFoLDS, they were both trained on 6
 
 While GFoLDS outperforms textual models trained on similar amounts of data, this model is still outperformed by the original BERT models. It is therefore crucial to establish the scalability of GFoLDS: the degree to which we would expect its downstream performance to scale if it were larger and/or pretrained on more data. To that end, we applied the techniques of Muennighoff et al. (2024) to GFoLDS, to determine the degree to which our model is under- or over-parameterized&mdash;and therefore, by the scaling laws established in Muennighoff et al. (2024), over- or under-trained.
 
-Specifically, we pretrained five GFoLDS models on 50%, 25%, 12.5%, 6.25%, and 3.125% of the pretraining data used in the model introduced above. We then evaluated the impact of pretraining token count on final pretraining loss and performance on a validation task: the RELPRON dataset, which does not require fine-tuning (which in turn could introduce confounding factors).
+Specifically, we pretrained five GFoLDS models on 50%, 25%, 12.5%, 6.25%, and 3.125% of the pretraining data used in the model introduced above. We then evaluated the impact of pretraining token count on final pretraining loss and performance on a validation task: the RELPRON dataset, which does not require fine-tuning (fine-tuning could introduce confounding factors).
 
 <br>
 
@@ -129,7 +131,7 @@ Specifically, we pretrained five GFoLDS models on 50%, 25%, 12.5%, 6.25%, and 3.
 
 <br>
 
-Final pretraining loss (left) consistently decreases with as the number of pretraining tokens increases from 3.125% to 50% of the data. After this point, the final loss value plateaus: we prove that&mdash;assuming that an analogue of the Muennighoff et al. (2024) scaling laws holds for the GFoLDS architecture&mdash;it can only be the case that the final loss for the 100% run is (roughly) equal to that for the 50% run if GFoLDS is underparameterized for both the 100% run *and* the 50% run. This means that GFoLDS requires much less pretraining data per parameter than textual models: the Chinchilla Scaling Laws (Hoffmann et al., 2022) predict that a textual LLM with the same parameter count (174 million) as GFoLDS necessitates ~5 billion pretraining tokens. This is roughly twenty times more than the 254 million tokens for which GFoLDS is overparameterized.
+Final pretraining loss (left) consistently decreases as the number of pretraining tokens increases from 3.125% to 50% of the data. After this point, the final loss value plateaus: we prove that&mdash;assuming that an analogue of the Muennighoff et al. (2024) scaling laws holds for the GFoLDS architecture&mdash;it can only be the case that the final loss for the 100% run is (roughly) equal to that for the 50% run if GFoLDS is underparameterized for both the 100% run *and* the 50% run. This means that GFoLDS requires much less pretraining data per parameter than textual models: the Chinchilla Scaling Laws (Hoffmann et al., 2022) predict that a textual LLM with the same parameter count (174 million) as GFoLDS necessitates ~5 billion pretraining tokens. This is roughly twenty times more than the 254 million tokens for which GFoLDS is overparameterized.
 
 On the RELPRON validation task (right), we observe improvement of +0.082 in MAP score from the 50% (0.569) to the 100% (0.651) run, which is *higher* than the +0.062 increase from the 25% (0.507) to the 50% run.
 
@@ -148,6 +150,8 @@ Ken McRae, George S Cree, Mark S Seidenberg, and Chris McNorgan. 2005. Semantic 
 Niklas Muennighoff, Alexander Rush, Boaz Barak, Teven Le Scao, Nouamane Tazi, Aleksandra Piktus, Sampo Pyysalo, Thomas Wolf, and Colin A Raffel. 2024. Scaling Data-Constrained Language Models. *Advances in Neural Information Processing Systems*, 36.
 
 Laura Rimell, Jean Maillard, Tamara Polajnar, and Stephen Clark. 2016. RELPRON: A Relative Clause Evaluation Data Set for Compositional Distributional Semantics. Computational Linguistics, 42(4):661–701.
+
+Pablo Villalobos, Anson Ho, Jaime Sevilla, Tamay Besiroglu, Lennart Heim, and Marius Hobbhahn. 2024. Position: Will We Run out of Data? Limits of LLM Scaling Based on Human-Generated Gata. In *Forty-first International Conference on Machine Learning*.
 
 Aaron Steven White, Rachel Rudinger, Kyle Rawlins, and Benjamin Van Durme. 2018. Lexicosyntactic Inference in Neural Models. In *Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing*, 4717–4724.
 
