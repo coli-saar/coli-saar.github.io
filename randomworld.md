@@ -63,22 +63,27 @@ Examples of Types, Descriptions, and Instances (Sampled from Generators):
 </details>
 
 We also implemented three type constructors, that allow for the generation of a theoretically unlimited number of types (recognizers/generators/subtype relations for constructed types are automatically inferred from their constituent types):
-- *list*: *T*  → *T*: takes a type *t* and returns the type *list*(*t*) of lists of objects of type *t*
-- *dict*: *T* x *T*  → *T*: takes types *t*, *u* and returns the type *dict*(*t*, *u*) of dictionaries mapping objects of type *t* to objects of type *u*
-- *union*: *T* x *T*  → *T*: takes types *t*, *u* and returns the type *union*(*t*, *u*) of objects of type *t* or *u*
+- *list* : *T* → *T* takes a type *t* and returns the type *list*(*t*) of lists of objects of type *t*
+- *dict* : *T* x *T* → *T* takes types *t*, *u* and returns the type *dict*(*t*, *u*) of dictionaries mapping objects of type *t* to objects of type *u*
+- *union* : *T* x *T* → *T* takes types *t*, *u* and returns the type *union*(*t*, *u*) of objects of type *t* or *u*
 
 ### Tool Creation
 
-We automatically generate tools (LLM-callable functions) in RandomWorld by sampling input types *A<sub>1</sub>*, ..., *A<sub>n</sub>* and output types *B<sub>1</sub>*, ..., *B<sub>m</sub>*, then using an LLM to generate a name and description for a tool *f*: *A<sub>1</sub>* x ... x *A<sub>n</sub>*  →  *B<sub>1</sub>* x ... x *B<sub>m</sub>* (filtering out the unreasonable ones). 
+We automatically generate tools (LLM-callable functions) in RandomWorld by sampling input types *A<sub>1</sub>*, ..., *A<sub>n</sub>* and output types *B<sub>1</sub>*, ..., *B<sub>m</sub>*, then using an LLM to generate a name and description for a tool *f* : *A<sub>1</sub>* x ... x *A<sub>n</sub>*  →  *B<sub>1</sub>* x ... x *B<sub>m</sub>* (filtering out the unreasonable ones). 
 
 When passed inputs *a<sub>1</sub>*, ..., *a<sub>n</sub>*, the tool returns *b<sub>1</sub>*, ..., *b<sub>m</sub>*, where each *b<sub>i</sub>* is sampled from the type generator for *B<sub>i</sub>*. While the agent is interacting with the environment, we temporarily store input/output pairs ((*a<sub>1</sub>*, ..., *a<sub>n</sub>*), (*b<sub>1</sub>*, ...,*b<sub>m</sub>*)): this ensures that the tool always returns the same output for a given input (from the agent's perspective).
 
 ### Task Generation
 
-RandomWorld tasks are synthesized by first generating a sequence of API calls through a type-guided sampling procedure, to create a data structure that we call a *trajectory skeleton*: a sequence of tool calls *f<sub>1</sub>*, ..., *f<sub>n</sub>*, along with annotations indicating the output(s) of the tool(s) *f<sub>m</sub>*, ..., *f<sub>k</sub>* that *f<sub>i</sub>* (*i* > *m*, *k*) takes as input.
+RandomWorld tasks are synthesized by first generating a sequence of API calls through a type-guided sampling procedure, to create a data structure that we call a *trajectory skeleton*: a sequence of tool calls *f<sub>1</sub>*, ..., *f<sub>n</sub>*, along with annotations indicating the output(s) of the tool(s) *f<sub>m</sub>*, ..., *f<sub>k</sub>* that *f<sub>i</sub>* (*i* > *m*, *k*) takes as input. For example, the trajectory skeleton below corresponds to the instruction *"how much will the y<sub>0,1</sub>-th and y<sub>0,2</sub>-th most recently-added items in my Amazon cart cost together, if purchased at the lowest-available price?"*
 
+<center>
+  <img src="static/images/randomworld/trj_ex.png" width="50%" />
+</center>
 
+First, we sample *user input* type(s) *Y<sub>0,1</sub>*, ..., *Y<sub>0,1</sub>*, which correspond to the value(s) that will be fed to the agent in the instruction: e.g. *"find <ins>comedy</ins> movies on Netflix that last less than <ins>two hours</ins>"*.
 
+Next, we sample a tool *f<sub>1</sub>* that is compatible with the variable set *V* (the user-input types *Y<sub>0,1</sub>*, ..., *Y<sub>0,1</sub>*): for each input type *X<sub>1,i</sub>* of *f<sub>1</sub>*, there is a type *Y* ≤ *X<sub>1,i</sub>* in *V*. In the trajectory skeleton above, *amazon-cart* : *ord* → *amazon-product* is compatible with the variable set *V* = {*y<sub>0,1</sub>*, *y<sub>0,2</sub>*}, because *ord* ≤ *ord*.
 
 # References
 
