@@ -63,17 +63,19 @@ Examples of Types, Descriptions, and Instances (Sampled from Generators):
 </details>
 
 We also implemented three type constructors, that allow for the generation of a theoretically unlimited number of types (recognizers/generators/subtype relations for constructed types are automatically inferred from their constituent types):
-- $\textit{list}\colon T\to T$: takes a type $t$ and returns the type $\textit{list}(t)$ of lists of objects of type $t$
-- $\textit{dict}\colon T\times T\to T$: takes types $t$, $u$ and returns the type $\textit{dict}(t,u)$ of dictionaries mapping objects of type $t$ to objects of type $u$
-- $\textit{union}\colon T\times T\to T$: takes types $t$, $u$ and returns the type $\textit{union}(t,u)$ of objects of type $t$ or $u$
+- *list*: *T*  → *T*: takes a type *t* and returns the type *list*(*t*) of lists of objects of type *t*
+- *dict*: *T* x *T*  → *T*: takes types *t*, *u* and returns the type *dict*(*t*, *u*) of dictionaries mapping objects of type *t* to objects of type *u*
+- *union*: *T* x *T*  → *T*: takes types *t*, *u* and returns the type *union*(*t*, *u*) of objects of type *t* or *u*
 
 ### Tool Creation
 
-We automatically generate tools (LLM-callable functions) in RandomWorld by sampling input types $X_1,\dots,X_n$ and output types $Y_1,\dots,Y_m$, then using an LLM to generate a name and description for a tool $f\colon X_1\times\dots\times X_n\to Y_1\times\dots\times Y_m$ (filtering out the unreasonable ones). 
+We automatically generate tools (LLM-callable functions) in RandomWorld by sampling input types *A<sub>1</sub>*, ..., *A<sub>n</sub>* and output types *B<sub>1</sub>*, ..., *B<sub>m</sub>*, then using an LLM to generate a name and description for a tool *f*: *A<sub>1</sub>* x ... x *A<sub>n</sub>*  →  *B<sub>1</sub>* x ... x *B<sub>m</sub>* (filtering out the unreasonable ones). 
 
-When passed inputs $x_1,\dots,x_n$, the tool returns $y_1,\dots,y_m$, where each $y_i$ is sampled from the type generator for $Y_i$. While the agent is interacting with the environment, we temporarily store input/output pairs $((x_1,\dots,x_n),(y_1,\dots,y_m))$: this ensures that the tool always returns the same output for a given input (from the agent's perspective).
+When passed inputs *a<sub>1</sub>*, ..., *a<sub>n</sub>*, the tool returns *b<sub>1</sub>*, ..., *b<sub>m</sub>*, where each *b<sub>i</sub>* is sampled from the type generator for *B<sub>i</sub>*. While the agent is interacting with the environment, we temporarily store input/output pairs ((*a<sub>1</sub>*, ..., *a<sub>n</sub>*), (*b<sub>1</sub>*, ...,*b<sub>m</sub>*)): this ensures that the tool always returns the same output for a given input (from the agent's perspective).
 
+### Task Generation
 
+RandomWorld tasks are synthesized by first generating a sequence of API calls through a type-guided sampling procedure, to create a data structure that we call a *trajectory skeleton*: a sequence of tool calls *f<sub>1</sub>*, ..., *f<sub>n</sub>*, along with annotations indicating the output(s) of the tool(s) *f<sub>m</sub>*, ..., *f<sub>k</sub>* that *f<sub>i</sub>* (*i* > *m*, *k*) takes as input.
 
 
 
