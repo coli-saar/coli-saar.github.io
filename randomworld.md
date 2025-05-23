@@ -44,7 +44,7 @@ Tool and environment generation in RandomWorld are guided by its fine-grained ty
 
 <details open>
 <summary>
-Type Hierarchy:
+<b>Type Hierarchy:</b>
 </summary>
 <center>
   <img src="static/images/randomworld/type_hierarchy.png" width="65%" />
@@ -57,7 +57,7 @@ For each of these base types, we craft a description, a generator, and a recogni
 
 <details open>
 <summary>
-Examples of Types, Descriptions, and Instances (Sampled from Generators):
+<b>Examples of Types, Descriptions, and Instances (Sampled from Generators):</b>
 </summary>
 <center>
   <img src="static/images/randomworld/type_exs.png" width="85%" />
