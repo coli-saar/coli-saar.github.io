@@ -34,7 +34,22 @@ In contrast, the Randomorld pipeline procedurally generates environments that ha
 2. (Non-linear) *Compositionality*: chainable tools&mdash;and objectives necessitating non-linear tool-chaining&mdash;to emulate complex, real-world tasks.
 3. *Interactivity*: intermediate tool outputs that are visible to the agent, allowing the inspection of outputs and (if necessary) correction of the tool-call sequence&mdash;as is possible in many real-world settings.
 
+Models fine-tuned through either RL or SFT with RandomWorld exhibit increased performance on multiple tool-use benchmarks, and set the new SoTA on two NESTFUL metrics. We also show that downstream performance scales with the size of the tool inventory and number of tasks in the training set: this indicates that further training with RandomWorld can further improve performance, without the need for costly human annotation.
 
+# How it Works
+
+### Type System
+
+Tool and environment generation in RandomWorld are guided by its fine-grained type system. We constructed 73 base types: fine-grained subtypes of strings (e.g. *month-name*, *movie-title*, *address*), integers (e.g. *age*, *year*, *spotify-id*), and floats (e.g. *hotel-rating*, *temperature*, *price*), with further sub-type constraints within this set of custom types: for example, *actor-name* is a subtype of *person-name* (which in turn is a subtype of *string*). 
+
+<details open>
+<summary>
+Type Hierarchy:
+</summary>
+<center>
+  <img src="static/images/randomworld/type_hierarchy.png" width="65%" />
+</center>
+</details>
 
 
 
