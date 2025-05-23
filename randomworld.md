@@ -51,6 +51,16 @@ Type Hierarchy:
 </center>
 </details>
 
+For each of these base types, we craft a description, a generator, and a recognizer. Type generators create new instances of that type, and are used to produce automatically-generated tool outputs: for example, the generator for month-name simply samples one of the twelve month names, while the generator for price samples a float between 1 and 5000, rounded to two decimal points. Type recognizers are boolean-valued functions that check if an object belongs to the type in question, and are used for type-checking inputs to randomly-generated tools.
+
+<details open>
+<summary>
+Examples of Types, Descriptions, and Instances (Sampled from Generators):
+</summary>
+<center>
+  <img src="static/images/randomworld/type_exs.png" width="85%" />
+</center>
+</details>
 
 
 
