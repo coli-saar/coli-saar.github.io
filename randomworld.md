@@ -73,6 +73,8 @@ We automatically generate tools (LLM-callable functions) in RandomWorld by sampl
 
 When passed inputs *a<sub>1</sub>*, ..., *a<sub>n</sub>*, the tool returns *b<sub>1</sub>*, ..., *b<sub>m</sub>*, where each *b<sub>i</sub>* is sampled from the type generator for *B<sub>i</sub>*. While the agent is interacting with the environment, we temporarily store input/output pairs ((*a<sub>1</sub>*, ..., *a<sub>n</sub>*), (*b<sub>1</sub>*, ...,*b<sub>m</sub>*)): this ensures that the tool always returns the same output for a given input (from the agent's perspective).
 
+Because a tool in RandomWorld is just a function annotated with input/output types, we can also use hand-crafted tools in place of&mdash;or alongside&mdash;synthetic tools. For example, we implemented six hand-crafted calculator tools in our experiments: *add*, *subtract*, *multiply*, *divide*, *max*, and *min*.
+
 ### Task Generation
 
 RandomWorld tasks are synthesized by first generating a sequence of API calls through a type-guided sampling procedure, to create a data structure that we call a *trajectory skeleton*: a sequence of tool calls *f<sub>1</sub>*, ..., *f<sub>n</sub>*, along with annotations indicating the output(s) of the tool(s) *f<sub>m</sub>*, ..., *f<sub>k</sub>* that *f<sub>i</sub>* (*i* > *m*, *k*) takes as input. For example, the non-linear trajectory skeleton below corresponds to the instruction *"how much will the y<sub>0,1</sub>-th and y<sub>0,2</sub>-th most recently-added items in my Amazon cart cost together, if purchased at the lowest-available price?"*
@@ -81,16 +83,32 @@ RandomWorld tasks are synthesized by first generating a sequence of API calls th
   <img src="static/images/randomworld/trj_ex.png" width="55%" />
 </center>
 
-These trajectory skeletons begin with sampled *user input* type(s) *Y<sub>0,1</sub>*, ..., *Y<sub>0,1</sub>*, which correspond to the value(s) that will be fed to the agent in the instruction: e.g. *"find <ins>comedy</ins> movies on Netflix that last less than <ins>two hours</ins>"*. We add a new tool call to the trajectory skeleton by sampling a tool whose input types are compatible with the types of the variables currently in play: the user input types, along with (variables representing) the output values of each existing tool call in the trajectory skeleton. We continue sampling new tools to add to the trajectory skeleton until the tool call sequence reaches a pre-sampled length, and the output of the last tool call is taken as the value to be returned by the agent to complete the task (the *goal state*).
+These trajectory skeletons begin with sampled *user input* type(s) *Y<sub>0,1</sub>*, ..., *Y<sub>0,1</sub>*, which correspond to the value(s) that will be fed to the agent in the instruction: e.g. *"find <ins>comedy</ins> movies on Netflix that last less than <ins>two hours</ins>"*. 
+
+We add a new tool call to the trajectory skeleton by sampling a tool whose input types are compatible with the types of the variables currently in play: the user input types, along with (variables representing) the output values of each existing tool call in the trajectory skeleton. We continue sampling new tools to add to the trajectory skeleton until the tool call sequence reaches a pre-sampled length, and the output of the last tool call is taken as the value to be returned by the agent to complete the task (the *goal state*).
 
 ### Environment Generation
 
-Once the trajectory skeleton has been generated, we sample user input values and compute output values for each tool call in the sequence, thereby populating an *environment*: a data structure that contains tool input/output values, user information (see below), a goal state, and an instruction. After the environment has been populated from a trajectory skeleton, we prompt an LLM to generate an instruction for that environment, given descriptions of each tool in the trajectory, the value(s) of the user input(s), and the trajectory skeleton. We use a filtering mechanism to ensure that the LLM-generated instructions always contain enough information to reach the goal state.
+Once the trajectory skeleton has been generated, we sample user input values and compute output values for each tool call in the sequence, thereby populating an *environment*: a data structure that contains tool input/output values, user information (see below), a goal state, and an instruction. 
+
+After the environment has been populated from a trajectory skeleton, we prompt an LLM to generate an instruction for that environment, given descriptions of each tool in the trajectory, the value(s) of the user input(s), and the trajectory skeleton. We use a filtering mechanism to ensure that the LLM-generated instructions always contain enough information to reach the goal state.
 
 ### Agent Interface
 
 RandomWorld is fully compatible with TRL (von Werra et al., 2020) text environments: for evaluation and RL training, we simply create a text environment for each RandomWorld environment, and pass the agent and the RandomWorld environment's tools to the text environment.
 
+For SFT training, we use the trajectory skeleton and stored tool input/output values to automatically construct a training instance that reaches the goal state. 
+
+
+# Experiment: Training on RandomWorld
+
+We fine-tuned Llama-3.1-8B-Instruct3 and Qwen2.5-7B-Instruct on 12,000 RandomWorld environments generated from a set of six hand-crafted and 550 procedurally-generated tools. For each model, we trained one variant using online RL&mdash;Group Relative Policy Optimization (GRPO; Shao et al., 2024)&mdash;and one with standard SFT. 
+
+We then evaluated these models on three benchmarks: ToolQA, NESTFUL, and a RandomWorld test set generated from 75 tools not seen during training. We compared our Qwen models (Qwen-RW-GRPO and Qwen-RW-SFT) to Hammer2.0-7B (Lin et al., 2025), a Qwen2.5-7B-Instruct model fine-tuned via SFT on an augmented version of the xlam-function-calling-60k tool-use dataset (67.5k examples; Zhang et al., 2024). Our Llama models (Llama-RW-GRPO and Llama-RW-SFT) were compared to ToolACE-8B, a Llama-3.1-8B-Instruct model fine-tuned (SFT) on the ToolACE dataset (11.3k examples; Liu et al., 2024).
+
+<center>
+  <img src="static/images/randomworld/main_results.png" width="90%" />
+</center>
 
 
 
@@ -106,3 +124,12 @@ Kinjal Basu, Ibrahim Abdelaziz, Kiran Kate, Mayank Agarwal, Maxwell Crouse, Yara
 Harsh Trivedi, Tushar Khot, Mareike Hartmann, Ruskin Manku, Vinty Dong, Edward Li, Shashank Gupta, Ashish Sabharwal, and Niranjan Balasubramanian. 2024. AppWorld: A Controllable World of Apps and People for Benchmarking Interactive Coding Agents. In *Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, 16022–16076.
 
 Leandro von Werra, Younes Belkada, Lewis Tunstall, Edward Beeching, Tristan Thrush, Nathan Lambert, Shengyi Huang, Kashif Rasul, and Quentin Gallouédec. 2020. TRL: Transformer Reinforcement Learning. [https://github.com/huggingface/trl](https://github.com/huggingface/trl).
+
+Zhihong Shao, Peiyi Wang, Qihao Zhu, Runxin Xu, Junxiao Song, Xiao Bi, Haowei Zhang, Mingchuan Zhang, YK Li, Y Wu, et al. 2024. DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models. arXiv preprint arXiv:2402.03300.
+
+Qiqiang Lin, Muning Wen, Qiuying Peng, Quanyu Nie, Junwei Liao, Jun Wang, Xiaoyun Mo, Jiamu Zhou, Cheng Cheng, Yin Zhao, Jun Wang, and Zhang Weinan. 2025. Robust Function-Calling for On-Device Language Model via Function Masking. In *The Thirteenth International Conference on Learning Representations*.
+
+Jianguo Zhang, Tian Lan, Ming Zhu, Zuxin Liu, Thai Hoang, Shirley Kokane, Weiran Yao, Juntao Tan, Akshara Prabhakar, Haolin Chen, et al. 2024. xLAM: A Family of Large Action Models to Empower AI Agent Systems. *arXiv preprint arXiv:2409.03215*.
+
+Weiwen Liu, Xu Huang, Xingshan Zeng, Xinlong Hao, Shuai Yu, Dexun Li, Shuai Wang, Weinan Gan, Zhengying Liu, Yuanqing Yu, et al. 2024a. ToolACE: Winning the Points of LLM Function Calling. *arXiv preprint arXiv:2409.00920*.
+
