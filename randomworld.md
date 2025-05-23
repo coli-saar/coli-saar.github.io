@@ -62,6 +62,20 @@ Examples of Types, Descriptions, and Instances (Sampled from Generators):
 </center>
 </details>
 
+We also implemented three type constructors, that allow for the generation of a theoretically unlimited number of types (recognizers/generators/subtype relations for constructed types are automatically inferred from their constituent types):
+- $\textit{list}\colon T\to T$: takes a type $t$ and returns the type $\textit{list}(t)$ of lists of objects of type $t$
+- $\textit{dict}\colon T\times T\to T$: takes types $t$, $u$ and returns the type $\textit{dict}(t,u)$ of dictionaries mapping objects of type $t$ to objects of type $u$
+- $\textit{union}\colon T\times T\to T$: takes types $t$, $u$ and returns the type $\textit{union}(t,u)$ of objects of type $t$ or $u$
+
+### Tool Creation
+
+We automatically generate tools (LLM-callable functions) in RandomWorld by sampling input types $X_1,\dots,X_n$ and output types $Y_1,\dots,Y_m$, then using an LLM to generate a name and description for a tool $f\colon X_1\times\dots\times X_n\to Y_1\times\dots\times Y_m$ (filtering out the unreasonable ones). 
+
+When passed inputs $x_1,\dots,x_n$, the tool returns $y_1,\dots,y_m$, where each $y_i$ is sampled from the type generator for $Y_i$. While the agent is interacting with the environment, we temporarily store input/output pairs $((x_1,\dots,x_n),(y_1,\dots,y_m))$: this ensures that the tool always returns the same output for a given input (from the agent's perspective).
+
+
+
+
 
 
 # References
