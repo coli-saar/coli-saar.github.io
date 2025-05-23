@@ -26,7 +26,7 @@ bibtex: |
 
 # RandomWorld
 
-We introduce RandomWorld, a pipeline for the procedural generation of tools and tasks for the generation of a virtually unlimited amount of training data for online RL (or SFT) training of tool-use agents. While such pipelines exist, they are comprised of either small or non-interactive (i.e. not callable) tool inventories, and/or non-compositional or linear tasks. This results in training datasets that can teach models to master simpler tool-use benchmarks (e.g. BFCL-V3; Yan et al., 2024), but that fail to satisfactorily improve model performance on benchmarks with more complex tasks: namely, tasks necessitating the non-linear chaining of tool calls in an interactive setting, such as ToolQA (Zhuang et al., 2023), NESTFUL (Basu et al., 2024), AppWorld (Trivedi et al., 2024), etc.
+We introduce RandomWorld, a pipeline for the procedural generation of tools and tasks for the online RL (or SFT) training of tool-use agents, that can generate a virtually unlimited amount of training data. While such pipelines exist, they are comprised of either small or non-interactive (i.e. not callable) tool inventories, and/or non-compositional or linear tasks. This results in training datasets that can teach models to master simpler tool-use benchmarks (e.g. BFCL-V3; Yan et al., 2024), but that fail to satisfactorily improve model performance on benchmarks with more complex tasks: namely, tasks necessitating the non-linear chaining of tool calls in an interactive setting, such as ToolQA (Zhuang et al., 2023), NESTFUL (Basu et al., 2024), AppWorld (Trivedi et al., 2024), etc.
 
 In contrast, the Randomorld pipeline procedurally generates environments that have:
 
