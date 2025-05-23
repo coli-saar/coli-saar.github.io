@@ -110,6 +110,9 @@ We then evaluated these models on three benchmarks: ToolQA, NESTFUL, and a Rando
   <img src="static/images/randomworld/main_results.png" width="90%" />
 </center>
 
+- **Qwen-RW-SFT Achieves NESTFUL SoTA:** On the NESTFUL benchmark, our Qwen-RW-SFT model sets the SoTA for the F1-Function (0.96) and F1-Parameter (0.71) scores, both of which reflect the correctness of the predicted API calls. In fact, aside from Llama-RW-SFT, all of our models outperform the previous SoTA (Mixtral-8x22B-Instruct-v0.1).
+- **Synthetic Data Improves Model Performance:** These results show that training tool-use agents purely on procedurally-generated synthetic data improves model performance. The superior performance of Llama-RW-GRPO over Llama-RW-SFT (and ToolACE-8B) demonstrate the utility of data-creation pipeline for tool-use that is compatible with online RL tuning, while the SoTA and near-SoTA results of Qwen-RW-SFT show the importance of a pipeline compatible with both kinds of fine-tuning.
+- **Data Quality Matters:** Our Llama models generally outperform ToolACE-8B (another Llama-3.1-8B-Instruct model fine-tuned on a similar amount of tool-use data), and our Qwen models generally outperform Hammer2.0-7B (another Qwen2.5-7B-Instruct model fine-tuned on almost 7x more tool-use data). The fact that both Qwen-RW-SFT and Hammer2.0-7B are trained via SFT on synthetic tool-use data raises the question as to why our model outperforms Hammer2.0-7B: we hypothesize that RandomWorld's non-linear, trajectory-skeleton-driven task-creation pipeline generates more complex tasks than an LLM-driven task-creation pipeline&mdash;such as those used by Hammer2.0-7B and ToolACE-8B&mdash;is capable of envisioning. This likely provides our models with a richer training set than those of the baseline models.
 
 
 
