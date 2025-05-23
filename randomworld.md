@@ -36,7 +36,7 @@ In contrast, the Randomorld pipeline procedurally generates environments that ha
 
 Models fine-tuned through either RL or SFT with RandomWorld exhibit increased performance on multiple tool-use benchmarks, and set the new SoTA on two NESTFUL metrics. We also show that downstream performance scales with the size of the tool inventory and number of tasks in the training set: this indicates that further training with RandomWorld can further improve performance, without the need for costly human annotation.
 
-# How it Works
+# The Pipeline
 
 ### Type System
 
@@ -51,6 +51,8 @@ Type Hierarchy:
 </center>
 </details>
 
+<br>
+
 For each of these base types, we craft a description, a generator, and a recognizer. Type generators create new instances of that type, and are used to produce automatically-generated tool outputs: for example, the generator for month-name simply samples one of the twelve month names, while the generator for price samples a float between 1 and 5000, rounded to two decimal points. Type recognizers are boolean-valued functions that check if an object belongs to the type in question, and are used for type-checking inputs to randomly-generated tools.
 
 <details open>
@@ -61,6 +63,8 @@ Examples of Types, Descriptions, and Instances (Sampled from Generators):
   <img src="static/images/randomworld/type_exs.png" width="85%" />
 </center>
 </details>
+
+<br>
 
 We also implemented three type constructors, that allow for the generation of a theoretically unlimited number of types (recognizers/generators/subtype relations for constructed types are automatically inferred from their constituent types):
 - *list* : *T* → *T* takes a type *t* and returns the type *list*(*t*) of lists of objects of type *t*
@@ -79,9 +83,13 @@ Because a tool in RandomWorld is just a function annotated with input/output typ
 
 RandomWorld tasks are synthesized by first generating a sequence of API calls through a type-guided sampling procedure, to create a data structure that we call a *trajectory skeleton*: a sequence of tool calls *f<sub>1</sub>*, ..., *f<sub>n</sub>*, along with annotations indicating the output(s) of the tool(s) *f<sub>m</sub>*, ..., *f<sub>k</sub>* that *f<sub>i</sub>* (*i* > *m*, *k*) takes as input. For example, the non-linear trajectory skeleton below corresponds to the instruction *"how much will the y<sub>0,1</sub>-th and y<sub>0,2</sub>-th most recently-added items in my Amazon cart cost together, if purchased at the lowest-available price?"*
 
+<br>
+
 <center>
   <img src="static/images/randomworld/trj_ex.png" width="55%" />
 </center>
+
+<br>
 
 These trajectory skeletons begin with sampled *user input* type(s) *Y<sub>0,1</sub>*, ..., *Y<sub>0,1</sub>*, which correspond to the value(s) that will be fed to the agent in the instruction: e.g. *"find <ins>comedy</ins> movies on Netflix that last less than <ins>two hours</ins>"*. 
 
@@ -106,9 +114,13 @@ We fine-tuned Llama-3.1-8B-Instruct and Qwen2.5-7B-Instruct on 12,000 RandomWorl
 
 We then evaluated these models on three benchmarks: ToolQA, NESTFUL, and a RandomWorld test set generated from 75 tools not seen during training. We compared our Qwen models (Qwen-RW-GRPO and Qwen-RW-SFT) to Hammer2.0-7B (Lin et al., 2025), a Qwen2.5-7B-Instruct model fine-tuned via SFT on an augmented version of the xlam-function-calling-60k tool-use dataset (67.5k examples; Zhang et al., 2024). Our Llama models (Llama-RW-GRPO and Llama-RW-SFT) were compared to ToolACE-8B, a Llama-3.1-8B-Instruct model fine-tuned (SFT) on the ToolACE dataset (11.3k examples; Liu et al., 2024).
 
+<br>
+
 <center>
   <img src="static/images/randomworld/main_results.png" width="90%" />
 </center>
+
+<br>
 
 - **Qwen-RW-SFT Achieves NESTFUL SoTA:** On the NESTFUL benchmark, our Qwen-RW-SFT model sets the SoTA for the F1-Function (0.96) and F1-Parameter (0.71) scores, both of which reflect the correctness of the predicted API calls. In fact, aside from Llama-RW-SFT, all of our models outperform the previous SoTA (Mixtral-8x22B-Instruct-v0.1).
 - **Synthetic Data Improves Model Performance:** These results show that training tool-use agents purely on procedurally-generated synthetic data improves model performance. The superior performance of Llama-RW-GRPO over Llama-RW-SFT (and ToolACE-8B) demonstrate the utility of data-creation pipeline for tool-use that is compatible with online RL tuning, while the SoTA and near-SoTA results of Qwen-RW-SFT show the importance of a pipeline compatible with both kinds of fine-tuning.
@@ -122,9 +134,13 @@ Next, we examined the effect of number of synthetic tools and tasks on downstrea
 - **25% tools/100% tasks:** designed to evaluate the effect of tool inventory size, constructed by removing 75% of the tools from the original training set, then generating 12,000 unique tasks from that restricted tool set.
 - **25% tools/25% tasks:** constructed from the 25% tools/100% tasks set by by randomly removing 75% of the tasks.
 
+<br>
+
 <center>
   <img src="static/images/randomworld/scalability_results.png" width="90%" />
 </center>
+
+<br>
 
 These results are most pronounced on the RandomWorld test set: Qwen-RW-GRPO performed worse than the base model on ToolQA-Easy&mdash;explaining the observed *increased* performance when trained on fewer tasks&mdash;and NESTFUL is not fully in-distribution with respect to RandomWorld, so we would not expect a marked effect on those benchmarks. But, on the RandomWorld test set, we observe that:
 
