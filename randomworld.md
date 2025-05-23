@@ -19,3 +19,16 @@ code: https://github.com/coli-saar/randomworld
 bibtex: |
     None (TODO)
 ---
+
+<center>
+    <img src="static/images/randomworld/figure1.png" width="50%" />
+</center>
+
+# RandomWorld
+
+blah blah blah
+
+
+
+
+# References
