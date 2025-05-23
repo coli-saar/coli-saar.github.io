@@ -53,7 +53,7 @@ Tool and environment generation in RandomWorld are guided by its fine-grained ty
 
 <br>
 
-For each of these base types, we craft a description, a generator, and a recognizer. Type generators create new instances of that type, and are used to produce automatically-generated tool outputs: for example, the generator for month-name simply samples one of the twelve month names, while the generator for price samples a float between 1 and 5000, rounded to two decimal points. Type recognizers are boolean-valued functions that check if an object belongs to the type in question, and are used for type-checking inputs to randomly-generated tools.
+For each of these base types, we craft a description, a generator, and a recognizer. Type generators create new instances of that type, and are used to produce automatically-generated tool outputs: for example, the generator for *month-name* simply samples one of the twelve month names, while the generator for price samples a float between 1 and 5000, rounded to two decimal points. Type recognizers are boolean-valued functions that check if an object belongs to the type in question, and are used for type-checking inputs to randomly-generated tools.
 
 <details open>
 <summary>
@@ -81,7 +81,7 @@ Because a tool in RandomWorld is just a function annotated with input/output typ
 
 ### Task Generation
 
-RandomWorld tasks are synthesized by first generating a sequence of API calls through a type-guided sampling procedure, to create a data structure that we call a *trajectory skeleton*: a sequence of tool calls *f<sub>1</sub>*, ..., *f<sub>n</sub>*, along with annotations indicating the output(s) of the tool(s) *f<sub>m</sub>*, ..., *f<sub>k</sub>* that *f<sub>i</sub>* (*i* > *m*, *k*) takes as input. For example, the non-linear trajectory skeleton below corresponds to the instruction *"how much will the y<sub>0,1</sub>-th and y<sub>0,2</sub>-th most recently-added items in my Amazon cart cost together, if purchased at the lowest-available price?"*
+RandomWorld tasks are synthesized by first generating a sequence of API calls through a type-guided sampling procedure, to create a data structure that we call a *trajectory skeleton*: a sequence of tool calls *f<sub>1</sub>*, ..., *f<sub>n</sub>*, along with annotations indicating the output(s) of the tool(s) *f<sub>m</sub>*, ..., *f<sub>k</sub>* that *f<sub>i</sub>* takes as input (*m*, *k* < *i*). For example, the non-linear trajectory skeleton below corresponds to the instruction *"how much will the y<sub>0,1</sub>-th and y<sub>0,2</sub>-th most recently-added items in my Amazon cart cost together, if purchased at the lowest-available price?"*
 
 <br>
 
@@ -91,7 +91,7 @@ RandomWorld tasks are synthesized by first generating a sequence of API calls th
 
 <br>
 
-These trajectory skeletons begin with sampled *user input* type(s) *Y<sub>0,1</sub>*, ..., *Y<sub>0,1</sub>*, which correspond to the value(s) that will be fed to the agent in the instruction: e.g. *"find <ins>comedy</ins> movies on Netflix that last less than <ins>two hours</ins>"*. 
+These trajectory skeletons begin with sampled *user input* type(s) *Y<sub>0,1</sub>*, ..., *Y<sub>0,m</sub>*, which correspond to the value(s) that will be fed to the agent in the instruction: e.g. *"find <ins>comedy</ins> movies on Netflix that last less than <ins>two</ins> hours"* (*comedy*: *movie-genre*, *two*: *hour-duration*). 
 
 We add a new tool call to the trajectory skeleton by sampling a tool whose input types are compatible with the types of the variables currently in play: the user input types, along with (variables representing) the output values of each existing tool call in the trajectory skeleton. We continue sampling new tools to add to the trajectory skeleton until the tool call sequence reaches a pre-sampled length, and the output of the last tool call is taken as the value to be returned by the agent to complete the task (the *goal state*).
 
