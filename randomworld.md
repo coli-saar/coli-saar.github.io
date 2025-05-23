@@ -81,12 +81,15 @@ RandomWorld tasks are synthesized by first generating a sequence of API calls th
   <img src="static/images/randomworld/trj_ex.png" width="55%" />
 </center>
 
-These trajectory skeletons begin with sampled *user input* type(s) *Y<sub>0,1</sub>*, ..., *Y<sub>0,1</sub>*, which correspond to the value(s) that will be fed to the agent in the instruction: e.g. *"find <ins>comedy</ins> movies on Netflix that last less than <ins>two hours</ins>"*. We add a new tool call to the trajectory skeleton by sampling a tool whose input types are compatible with the types of the variables currently in play: the user input types, along with (variables representing) the output values of each existing tool call in the trajectory skeleton. We continue sampling new tools to add to the trajectory skeleton until the tool call sequence reaches a pre-sampled length, and the output of the last tool call is taken as the value to be returned by the agent (the *goal state*).
+These trajectory skeletons begin with sampled *user input* type(s) *Y<sub>0,1</sub>*, ..., *Y<sub>0,1</sub>*, which correspond to the value(s) that will be fed to the agent in the instruction: e.g. *"find <ins>comedy</ins> movies on Netflix that last less than <ins>two hours</ins>"*. We add a new tool call to the trajectory skeleton by sampling a tool whose input types are compatible with the types of the variables currently in play: the user input types, along with (variables representing) the output values of each existing tool call in the trajectory skeleton. We continue sampling new tools to add to the trajectory skeleton until the tool call sequence reaches a pre-sampled length, and the output of the last tool call is taken as the value to be returned by the agent to complete the task (the *goal state*).
 
 ### Environment Generation
 
+Once the trajectory skeleton has been generated, we sample user input values and compute output values for each tool call in the sequence, thereby populating an *environment*: a data structure that contains tool input/output values, user information (see below), a goal state, and an instruction. After the environment has been populated from a trajectory skeleton, we prompt an LLM to generate an instruction for that environment, given descriptions of each tool in the trajectory, the value(s) of the user input(s), and the trajectory skeleton. We use a filtering mechanism to ensure that the LLM-generated instructions always contain enough information to reach the goal state.
 
+### Agent Interface
 
+RandomWorld is fully compatible with TRL (von Werra et al., 2020) text environments: for evaluation and RL training, we simply create a text environment for each RandomWorld environment, and pass the agent and the RandomWorld environment's tools to the text environment.
 
 
 
@@ -101,3 +104,5 @@ Yuchen Zhuang, Yue Yu, Kuan Wang, Haotian Sun, and Chao Zhang. 2023. ToolQA: A D
 Kinjal Basu, Ibrahim Abdelaziz, Kiran Kate, Mayank Agarwal, Maxwell Crouse, Yara Rizk, Kelsey Bradford, Asim Munawar, Sadhana Kumaravel, Saurabh Goyal, et al. 2024. Nestful: A Benchmark for Evaluating LLMs on Nested Sequences of API Calls. *arXiv preprint arXiv:2409.03797*.
 
 Harsh Trivedi, Tushar Khot, Mareike Hartmann, Ruskin Manku, Vinty Dong, Edward Li, Shashank Gupta, Ashish Sabharwal, and Niranjan Balasubramanian. 2024. AppWorld: A Controllable World of Apps and People for Benchmarking Interactive Coding Agents. In *Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)*, 16022–16076.
+
+Leandro von Werra, Younes Belkada, Lewis Tunstall, Edward Beeching, Tristan Thrush, Nathan Lambert, Shengyi Huang, Kashif Rasul, and Quentin Gallouédec. 2020. TRL: Transformer Reinforcement Learning. [https://github.com/huggingface/trl](https://github.com/huggingface/trl).
