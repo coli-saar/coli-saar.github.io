@@ -21,6 +21,17 @@ affiliations:
   name: Saarland University
 - id: 2
   name: Utrecht University
+paper: http://arxiv.org/abs/2505.17923
+bibtex: |
+    @misc{yao2025languagemodelslearnimplicit,
+          title={Language models can learn implicit multi-hop reasoning, but only if they have lots of training data}, 
+          author={Yuekun Yao and Yupei Du and Dawei Zhu and Michael Hahn and Alexander Koller},
+          year={2025},
+          eprint={2505.17923},
+          archivePrefix={arXiv},
+          primaryClass={cs.CL},
+          url={https://arxiv.org/abs/2505.17923}, 
+    }
 ---
 
 
@@ -47,12 +58,37 @@ We first demonstrate that GPT-2 style models trained from scratch are able to so
 The second objective is to understand the underlying mechanism by which language models solve the $k$-hop task. We first demonstrate that language models solve such tasks by layer-wise lookup of bridge entities of a $k$-hop query through empirical evidence (e.g. mechanistic interpretability). Building on this finding, we then establish a theoretical lower bound, showing that the model’s depth must grow with $k$ to maintain such layer-wise lookup mechanism.
 
 <center>
-    <img src="static/images/khop/figure2.png" width="50%" />
+    <img src="static/images/khop/control_seed0_font_actpatch_heatmap.pdf" width="40%" />
+    <div style="font-size: 0.9em; color: #555; margin-top: 0.5em;">
+        <em>Figure 1: Causal effects across layers at the last input token position. C_i-hop refers to the effect of a particular intermediate bridge entity, which is calculated according to a corrupted run with i-hop bridge entity corrupted while others unchanged. </em>
+    </div>
 </center>
+
 ## Curriculum learning mitigates the data requirement, but doesn't solve it
 
-Finally, we study training strategies to improve the data budget issue. Models mentioned above were trained solely on $k$-hop task, but  $i$-hop ($i < k$) questions should also be available in realistic setups. By exploiting such easier questions as additional training data for $k$-hop task, we demonstrate that curriculum learning significantly mitigates the exponential growth issue, though not eliminate the increase of data budget as $k$ increases. 
+Finally, we study training strategies to improve the data budget issue. Models mentioned above were trained solely on $k$-hop task, but  $i$-hop ($i < k$) questions should also be available in realistic setups. By exploiting such easier questions as additional training data for $k$-hop task, we demonstrate that curriculum learning significantly mitigates the exponential growth issue, though not eliminate the increase of data budget as $k$ increases. Instead, simply mixing all training data only yields modest improvement. 
 
 <center>
     <img src="static/images/khop/figure3.png" width="40%" />
 </center>
+We attribute this effectiveness of curriculum learning to a stepwise build-up of circuits: 
+According to our mechanism study (e.g. activation patching) in Figure 2 and 3, 
+mechanisms retrieving lower-hop entities (e.g., $1$-hop) emerge in the early training stages; 
+subsequent stages then build upon these established circuits to learn more complex reasoning tasks.
+While baseline models have to construct a full circuit for $k$-hop reasoning at once, 
+curriculum learning enables $1$-hop circuits to emerge in shallower layers in the first stage, with later stages developing circuits for $2$-hop and $3$-hop entities on top of these.
+
+<center>
+    <img src="static/images/khop/base_multi_hop_row_subplots.pdf" width="100%" />
+    <div style="font-size: 0.9em; color: #555; margin-top: 0.5em;">
+        <em>Figure 2: Causal effects across checkpoints and layers for 1-hop to 3-hop reasoning in Baseline model.</em>
+    </div>
+</center>
+
+<center>
+    <img src="static/images/khop/cl_fix_multi_hop_row_subplots.pdf" width="100%" />
+    <div style="font-size: 0.9em; color: #555; margin-top: 0.5em;">
+        <em>Figure 3: Causal effects across checkpoints and layers for 1-hop to 3-hop reasoning in Curriculum Learning model.</em>
+    </div>
+</center>
+
