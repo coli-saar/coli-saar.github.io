@@ -58,7 +58,7 @@ We first demonstrate that GPT-2 style models trained from scratch are able to so
 The second objective is to understand the underlying mechanism by which language models solve the $k$-hop task. We first demonstrate that language models solve such tasks by layer-wise lookup of bridge entities of a $k$-hop query through empirical evidence (e.g. mechanistic interpretability). Building on this finding, we then establish a theoretical lower bound, showing that the model’s depth must grow with $k$ to maintain such layer-wise lookup mechanism.
 
 <center>
-    <img src="static/images/khop/control_seed0_font_actpatch_heatmap.pdf" width="40%" />
+    <img src="static/images/khop/control_seed0_font_actpatch_heatmap.png" width="40%" />
     <div style="font-size: 0.9em; color: #555; margin-top: 0.5em;">
         <em>Figure 1: Causal effects across layers at the last input token position. C_i-hop refers to the effect of a particular intermediate bridge entity, which is calculated according to a corrupted run with i-hop bridge entity corrupted while others unchanged. </em>
     </div>
@@ -79,14 +79,14 @@ While baseline models have to construct a full circuit for $k$-hop reasoning at 
 curriculum learning enables $1$-hop circuits to emerge in shallower layers in the first stage, with later stages developing circuits for $2$-hop and $3$-hop entities on top of these.
 
 <center>
-    <img src="static/images/khop/base_multi_hop_row_subplots.pdf" width="100%" />
+    <img src="static/images/khop/base_multi_hop_row_subplots.png" width="100%" />
     <div style="font-size: 0.9em; color: #555; margin-top: 0.5em;">
         <em>Figure 2: Causal effects across checkpoints and layers for 1-hop to 3-hop reasoning in Baseline model.</em>
     </div>
 </center>
 
 <center>
-    <img src="static/images/khop/cl_fix_multi_hop_row_subplots.pdf" width="100%" />
+    <img src="static/images/khop/cl_fix_multi_hop_row_subplots.png" width="100%" />
     <div style="font-size: 0.9em; color: #555; margin-top: 0.5em;">
         <em>Figure 3: Causal effects across checkpoints and layers for 1-hop to 3-hop reasoning in Curriculum Learning model.</em>
     </div>
