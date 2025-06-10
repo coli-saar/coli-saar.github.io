@@ -14,7 +14,7 @@ authors:
 affiliations:
 - id: 1
   name: Saarland University
-paper: https://www.google.com
+paper: https://coli-saar.github.io/static/images/randomworld/randomworld.pdf
 code: https://github.com/coli-saar/randomworld
 bibtex: |
     None (TODO)
