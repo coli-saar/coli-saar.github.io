@@ -47,7 +47,7 @@ bibtex: |
 ---
 
 <center>
-    <img src="static\improvedgeneralizedplanning\images\3StepPipeline3.png" width="100%" />
+    <img src="static/images/improvedgeneralizedplanning/3StepPipeline3.png" width="100%" />
 </center>
 
 
@@ -62,7 +62,6 @@ Our apporach consists of three steps:
 1. Natural Language Generation
 </summary>
 
-<img src="static/images/autoplanbench/blocksworld_example.png" width="70%"/>
 <br>
 </details>
 
@@ -71,9 +70,9 @@ Our apporach consists of three steps:
 2. Strategy Generation
 </summary>
 
-<img src="static\improvedgeneralizedplanning\images\LogisticsExampleStrategyPrompt.png" width="90%"/>
+<img src="static/images/improvedgeneralizedplanning/LogisticsExampleStrategyPrompt.png" width="90%"/>
 <br>
-<img src="static\improvedgeneralizedplanning\images\LogisticsIncorrectPlan.png" width="90%"/>
+<img src="static/images/improvedgeneralizedplanning/LogisticsIncorrectPlan.png" width="90%"/>
 <br>
 </details>
 
@@ -82,9 +81,9 @@ Our apporach consists of three steps:
 3. Code Generation
 </summary>
 
-<img src="static\improvedgeneralizedplanning\images\StrategyPseudocodeToPolicy.png" width="90%"/>
+<img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="90%"/>
 <br>
-<img src="static\improvedgeneralizedplanning\images\Feedback.png" width="90%"/>
+<img src="static/images/improvedgeneralizedplanning/Feedback.png" width="90%"/>
 <br>
 </details>
 
@@ -94,11 +93,11 @@ Example in the Logistics Domain
 </summary>
 
 Init and Goal: #TODO Description
-<img src="static\improvedgeneralizedplanning\images\LogisticsInitGoal.png" width="90%"/>
+<img src="static/images/improvedgeneralizedplanning/LogisticsInitGoal.png" width="90%"/>
 <br>
 
 Full Pipeline: #TODO Description
-<img src="static\improvedgeneralizedplanning\images\LogisticsPipelineExample2.png" width="90%"/>
+<img src="static/images/improvedgeneralizedplanning/LogisticsPipelineExample2.png" width="90%"/>
 <br>
 </details
 
@@ -129,14 +128,10 @@ We compare the performance of our approach to the framework by Silver et al. (20
 
 ### Results:
 
-**Results on the custom datasets:**
+**Results:**
 
-<img src="static/images/autoplanbench/results_version2/main_table.png" width="50%" />
+<img src="static/images/improvedgeneralizedplanning/table1.png" width="50%" />
 
-
-**Results on IPC datasets:**
-
-<img src="static/images/autoplanbench/results_version2/IPC_results.png" width="50%" />
 
 
 ## References
