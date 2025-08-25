@@ -13,7 +13,8 @@ authors:
   affiliation: 3
 - name: Joerg Hoffmann
   homepage: http://fai.cs.uni-saarland.de/hoffmann/ #TODO
-  affiliation: [1,2]
+  affiliation: 1
+  affiliation: 2
   
 - name: Michael Katz
   #homepage: Link? #TODO
@@ -99,7 +100,7 @@ Init and Goal: #TODO Description
 Full Pipeline: #TODO Description
 <img src="static/images/improvedgeneralizedplanning/LogisticsPipelineExample2.png" width="90%"/>
 <br>
-</details
+</details>
 
 ## Data
 
