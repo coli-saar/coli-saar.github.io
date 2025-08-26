@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "WORK IN PROGRESS\nImproved Generalized Planning with LLMs through Strategy Refinement and Reflection"
+title: "WORK IN PROGRESS Improved Generalized Planning with LLMs through Strategy Refinement and Reflection"
 authors:
 - name: Katharina Stein
   homepage: https://kastein.github.io/ #TODO
@@ -79,19 +79,19 @@ Together with the NL description of the domain and the example tasks we prompt t
 
   * Response of the LLM:
     * Step-by-step outline of the strategy:
-    <img src="static\improvedgeneralizedplanning\images\LogisticsStrategyExample.png" width="90%"/>
+    <img src="static\images\improvedgeneralizedplanning\LogisticsStrategyExample.png" width="90%"/>
     <br>
     * Final strategy in the from of pseudocode:
-    <img src="static\improvedgeneralizedplanning\images\LogisticsStrategyExample2.png" width="90%"/>
+    <img src="static\images\improvedgeneralizedplanning\LogisticsStrategyExample2.png" width="90%"/>
     <br>
 
   * Strategy debugging:
-  <img src="static\improvedgeneralizedplanning\images\PlanGenFeedback.png" width="90%"/>
+  <img src="static\images\improvedgeneralizedplanning\PlanGenFeedback.png" width="90%"/>
 
 * Code Generation
 
   * From strategy to code:
-  <img src="static\improvedgeneralizedplanning\images\StrategyPseudocodeToPolicy.png" width="90%"/>
+  <img src="static\images\improvedgeneralizedplanning\StrategyPseudocodeToPolicy.png" width="90%"/>
   <br>
   * Error Feedback and Reflection Prompt:
   <img src="static/images/improvedgeneralizedplanning/Feedback.png" width="90%"/>
@@ -105,7 +105,7 @@ For our experiments, we focus on domains that have previously been used in resea
 <summary>
 Table 2
 </summary>
-<img src="static\improvedgeneralizedplanning\table2.png" width="90%"/>
+<img src="static\images\improvedgeneralizedplanning\table2.png" width="90%"/>
 <br>
 </details>
 
