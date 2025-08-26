@@ -13,7 +13,7 @@ authors:
   affiliation: 3
 - name: Joerg Hoffmann
   homepage: http://fai.cs.uni-saarland.de/hoffmann/ #TODO
-  affiliation: [1, 2]
+  affiliation: "1, 2"
   
 - name: Michael Katz
   #homepage: Link? #TODO
