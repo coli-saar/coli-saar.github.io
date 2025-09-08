@@ -6,7 +6,6 @@ authors:
   homepage: https://kastein.github.io/ #TODO
   affiliation: 1
 - name: Nils Hodel
-  #homepage: email? #TODO
   affiliation: 1
 - name: Daniel Fiser
   homepage: https://www.danfis.cz/ #TODO
@@ -73,17 +72,23 @@ In the Logistics domain we have a specified number of cities which have the same
 <summary>More Detail</summary>
 
 ### Strategy Generation
-
-  Together with the NL description of the domain and the example tasks we prompt the LLM to provide a strategy in the form of a pseudocode for an algorithm.
-
+  Our goal is to improve the quality of the strategies that the LLM is asked to implement in order to shift most of the work beyond the mere conversion into Python to the previous step of the generation framework. We therefore instruct the LLM to generate the strategy in the form of pseudocode that should be detailed and specific enough to be converted into an executable program in a straightforward way. The prompt for this step consists of the NL descriptions of the domain and two example tasks and instructions to think step-by-step (zero-shot CoT, Kojima et al., 2022) for developing a strategy that can be turned into a program.
+  <br>
   <img src="static/images/improvedgeneralizedplanning/LogisticsExampleStrategyPrompt.png" width="60%"/>
 
   * Response of the LLM:
+
     * Step-by-step outline of the strategy:  
-    <img src="static/images/improvedgeneralizedplanning/LogisticsStrategyExample.png" width="60%"/>
+    <br>
+    <img src="static/images/improvedgeneralizedplanning/LogisticsStrategyExample.png" width="70%"/>
     * Final strategy in the form of pseudocode:  
-    <img src="static/images/improvedgeneralizedplanning/LogisticsStrategyExample2.png" width="60%"/>
-  * Strategy debugging:  
+    <br>
+    <img src="static/images/improvedgeneralizedplanning/LogisticsStrategyExample2.png" width="70%"/>
+  * Strategy debugging:
+  <br>
+  We provide the pseudocode strategy to an LLM and prompt it to generate the PDDL plan for a given debugging task (in NL) by following the strategy. The generated plan is then validated using VAL. If the plan is incorrect, the validation output is converted into a feedback message.
+  <br>
+  Instead of directly prompting the LLM to update the pseudocode based on the feedback, we add a reflection step, inspired by approaches that let LLMs reflect about ways to improve over previous outputs (e.g. Madaan et al. 2023; Shinn et al. 2023). We combine the feedback about the mistake and the generated plan and with instructions to reflect about the part of the pseudocode that caused the mistake and the rea
   <img src="static/images/improvedgeneralizedplanning/PlanGenFeedback.png" width="60%"/>
 
 ### Code Generation
