@@ -30,8 +30,8 @@ affiliations:
 - id: 4
   name: IBM Research, US
 paper: https://www.arxiv.org/abs/2508.13876
-code: https://github.com/minecraft-saar/autoplanbench/tree/main #TODO
-data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_dataset #TODO
+code: https://github.com/coli-saar/genplan-strategy-refine #TODO
+data: https://github.com/coli-saar/genplan-strategy-refine #TODO
 bibtex: |
     @misc{stein2025improvedgeneralizedplanningllms,
       title={Improved Generalized Planning with LLMs through Strategy Refinement and Reflection}, 
@@ -155,7 +155,7 @@ We compare the performance of our approach to the framework by Silver et al. (20
 ## References
 <details>
 <summary>
-References
+More Detail
 </summary>
 M. Helmert and C. Domshlak. Landmarks, critical paths and abstractions: What’s the difference anyway? In *Proceedings of the 19th International Conference on Automated Planning and Scheduling, ICAPS*. AAAI, 2009.<br>
 J. Hoffmann and B. Nebel. The FF planning system: Fast plan generation through heuristic search. 'Journal of Artificial Intelligence Research*, 14:253–302, 2001.<br>
