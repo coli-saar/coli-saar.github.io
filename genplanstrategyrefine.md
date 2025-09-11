@@ -142,10 +142,10 @@ We compare the performance of our approach to the framework by Silver et al. (20
 ### Results:
 
 <center>
-<img src="static/images/improvedgeneralizedplanning/table1.png" width="85%" />
+<img src="static/images/improvedgeneralizedplanning/table1_new.png" width="85%" />
 </center>
 <center>
-<img src="static/images/improvedgeneralizedplanning/table3.png" width="90%" />
+<img src="static/images/improvedgeneralizedplanning/table3_new.png" width="85%" />
 </center>
 <img src="static/images/improvedgeneralizedplanning/Figure8.png" width="49%" style="display:inline-block;vertical-align:middle;margin-right:1%;" />
 <img src="static/images/improvedgeneralizedplanning/Figure9.png" width="49%" style="display:inline-block;vertical-align:middle;" />
@@ -153,7 +153,10 @@ We compare the performance of our approach to the framework by Silver et al. (20
 
 
 ## References
-
+<details>
+<summary>
+References
+</summary>
 M. Helmert and C. Domshlak. Landmarks, critical paths and abstractions: What’s the difference anyway? In *Proceedings of the 19th International Conference on Automated Planning and Scheduling, ICAPS*. AAAI, 2009.<br>
 J. Hoffmann and B. Nebel. The FF planning system: Fast plan generation through heuristic search. 'Journal of Artificial Intelligence Research*, 14:253–302, 2001.<br>
 K. Valmeekam, M. Marquez, A. Olmo, S. Sreedharan, and S. Kambhampati. Planbench: An extensible benchmark for evaluating large language models on planning and reasoning about change. In *Thirty-seventh Conference on Neural Information Processing Systems Datasets and Benchmarks Track*, 2023.<br>
@@ -181,4 +184,4 @@ Stein, K.; Fiˇser, D.; Hoffmann, J.; and Koller, A. 2025. Automating the Genera
 Tang, H.; Hu, K.; Zhou, J. P.; Zhong, S.; Zheng, W.-L.; Si, X.; and Ellis, K. 2024. Code Repair with LLMs gives an Exploration-Exploitation Tradeoff. In Globerson, A.; Mackey, L.; Belgrave, D.; Fan, A.; Paquet, U.; Tomczak, J.; and Zhang, C., eds., Advances in Neural Information Processing Systems, volume 37, 117954–117996. Curran Associates, Inc.<br>
 Valmeekam, K.; Marquez, M.; Sreedharan, S.; and Kambhampati, S. 2023. On the Planning Abilities of Large Language Models - A Critical Investigation. In Oh, A.; Naumann, T.; Globerson, A.; Saenko, K.; Hardt, M.; and Levine, S., eds., Advances in Neural Information Processing Systems, volume 36, 75993–76005. Curran Associates, Inc. Wang, E.; Cassano, F.; Wu, C.; Bai, Y.; Song, W.; Nath, V.; Han, Z.; Hendryx, S.; Yue, S.; and Zhang, H. 2024. Planning In Natural Language Improves LLM Search For Code Generation. arXiv:2409.03733.<br>
 Wei, J.; Wang, X.; Schuurmans, D.; Bosma, M.; ichter, b.; Xia, F.; Chi, E.; Le, Q. V.; and Zhou, D. 2022. Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. In Koyejo, S.; Mohamed, S.; Agarwal, A.; Belgrave, D.; Cho, K.; and Oh, A., eds., Advances in Neural Information Processing Systems, volume 35, 24824–24837. Curran Associates, Inc.<br>
-
+</details>
