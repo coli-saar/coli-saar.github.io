@@ -3,22 +3,21 @@ layout: default
 title: "Improved Generalized Planning with LLMs through Strategy Refinement and Reflection"
 authors:
 - name: Katharina Stein
-  homepage: https://kastein.github.io/ #TODO
+  homepage: https://kastein.github.io/ 
   affiliation: 1
 - name: Nils Hodel
   affiliation: 1
 - name: Daniel Fiser
-  homepage: https://www.danfis.cz/ #TODO
+  homepage: https://www.danfis.cz/ 
   affiliation: 3
 - name: Joerg Hoffmann
-  homepage: http://fai.cs.uni-saarland.de/hoffmann/ #TODO
+  homepage: http://fai.cs.uni-saarland.de/hoffmann/ 
   affiliation: "1,2"
-  
 - name: Michael Katz
-  #homepage: Link? #TODO
+  homepage: https://ctpelok77.github.io/
   affiliation: 4
 - name: Alexander Koller
-  homepage: https://www.coli.uni-saarland.de/~koller/ #TODO
+  homepage: https://www.coli.uni-saarland.de/~koller/ 
   affiliation: 1
 affiliations:
 - id: 1
@@ -31,7 +30,7 @@ affiliations:
   name: IBM Research, US
 paper: https://www.arxiv.org/abs/2508.13876
 code: https://github.com/coli-saar/genplan-strategy-refine #TODO
-data: https://github.com/coli-saar/genplan-strategy-refine #TODO
+data: https://github.com/coli-saar/genplan-strategy-refine/tree/main/data #TODO
 bibtex: |
     @misc{stein2025improvedgeneralizedplanningllms,
       title={Improved Generalized Planning with LLMs through Strategy Refinement and Reflection}, 
@@ -134,9 +133,9 @@ We conduct three ablation experiments to assess the effect of our pipeline exten
 We compare the performance of our approach to the framework by Silver et al. (2024) with GPT-4o (Sil) and to a re-implementation of their pipeline (Bas). For the re-implementation we make a number of smaller changes to the original pipeline for a fairer comparison. First, we adapt the phrasing of the prompts to be more similar to our prompts, including instructions to think step-by-step for generating the NL strategy. We also separate the three parts of the pipeline and use the output of the previous step as part of the input for the next step, as done in our main frame- work. To account for the fact that no PDDL is available at code generation time, we provide the definition of the example task and of the failed task in Python format. Lastly, the final program is selected based on the debugging data.
 
 **Symbolic Baselines**<br>
-* lm: optimal A* and the LM-Cut heuristic (Helmert et al. 2009).
-* ff: satisficing greedy best-first search with FF heuristic (Hoffmann and Nebel, 2001).
-* ff= and lm=: We also report coverage for the same 45s limit applied to the execution of generalized plans.
+* lm: optimal A* and the LM-Cut heuristic (Helmert et al. 2009), ran with a 30-minute time limit.
+* ff: satisficing greedy best-first search with FF heuristic (Hoffmann and Nebel, 2001), ran with a 30-minute time limit.
+* ff= and lm=: Like lm and ff but with the same 45s time limit as applied to the execution of generalized plans.
 
 
 ### Results:
