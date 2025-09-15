@@ -49,7 +49,7 @@ bibtex: |
     <img src="static/images/improvedgeneralizedplanning/LogisticsPipelineExample3.png" width="100%"/>
 </center>
 
-
+<div style="text-align:justify;">
 ## Improved Generalized Planning with LLMs through Strategy Refinement and Reflection
 We introduce **Improved Generalized Planning with LLMs through Strategy Refinement and Reflection**, an approach for **generating Python programs representing generalized plans in PDDL planning**, i.e., plans that generalize across the tasks of a given PDDL domain. Previous work proposed a framework consisting of three steps: the LLM first generates a summary and then a strategy for the domain, both in natural language, and then implements that strategy as a Python program, that gets debugged on example planning tasks. In that work, only one strategy is generated and passed directly to the program generation. If the strategy is incorrect, its implementation will therefore result in an incorrect generalized plan. Here, we introduce an approach that generates the strategy in the form of pseudocode and enables automatic debugging of the pseudocode, hence allowing us to identify and fix errors prior to the generation of the generalized plan itself. Additionally, we extend the Python debugging phase with a reflection step prompting the LLM to pinpoint the reason for the observed plan failure. Finally, we take inspiration from LLM code generation to produce several program variants and pick the best one.
 
@@ -73,7 +73,7 @@ In the Logistics domain we have a specified number of cities which have the same
 NL Generation
 </summary>
 For the strategy validation approach, we provide the domain and debugging task in NL form. Therefore, we require a separate NL description for each debugging task. We obtain the NL descriptions in a two-step process: First, the LLM is prompted to generate the NL domain description given the PDDL domain. Afterwards, the NL description of each debugging task is generated based on its PDDL definition and the PDDL and NL domain descriptions. We also use that NL domain description and two debugging task descriptions as input for the pseudocode generation.
-
+<br>
 </details>
 
 <details>
@@ -95,11 +95,11 @@ Our goal is to improve the quality of the strategies that the LLM is asked to im
       </li>
     </ul>
   </li>
-  <li>Strategy debugging:
+  <li>Strategy debugging:<br>
   We provide the pseudocode strategy to an LLM and prompt it to generate the PDDL plan for a given debugging task (in NL) by following the strategy. The generated plan is then validated using VAL. If the plan is incorrect, the validation output is converted into a feedback message.
 
   Instead of directly prompting the LLM to update the pseudocode based on the feedback, we add a reflection step, inspired by approaches that let LLMs reflect about ways to improve over previous outputs (e.g. Madaan et al. 2023; Shinn et al. 2023). We combine the feedback about the mistake and the generated plan and with instructions to reflect about the part of the pseudocode that caused the mistake and the reason why that part is incorrect. After generating the reflection response based on that prompt, the LLM is then asked to correct the pseudocode by thinking step-by-step. This process is continued until the LLM generates correct plans for all debugging tasks or a maximum number of debugging iterations, K_S, is reached. Then the pseudocode that resulted in the highest number of solved tasks is selected as the pseudocode for the code generation step.
-
+  <br>
   <img src="static/images/improvedgeneralizedplanning/PlanGenFeedback.png" width="80%"/>
   </li>
 </ul>
@@ -118,7 +118,7 @@ Last but not least, we prompt the LLM to provide python code that implements the
   <li>First Code Generation Prompt:
   <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbr.png" width="100%"/>
   <li>From NL Strategy to Generalized Plan:
-  <img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="80%"/>
+  <img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="90%"/>
   </li>
   <li>Error Feedback and corresponding Reflection Prompt:  
   <img src="static/images/improvedgeneralizedplanning/Feedback.png" width="80%"/>
@@ -184,7 +184,7 @@ We compare the performance of our approach to the framework by Silver et al. (20
     <figcaption style="font-style:normal;">Figure 9: Runtime of the best generalized plan by F3-6 (x-axis) and of ff (y-axis) for each commonly solved task. Diagonal is plotted in red.</figcaption>
   </figure>
 </div>
-
+</div>
 
 ## References
 <details>
