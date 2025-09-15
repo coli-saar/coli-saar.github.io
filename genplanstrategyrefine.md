@@ -98,6 +98,7 @@ Our goal is to improve the quality of the strategies that the LLM is asked to im
 
   Instead of directly prompting the LLM to update the pseudocode based on the feedback, we add a reflection step, inspired by approaches that let LLMs reflect about ways to improve over previous outputs (e.g. Madaan et al. 2023; Shinn et al. 2023). We combine the feedback about the mistake and the generated plan and with instructions to reflect about the part of the pseudocode that caused the mistake and the reason why that part is incorrect. After generating the reflection response based on that prompt, the LLM is then asked to correct the pseudocode by thinking step-by-step. This process is continued until the LLM generates correct plans for all debugging tasks or a maximum number of debugging iterations, K_S, is reached. Then the pseudocode that resulted in the highest number of solved tasks is selected as the pseudocode for the code generation step.
 
+  <br>
   <img src="static/images/improvedgeneralizedplanning/PlanGenFeedback.png" width="80%"/>
   </li>
 </ul>
@@ -116,10 +117,10 @@ Last but not least, we prompt the LLM to provide python code that implements the
   <li>First Code Generation Prompt:
   <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbr.png" width="100%"/>
   </li>
-  <li>First Code Generation Prompt:
+  <li>First Code Generation Prompt:<br>
   <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbrV2.png" width="50%"/>
   </li>
-  <li>First Code Generation Prompt:
+  <li>First Code Generation Prompt:<br>
   <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbrV3.png" width="50%"/>
   </li>
   <li>From NL Strategy to Generalized Plan:
