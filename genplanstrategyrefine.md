@@ -51,10 +51,11 @@ bibtex: |
 
 
 ## Improved Generalized Planning with LLMs through Strategy Refinement and Reflection
-
+<div style="text-align:justify;">
 We introduce **Improved Generalized Planning with LLMs through Strategy Refinement and Reflection**, an approach for **generating Python programs representing generalized plans in PDDL planning**, i.e., plans that generalize across the tasks of a given PDDL domain. Previous work proposed a framework consisting of three steps: the LLM first generates a summary and then a strategy for the domain, both in natural language, and then implements that strategy as a Python program, that gets debugged on example planning tasks. In that work, only one strategy is generated and passed directly to the program generation. If the strategy is incorrect, its implementation will therefore result in an incorrect generalized plan. Here, we introduce an approach that generates the strategy in the form of pseudocode and enables automatic debugging of the pseudocode, hence allowing us to identify and fix errors prior to the generation of the generalized plan itself. Additionally, we extend the Python debugging phase with a reflection step prompting the LLM to pinpoint the reason for the observed plan failure. Finally, we take inspiration from LLM code generation to produce several program variants and pick the best one.
 
 Running experiments on 17 benchmark domains, we show that these extensions substantially improve (and never deteriorate) the quality of the generalized plans. In 12 of the domains, our best Python programs solve all tasks that can be generated with the respective instance generator.
+</div>
 
 ## Example in the Logistics domain
 
@@ -63,7 +64,9 @@ Running experiments on 17 benchmark domains, we show that these extensions subst
 Logistics Domain Description
 </summary>
 <br>
+<div style="text-align:justify;">
 In the Logistics domain we have a specified number of cities which have the same number of locations and each city has one airport. A specified number of airplanes are randomly distributed across all airports. Each task also includes a specified number of trucks, with the only condition that there are at least as many trucks as cities. There can be multiple trucks and airplanes in the same location. A specified number of packages is distributed over all possible locations. The goal specifies for each package a goal location which can be identical to the initial location.
+</div>
 </details>
 <br>
 <img src="static/images/improvedgeneralizedplanning/3StepPipeline3.png" width="100%" />
@@ -73,8 +76,9 @@ In the Logistics domain we have a specified number of cities which have the same
 <summary>
 NL Generation
 </summary>
-
+<div style="text-align:justify;">
 For the strategy validation approach, we provide the domain and debugging task in NL form. Therefore, we require a separate NL description for each debugging task. We obtain the NL descriptions in a two-step process: First, the LLM is prompted to generate the NL domain description given the PDDL domain. Afterwards, the NL description of each debugging task is generated based on its PDDL definition and the PDDL and NL domain descriptions. We also use that NL domain description and two debugging task descriptions as input for the pseudocode generation.
+</div>
 
 </details>
 
@@ -82,8 +86,9 @@ For the strategy validation approach, we provide the domain and debugging task i
 <summary>
 Strategy Generation
 </summary>
-
+<div style="text-align:justify;">
 Our goal is to improve the quality of the strategies that the LLM is asked to implement in order to shift most of the work beyond the mere conversion into Python to the previous step of the generation framework. We therefore instruct the LLM to generate the strategy in the form of pseudocode that should be detailed and specific enough to be converted into an executable program in a straightforward way. The prompt for this step consists of the NL descriptions of the domain and two example tasks and instructions to think step-by-step (zero-shot CoT, Kojima et al., 2022) for developing a strategy that can be turned into a program.
+</div>
 <br>
 <img src="static/images/improvedgeneralizedplanning/LogisticsExampleStrategyPrompt.png" width="80%"/>
 
@@ -99,9 +104,11 @@ Our goal is to improve the quality of the strategies that the LLM is asked to im
     </ul>
   </li>
   <li>Strategy debugging:
+  <div style="text-align:justify;">
   We provide the pseudocode strategy to an LLM and prompt it to generate the PDDL plan for a given debugging task (in NL) by following the strategy. The generated plan is then validated using VAL. If the plan is incorrect, the validation output is converted into a feedback message.
 
   Instead of directly prompting the LLM to update the pseudocode based on the feedback, we add a reflection step, inspired by approaches that let LLMs reflect about ways to improve over previous outputs (e.g. Madaan et al. 2023; Shinn et al. 2023). We combine the feedback about the mistake and the generated plan and with instructions to reflect about the part of the pseudocode that caused the mistake and the reason why that part is incorrect. After generating the reflection response based on that prompt, the LLM is then asked to correct the pseudocode by thinking step-by-step. This process is continued until the LLM generates correct plans for all debugging tasks or a maximum number of debugging iterations, K_S, is reached. Then the pseudocode that resulted in the highest number of solved tasks is selected as the pseudocode for the code generation step.
+  </div>
 
   <img src="static/images/improvedgeneralizedplanning/PlanGenFeedback.png" width="80%"/>
   </li>
@@ -114,18 +121,26 @@ Code Generation
 </summary>
 
 Last but not least, we prompt the LLM to provide python code that implements the generated pseudocode strategy given the NL description of the domain and the pseudocode strategy.
-  * Prompt for First Code Generation:
+<ul>
+  <li>Prompt for First Code Generation:
   <img src="static/images/improvedgeneralizedplanning/CodeGenPromptFull.png" width="100%"/>
+  </li>
+  <li>
   <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbr.png" width="100%"/>
-  * From NL Strategy to Generalized Plan:
+  <li>From NL Strategy to Generalized Plan:
   <img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="80%"/>
-  * Error Feedback and corresponding Reflection Prompt:  
+  </li>
+  <li>Error Feedback and corresponding Reflection Prompt:  
   <img src="static/images/improvedgeneralizedplanning/Feedback.png" width="80%"/>
+  </li>
+</ul>
 
 </details>
 
 ## Data
+<div style="text-align:justify;">
 For our experiments, we focus on domains that have previously been used in research on LLMs in the context of classical planning. In particular, we use the domains from Silver et al. (2024)’s generalized planning experiments and Stein et al. (2025)’s LLM action-choice experiments. Table 2 shows for each of the domains the sources of the tasks we include in our experiments. All tasks included in our experiments are solvable. The right column of Table 2 shows the origin of the instance generators that we used to generate additional tasks for some of the domains, and that we used for the manual evaluation of the generalization power of our generalized plans.
+</div>
 
 <details>
 <summary>
@@ -141,16 +156,24 @@ Table 2
     * Average: The average coverage over all runs.
     * Best: The coverage of the best run. <br>
 <br>
+<div style="text-align:justify;">
 For running the Python programs on the evaluation tasks, we impose the same time limit of 45s as in debugging. As the Python program output sometimes depends on the ordering of objects and initial/goal facts in the input, we run 4 random orderings and treat the output as correct only if all runs succeed.
+</div>
 
 **Our Framework**<br>
+<div style="text-align:justify;">
 We test our generalized planning framework for two different combinations of the maximum number of initial programs (N ) and code debugging steps (KC ). For one experiment we set N = 3 and KC = 6, resulting in a maximum of 21 generated programs. For the other experiment, we set N = 5 and KC = 3, hence increasing the number of initial programs while keeping the maximum number of generated programs similar (20). We refer to the two versions as F3-6 and F5-3. For both versions we set KS = 6.
+</div>
 
 **Ablations**<br>
+<div style="text-align:justify;">
 We conduct three ablation experiments to assess the effect of our pipeline extensions. The base approach for all ablation experiments is F3-6. We assess the effect of generating multiple initial programs by setting N = 1 (-MC). In order to test to what extent debugging at the strategy level is beneficial we set KS to 0 (-SD). Lastly, we prompt the LLM to revise the code directlyRac based on the feedback, to assess the effect of the reflection step (-CR).
+</div>
 
 **Baselines**<br>
+<div style="text-align:justify;">
 We compare the performance of our approach to the framework by Silver et al. (2024) with GPT-4o (Sil) and to a re-implementation of their pipeline (Bas). For the re-implementation we make a number of smaller changes to the original pipeline for a fairer comparison. First, we adapt the phrasing of the prompts to be more similar to our prompts, including instructions to think step-by-step for generating the NL strategy. We also separate the three parts of the pipeline and use the output of the previous step as part of the input for the next step, as done in our main frame- work. To account for the fact that no PDDL is available at code generation time, we provide the definition of the example task and of the failed task in Python format. Lastly, the final program is selected based on the debugging data.
+</div>
 
 **Symbolic Baselines**<br>
 * lm: optimal A* and the LM-Cut heuristic (Helmert et al. 2009).
@@ -187,6 +210,7 @@ We compare the performance of our approach to the framework by Silver et al. (20
 <summary>
 More Detail
 </summary>
+<div style="text-align:justify;">
 M. Helmert and C. Domshlak. Landmarks, critical paths and abstractions: What’s the difference anyway? In *Proceedings of the 19th International Conference on Automated Planning and Scheduling, ICAPS*. AAAI, 2009.<br>
 J. Hoffmann and B. Nebel. The FF planning system: Fast plan generation through heuristic search. 'Journal of Artificial Intelligence Research*, 14:253–302, 2001.<br>
 K. Valmeekam, M. Marquez, A. Olmo, S. Sreedharan, and S. Kambhampati. Planbench: An extensible benchmark for evaluating large language models on planning and reasoning about change. In *Thirty-seventh Conference on Neural Information Processing Systems Datasets and Benchmarks Track*, 2023.<br>
@@ -214,4 +238,5 @@ Stein, K.; Fiˇser, D.; Hoffmann, J.; and Koller, A. 2025. Automating the Genera
 Tang, H.; Hu, K.; Zhou, J. P.; Zhong, S.; Zheng, W.-L.; Si, X.; and Ellis, K. 2024. Code Repair with LLMs gives an Exploration-Exploitation Tradeoff. In Globerson, A.; Mackey, L.; Belgrave, D.; Fan, A.; Paquet, U.; Tomczak, J.; and Zhang, C., eds., Advances in Neural Information Processing Systems, volume 37, 117954–117996. Curran Associates, Inc.<br>
 Valmeekam, K.; Marquez, M.; Sreedharan, S.; and Kambhampati, S. 2023. On the Planning Abilities of Large Language Models - A Critical Investigation. In Oh, A.; Naumann, T.; Globerson, A.; Saenko, K.; Hardt, M.; and Levine, S., eds., Advances in Neural Information Processing Systems, volume 36, 75993–76005. Curran Associates, Inc. Wang, E.; Cassano, F.; Wu, C.; Bai, Y.; Song, W.; Nath, V.; Han, Z.; Hendryx, S.; Yue, S.; and Zhang, H. 2024. Planning In Natural Language Improves LLM Search For Code Generation. arXiv:2409.03733.<br>
 Wei, J.; Wang, X.; Schuurmans, D.; Bosma, M.; ichter, b.; Xia, F.; Chi, E.; Le, Q. V.; and Zhou, D. 2022. Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. In Koyejo, S.; Mohamed, S.; Agarwal, A.; Belgrave, D.; Cho, K.; and Oh, A., eds., Advances in Neural Information Processing Systems, volume 35, 24824–24837. Curran Associates, Inc.<br>
+</div>
 </details>
