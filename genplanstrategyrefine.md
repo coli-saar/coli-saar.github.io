@@ -72,9 +72,8 @@ In the Logistics domain we have a specified number of cities which have the same
 NL Generation
 </summary>
 For the strategy validation approach, we provide the domain and debugging task in NL form. Therefore, we require a separate NL description for each debugging task. We obtain the NL descriptions in a two-step process: First, the LLM is prompted to generate the NL domain description given the PDDL domain. Afterwards, the NL description of each debugging task is generated based on its PDDL definition and the PDDL and NL domain descriptions. We also use that NL domain description and two debugging task descriptions as input for the pseudocode generation.
-<br>
 </details>
-
+<br>
 <details>
 <summary>
 Strategy Generation
@@ -103,7 +102,7 @@ Our goal is to improve the quality of the strategies that the LLM is asked to im
   </li>
 </ul>
 </details>
-
+<br>
 <details>
 <summary>
 Code Generation
@@ -116,6 +115,7 @@ Last but not least, we prompt the LLM to provide python code that implements the
   </li>
   <li>First Code Generation Prompt:
   <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbr.png" width="100%"/>
+  </li>
   <li>From NL Strategy to Generalized Plan:
   <img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="90%"/>
   </li>
