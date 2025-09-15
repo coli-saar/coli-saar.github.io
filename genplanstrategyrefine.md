@@ -84,23 +84,28 @@ Strategy Generation
 </summary>
 
 Our goal is to improve the quality of the strategies that the LLM is asked to implement in order to shift most of the work beyond the mere conversion into Python to the previous step of the generation framework. We therefore instruct the LLM to generate the strategy in the form of pseudocode that should be detailed and specific enough to be converted into an executable program in a straightforward way. The prompt for this step consists of the NL descriptions of the domain and two example tasks and instructions to think step-by-step (zero-shot CoT, Kojima et al., 2022) for developing a strategy that can be turned into a program.
-
+<br>
 <img src="static/images/improvedgeneralizedplanning/LogisticsExampleStrategyPrompt.png" width="80%"/>
 
-* Response of the LLM:
-
-  * Step-by-step outline of the strategy:  
-  <img src="static/images/improvedgeneralizedplanning/LogisticsStrategyExample.png" width="80%"/>
-  * Final strategy in the form of pseudocode:  
-  <img src="static/images/improvedgeneralizedplanning/LogisticsStrategyExample2.png" width="80%"/>
-
-* Strategy debugging:
-
+<ul>
+  <li>Response of the LLM:
+    <ul>
+      <li>Step-by-step outline of the strategy:
+      <img src="static/images/improvedgeneralizedplanning/LogisticsStrategyExample.png" width="80%"/>
+      </li>
+      <li>Final strategy in the form of pseudocode:  
+      <img src="static/images/improvedgeneralizedplanning/LogisticsStrategyExample2.png" width="80%"/>
+      </li>
+    </ul>
+  </li>
+  <li>Strategy debugging:
   We provide the pseudocode strategy to an LLM and prompt it to generate the PDDL plan for a given debugging task (in NL) by following the strategy. The generated plan is then validated using VAL. If the plan is incorrect, the validation output is converted into a feedback message.
 
   Instead of directly prompting the LLM to update the pseudocode based on the feedback, we add a reflection step, inspired by approaches that let LLMs reflect about ways to improve over previous outputs (e.g. Madaan et al. 2023; Shinn et al. 2023). We combine the feedback about the mistake and the generated plan and with instructions to reflect about the part of the pseudocode that caused the mistake and the reason why that part is incorrect. After generating the reflection response based on that prompt, the LLM is then asked to correct the pseudocode by thinking step-by-step. This process is continued until the LLM generates correct plans for all debugging tasks or a maximum number of debugging iterations, K_S, is reached. Then the pseudocode that resulted in the highest number of solved tasks is selected as the pseudocode for the code generation step.
 
   <img src="static/images/improvedgeneralizedplanning/PlanGenFeedback.png" width="80%"/>
+  </li>
+</ul>
 </details>
 
 <details>
@@ -155,22 +160,22 @@ We compare the performance of our approach to the framework by Silver et al. (20
 
 ### Results:
 
-<figure style="margin:0; text-align:justify;">
-  <img src="static/images/improvedgeneralizedplanning/table1_no_caption.png" width="80%" />
+<figure style="width:80%;margin:0; text-align:justify;">
+  <img src="static/images/improvedgeneralizedplanning/table1_no_caption.png" width="100%" />
   <figcaption style="font-style: normal;">Table 1: Percentage of solved tasks for the original framework by Silver et al. (2024) (Sil) and the re-implemented baseline (Bas) and our generalized planning approach with N = 3, KC = 6 (F3-6) and N = 5, KC = 3 (F5-3). The three ablations -MC, -SD and -CR are based on F3-6. We report the average coverage over three runs and coverage of the best run. For both, we show in bold the best generalized planning approach. The symbolic baselines were run for the same time limit as the generalized plans (45 seconds) (lm= and ff=) and for 30 minutes (lm and ff).</figcaption>
 </figure>
 
-<figure style="margin:0; text-align:justify;">
-  <img src="static/images/improvedgeneralizedplanning/table3_no_caption.png" width="80%" />
+<figure style="width:80%;margin:0; text-align:justify;">
+  <img src="static/images/improvedgeneralizedplanning/table3_no_caption.png" width="100%" />
   <figcaption style="font-style: normal;">Table 3: The number of tasks for each domain (N), and the average (avg), minimum (min) and maximum (max) values of the plans derived by the lm and ff symbolic planners and number of objects for the evaluation tasks (eval) as well as the average values of the debugging tasks (debug). Tasks for which the symbolic planner did not find a plan were left out in the computation of the average plan length values.</figcaption>
 </figure>
 
 <div style="width:80%; display: flex; gap: 20px; align-items: center;">
-  <figure style="margin:0; text-align:justify;">
+  <figure style="width:300px; margin:0 auto; text-align:center;">
     <img src="static/images/improvedgeneralizedplanning/figure8_no_caption.png" style="width:300px; height:200px; object-fit:contain;" alt="Caption 1" />
     <figcaption style="font-style:normal;">Figure 8: Length of the plan generated by F3-6 (best) (x-axis) and by ff (y-axis) for each commonly solved task. Diagonal is plotted in red.</figcaption>
   </figure>
-  <figure style="margin:0; text-align:justify;">
+  <figure style="width:300px; margin:0 auto; text-align:center;">
     <img src="static/images/improvedgeneralizedplanning/figure9_no_caption.png" style="width:300px; height:200px; object-fit:contain;" alt="Caption 2" />
     <figcaption style="font-style:normal;">Figure 9: Runtime of the best generalized plan by F3-6 (x-axis) and of ff (y-axis) for each commonly solved task. Diagonal is plotted in red.</figcaption>
   </figure>
