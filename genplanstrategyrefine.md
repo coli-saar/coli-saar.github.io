@@ -68,9 +68,6 @@ In the Logistics domain we have a specified number of cities which have the same
 <br>
 <img src="static/images/improvedgeneralizedplanning/3StepPipeline3.png" width="100%" />
 
-<details markdown="1">
-<summary>More Detail</summary>
-
 
 <details>
 <summary>
@@ -112,8 +109,8 @@ Code Generation
 
 Last but not least, we prompt the LLM to provide python code that implements the generated pseudocode strategy given the NL description of the domain and the pseudocode strategy.
   * Prompt for First Code Generation:
-  <img src="static/images/improvedgeneralizedplanning/CodeGenPromptFull.png" width="80%"/>
-  <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbr.png" width="80%"/>
+  <img src="static/images/improvedgeneralizedplanning/CodeGenPromptFull.png" width="90%"/>
+  <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbr.png" width="90%"/>
   * From NL Strategy to Generalized Plan:
   <img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="80%"/>
   * Error Feedback and corresponding Reflection Prompt:  
