@@ -49,7 +49,6 @@ bibtex: |
     <img src="static/images/improvedgeneralizedplanning/LogisticsPipelineExample3.png" width="100%"/>
 </center>
 
-<div style="text-align:justify;">
 ## Improved Generalized Planning with LLMs through Strategy Refinement and Reflection
 We introduce **Improved Generalized Planning with LLMs through Strategy Refinement and Reflection**, an approach for **generating Python programs representing generalized plans in PDDL planning**, i.e., plans that generalize across the tasks of a given PDDL domain. Previous work proposed a framework consisting of three steps: the LLM first generates a summary and then a strategy for the domain, both in natural language, and then implements that strategy as a Python program, that gets debugged on example planning tasks. In that work, only one strategy is generated and passed directly to the program generation. If the strategy is incorrect, its implementation will therefore result in an incorrect generalized plan. Here, we introduce an approach that generates the strategy in the form of pseudocode and enables automatic debugging of the pseudocode, hence allowing us to identify and fix errors prior to the generation of the generalized plan itself. Additionally, we extend the Python debugging phase with a reflection step prompting the LLM to pinpoint the reason for the observed plan failure. Finally, we take inspiration from LLM code generation to produce several program variants and pick the best one.
 
@@ -183,7 +182,6 @@ We compare the performance of our approach to the framework by Silver et al. (20
     <img src="static/images/improvedgeneralizedplanning/figure9_no_caption.png" style="width:300px; height:200px; object-fit:contain;" alt="Caption 2" />
     <figcaption style="font-style:normal;">Figure 9: Runtime of the best generalized plan by F3-6 (x-axis) and of ff (y-axis) for each commonly solved task. Diagonal is plotted in red.</figcaption>
   </figure>
-</div>
 </div>
 
 ## References
