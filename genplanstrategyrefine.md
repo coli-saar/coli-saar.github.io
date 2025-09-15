@@ -118,10 +118,10 @@ Last but not least, we prompt the LLM to provide python code that implements the
   <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbr.png" width="100%"/>
   </li>
   <li>First Code Generation Prompt:<br>
-  <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbrV2.png" width="50%"/>
+  <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbrV2.png" width="60%"/>
   </li>
   <li>First Code Generation Prompt:<br>
-  <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbrV3.png" width="50%"/>
+  <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbrV3.png" width="60%"/>
   </li>
   <li>From NL Strategy to Generalized Plan:
   <img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="90%"/>
