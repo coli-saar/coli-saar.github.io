@@ -54,7 +54,7 @@ We introduce **Improved Generalized Planning with LLMs through Strategy Refineme
 
 Previous work proposed a framework consisting of three steps: the LLM first generates a summary and then a strategy for the domain, both in natural language, and then implements that strategy as a Python program, that gets debugged on example planning tasks. In that work, only one strategy is generated and passed directly to the program generation. If the strategy is incorrect, its implementation will therefore result in an incorrect generalized plan. 
 
-**Our contribution**
+**Our contribution**<br>
 Here, we introduce an approach that generates the strategy in the form of pseudocode and enables automatic debugging of the pseudocode, hence allowing us to identify and fix errors prior to the generation of the generalized plan itself. Additionally, we extend the Python debugging phase with a reflection step prompting the LLM to pinpoint the reason for the observed plan failure. Finally, we take inspiration from LLM code generation to produce several program variants and pick the best one.
 
 Running experiments on 17 benchmark domains, we show that these extensions substantially improve (and never deteriorate) the quality of the generalized plans. In 12 of the domains, our best Python programs solve all tasks that can be generated with the respective instance generator.
@@ -165,23 +165,23 @@ Table 2
 
 **Our Framework**<br>
 We test our framework for two different combinations of the maximum number of initial programs (N ) and code debugging steps (KC ) and conduct three ablation experiments to assess the effect of our pipeline extensions. <br>
+We also compare the performance of our approach to 2 baselines.
+
+The set-ups tested are the following:
 
 
-|   | KS  | N  |  KC | max. programs  |    |
-|---|---|---|---|---|---|
+|   | KS  | N  |  KC | max. programs  |  Description  |
+|:---:|---:|---:|---:|---:|---|
 | F3-6| 6  | 3  |  6 |  21 |  Our framework    |
 | F5-3| 6 | 5  | 3  | 20  |  Our framework    |
-| -MC|  6 |  3 |  6 | 21  |   Ablation multiple init programs   |
-| -SD | 0 | 3  | 6  |  21 |   Ablation strategy debugging   |
-| -CR |  6 |  3 | 6 |  21 |   Ablation code reflection step    |
-| Bas |  0  |  1 |  6 |  7 |  re-implementation of Silver et al.    |
+| -MC|  6 |  1 |  6 | 21  |   Ablation: effect of multiple init programs  |
+| -SD | 0 | 3  | 6  |  21 |   Ablation: effect of strategy debugging   |
+| -CR |  6 |  3 | 6 |  21 |   Ablation: effect of code reflection step    |
+| Sil |  0  |  1 |  6 |  7 |  Silver et al.    |
+| Bas |  0  |  1 |  6 |  7 |  Re-implementation of Silver et al.    |
 
 
-
-**Baselines**<br>
-We compare the performance of our approach to 2 baselines:
-* Silver et al. (2024) with GPT-4o (Sil)
-* re-implementation of Siler et al. (Bas), adapted for a fairere comparison:
+* Re-implementation of Siler et al., adapted for a fairer comparison:
   * more similar phrasing of prompts, including instructions to think step-by-step for NL strategy generation
   * separation of the three parts of the pipeline
   * example task an failed task is provided in the Python format during code generation
@@ -196,12 +196,12 @@ We compare the performance of our approach to 2 baselines:
 
 ### Results:
 
-<figure style="width:90%;margin:0; text-align:justify;">
+<figure style="width:80%;margin:0; text-align:justify;">
   <img src="static/images/improvedgeneralizedplanning/table1_no_caption.png" width="100%" />
   <figcaption style="font-style: normal;">Table 1: Percentage of solved tasks for the original framework by Silver et al. (2024) (Sil) and the re-implemented baseline (Bas) and our generalized planning approach with N = 3, KC = 6 (F3-6) and N = 5, KC = 3 (F5-3). The three ablations -MC, -SD and -CR are based on F3-6. We report the average coverage over three runs and coverage of the best run. For both, we show in bold the best generalized planning approach. The symbolic baselines were run for the same time limit as the generalized plans (45 seconds) (lm= and ff=) and for 30 minutes (lm and ff).</figcaption>
 </figure>
 <br>
-<figure style="width:90%;margin:0; text-align:justify;">
+<figure style="width:80%;margin:0; text-align:justify;">
   <img src="static/images/improvedgeneralizedplanning/table3_no_caption.png" width="100%" />
   <figcaption style="font-style: normal;">Table 3: The number of tasks for each domain (N), and the average (avg), minimum (min) and maximum (max) values of the plans derived by the lm and ff symbolic planners and number of objects for the evaluation tasks (eval) as well as the average values of the debugging tasks (debug). Tasks for which the symbolic planner did not find a plan were left out in the computation of the average plan length values.</figcaption>
 </figure>
