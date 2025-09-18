@@ -49,12 +49,17 @@ bibtex: |
     <img src="static/images/improvedgeneralizedplanning/LogisticsPipelineExample3.png" width="100%"/>
 </center>
 
-## Improved Generalized Planning with LLMs through Strategy Refinement and Reflection
-We introduce **Improved Generalized Planning with LLMs through Strategy Refinement and Reflection**, an approach for **generating Python programs representing generalized plans in PDDL planning**, i.e., plans that generalize across the tasks of a given PDDL domain. Previous work proposed a framework consisting of three steps: the LLM first generates a summary and then a strategy for the domain, both in natural language, and then implements that strategy as a Python program, that gets debugged on example planning tasks. In that work, only one strategy is generated and passed directly to the program generation. If the strategy is incorrect, its implementation will therefore result in an incorrect generalized plan. Here, we introduce an approach that generates the strategy in the form of pseudocode and enables automatic debugging of the pseudocode, hence allowing us to identify and fix errors prior to the generation of the generalized plan itself. Additionally, we extend the Python debugging phase with a reflection step prompting the LLM to pinpoint the reason for the observed plan failure. Finally, we take inspiration from LLM code generation to produce several program variants and pick the best one.
+## Overview
+We introduce **Improved Generalized Planning with LLMs through Strategy Refinement and Reflection**, an approach for **generating Python programs representing generalized plans in PDDL planning**, i.e., plans that generalize across the tasks of a given PDDL domain. 
+
+Previous work proposed a framework consisting of three steps: the LLM first generates a summary and then a strategy for the domain, both in natural language, and then implements that strategy as a Python program, that gets debugged on example planning tasks. In that work, only one strategy is generated and passed directly to the program generation. If the strategy is incorrect, its implementation will therefore result in an incorrect generalized plan. 
+
+**Our contribution**
+Here, we introduce an approach that generates the strategy in the form of pseudocode and enables automatic debugging of the pseudocode, hence allowing us to identify and fix errors prior to the generation of the generalized plan itself. Additionally, we extend the Python debugging phase with a reflection step prompting the LLM to pinpoint the reason for the observed plan failure. Finally, we take inspiration from LLM code generation to produce several program variants and pick the best one.
 
 Running experiments on 17 benchmark domains, we show that these extensions substantially improve (and never deteriorate) the quality of the generalized plans. In 12 of the domains, our best Python programs solve all tasks that can be generated with the respective instance generator.
 
-## Example in the Logistics domain
+## Pipeline Overview
 
 <details>
 <summary>
@@ -66,6 +71,11 @@ In the Logistics domain we have a specified number of cities which have the same
 <br>
 <img src="static/images/improvedgeneralizedplanning/3StepPipeline3.png" width="100%" />
 
+### Step-by-step Example in the Logistics domain
+
+<li>From NL Strategy to Generalized Plan:
+<img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="90%"/>
+</li>
 
 <details>
 <summary>
@@ -123,9 +133,6 @@ Last but not least, we prompt the LLM to provide python code that implements the
   <li>First Code Generation Prompt:<br>
   <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbrV3.png" width="60%"/>
   </li>
-  <li>From NL Strategy to Generalized Plan:
-  <img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="90%"/>
-  </li>
   <li>Error Feedback and corresponding Reflection Prompt:  
   <img src="static/images/improvedgeneralizedplanning/Feedback.png" width="70%"/>
   </li>
@@ -148,21 +155,37 @@ Table 2
 
 ## Experiments and Results 
 
-**Metrics**<br>
-* Coverage: The percentage of evaluation tasks for which the Python program generates a correct plan.
-    * Average: The average coverage over all runs.
+**Evaluation**<br>
+* Metric: Coverage - The percentage of evaluation tasks for which the Python program generates a correct plan.
+    * Average: The average coverage over all (3) runs.
     * Best: The coverage of the best run. <br>
-<br>
-For running the Python programs on the evaluation tasks, we impose the same time limit of 45s as in debugging. As the Python program output sometimes depends on the ordering of objects and initial/goal facts in the input, we run 4 random orderings and treat the output as correct only if all runs succeed.
+* Time limit of 45 seconds for running the programs
+* Each program is ran 4 times with random ordering of ob objects and initial/goal facts and treated as correct if each ordering results in a correct plan
+* Final evaluaiton based on the best generated program as determined on the debugging data
 
 **Our Framework**<br>
-We test our generalized planning framework for two different combinations of the maximum number of initial programs (N ) and code debugging steps (KC ). For one experiment we set N = 3 and KC = 6, resulting in a maximum of 21 generated programs. For the other experiment, we set N = 5 and KC = 3, hence increasing the number of initial programs while keeping the maximum number of generated programs similar (20). We refer to the two versions as F3-6 and F5-3. For both versions we set KS = 6.
+We test our framework for two different combinations of the maximum number of initial programs (N ) and code debugging steps (KC ) and conduct three ablation experiments to assess the effect of our pipeline extensions. <br>
 
-**Ablations**<br>
-We conduct three ablation experiments to assess the effect of our pipeline extensions. The base approach for all ablation experiments is F3-6. We assess the effect of generating multiple initial programs by setting N = 1 (-MC). In order to test to what extent debugging at the strategy level is beneficial we set KS to 0 (-SD). Lastly, we prompt the LLM to revise the code directlyRac based on the feedback, to assess the effect of the reflection step (-CR).
+
+|   | KS  | N  |  KC | max. programs  |    |
+|---|---|---|---|---|---|
+| F3-6| 6  | 3  |  6 |  21 |  Our framework    |
+| F5-3| 6 | 5  | 3  | 20  |  Our framework    |
+| -MC|  6 |  3 |  6 | 21  |   Ablation multiple init programs   |
+| -SD | 0 | 3  | 6  |  21 |   Ablation strategy debugging   |
+| -CR |  6 |  3 | 6 |  21 |   Ablation code reflection step    |
+| Bas |  0  |  1 |  6 |  7 |  re-implementation of Silver et al.    |
+
+
 
 **Baselines**<br>
-We compare the performance of our approach to the framework by Silver et al. (2024) with GPT-4o (Sil) and to a re-implementation of their pipeline (Bas). For the re-implementation we make a number of smaller changes to the original pipeline for a fairer comparison. First, we adapt the phrasing of the prompts to be more similar to our prompts, including instructions to think step-by-step for generating the NL strategy. We also separate the three parts of the pipeline and use the output of the previous step as part of the input for the next step, as done in our main frame- work. To account for the fact that no PDDL is available at code generation time, we provide the definition of the example task and of the failed task in Python format. Lastly, the final program is selected based on the debugging data.
+We compare the performance of our approach to 2 baselines:
+* Silver et al. (2024) with GPT-4o (Sil)
+* re-implementation of Siler et al. (Bas), adapted for a fairere comparison:
+  * more similar phrasing of prompts, including instructions to think step-by-step for NL strategy generation
+  * separation of the three parts of the pipeline
+  * example task an failed task is provided in the Python format during code generation
+  * selection of final program based on debugging data
 
 **Symbolic Baselines**<br>
 
@@ -173,12 +196,12 @@ We compare the performance of our approach to the framework by Silver et al. (20
 
 ### Results:
 
-<figure style="width:100%;margin:0; text-align:justify;">
+<figure style="width:90%;margin:0; text-align:justify;">
   <img src="static/images/improvedgeneralizedplanning/table1_no_caption.png" width="100%" />
   <figcaption style="font-style: normal;">Table 1: Percentage of solved tasks for the original framework by Silver et al. (2024) (Sil) and the re-implemented baseline (Bas) and our generalized planning approach with N = 3, KC = 6 (F3-6) and N = 5, KC = 3 (F5-3). The three ablations -MC, -SD and -CR are based on F3-6. We report the average coverage over three runs and coverage of the best run. For both, we show in bold the best generalized planning approach. The symbolic baselines were run for the same time limit as the generalized plans (45 seconds) (lm= and ff=) and for 30 minutes (lm and ff).</figcaption>
 </figure>
 <br>
-<figure style="width:100%;margin:0; text-align:justify;">
+<figure style="width:90%;margin:0; text-align:justify;">
   <img src="static/images/improvedgeneralizedplanning/table3_no_caption.png" width="100%" />
   <figcaption style="font-style: normal;">Table 3: The number of tasks for each domain (N), and the average (avg), minimum (min) and maximum (max) values of the plans derived by the lm and ff symbolic planners and number of objects for the evaluation tasks (eval) as well as the average values of the debugging tasks (debug). Tasks for which the symbolic planner did not find a plan were left out in the computation of the average plan length values.</figcaption>
 </figure>
