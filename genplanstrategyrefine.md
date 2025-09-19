@@ -52,9 +52,13 @@ bibtex: |
 
 We introduce an approach for generating improved **generalized plans in PDDL planning** in the form of **Python programs** using **LLMs**. Generalized plans are plans that generalize across the tasks of a given PDDL domain. 
 
-For example, a planning task from the Logistics domain has a specified number of cities which have the same number of locations and each city has one airport. A specified number of airplanes are randomly distributed across all airports. Each task also includes a specified number of trucks, with the only condition that there are at least as many trucks as cities. A specified number of packages is distributed over all possible locations.  There can be multiple objects at the same location. The goal specifies for each package a goal location which can be identical to the initial location.
+For example, in the Logistics domain the goal is to transport packages from their initial location to their goal location using trucks and airplanes. A planning task from that has a specified number of cities each consisting of the same number of locations out of which one is an airport. A specified number of airplanes is randomly distributed across all airports. Each task also includes a specified number of trucks, such that there is at least one truck per city. A specified number of packages is distributed over all possible locations. The goal specifies for each package a goal location.
 
 Our approach generates Python programs that can take any of such tasks from the Logistics domain as input and generates the corresponding plan, i.e. the sequence of actions required to transfomr the specific initial state into a state satisfying the goal constraints. 
+
+<center>
+    <img src="static/images/improvedgeneralizedplanning/illustration_genplan.png" width="80%"/>
+</center>
 
 ## Overview
 
