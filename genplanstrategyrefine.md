@@ -78,7 +78,9 @@ This approach allows:
 * intermediate form of the strategy is closer to the final target output, has a clearer structure and less ambiguity than NL strategies form previous work (see Figure below)
 * to identify and fix errors in the strategy prior to the code generation
 
-<img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="80%"/>
+<center>
+  <img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="80%"/>
+</center>
 
 * Additionally, we extend the Python debugging phase with a **reflection step** prompting the LLM to pinpoint the reason for the observed plan failure. 
 * We take inspiration from LLM code generation to produce several program variants and pick the best one.
@@ -102,6 +104,8 @@ For the strategy validation approach, we provide the domain and debugging task i
 1. First, the LLM is prompted to generate the NL domain description given the PDDL domain. 
 2. Afterwards, the NL description of each debugging task is generated based on its PDDL definition and the PDDL and NL domain descriptions. <br>
 We also use that NL domain description and two debugging task descriptions as input for the pseudocode generation.
+<br> 
+<br> 
 </details>
 
 <details>
@@ -124,6 +128,8 @@ We instruct the LLM to generate the strategy in the form of pseudocode that shou
     </ul>
   </li>
 </ul>
+<br> 
+<br> 
 </details>
 
 <details>
@@ -140,6 +146,8 @@ We instruct the LLM to generate the strategy in the form of pseudocode that shou
   </ul>
   <br>
   <img src="static/images/improvedgeneralizedplanning/PlanGenFeedback.png" width="70%"/>
+  <br> 
+  <br> 
 </details>
 
 <details>
@@ -165,7 +173,8 @@ Last but not least, we prompt the LLM to provide python code that implements the
   <img src="static/images/improvedgeneralizedplanning/Feedback.png" width="70%"/>
   </li>
 </ul>
-
+<br> 
+<br> 
 </details>
 
 ## Data
@@ -185,11 +194,12 @@ Table 2
 
 **Evaluation**<br>
 * Metric: Coverage - The percentage of evaluation tasks for which the Python program generates a correct plan.
-    * Average: The average coverage over all (3) runs.
+    * Average: The average coverage over all 3 runs.
     * Best: The coverage of the best run. <br>
 * Time limit of 45 seconds for running the programs
 * Each program is ran 4 times with random ordering of ob objects and initial/goal facts and treated as correct if each ordering results in a correct plan
 * Final evaluaiton based on the best generated program as determined on the debugging data
+* For each configuration, we conducted 3 runs of the complete pipeline, each with a different pair of initial example tasks provided to the LLM
 
 **Our Framework**<br>
 We test our framework for two different combinations of the maximum number of initial programs (N ) and code debugging steps (KC ) and conduct three ablation experiments to assess the effect of our pipeline extensions. <br>
