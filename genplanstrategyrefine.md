@@ -58,23 +58,29 @@ Our approach generates Python programs that can take any of such tasks from the 
 
 ## Overview
 
-Previous work (Silver et al. '24') proposed a framework consisting of three steps: 
+**Previous work** (Silver et al. '24') proposed a framework consisting of three steps: 
 1. the LLM first generates a summary of the domain in natural language
 2. the LLM then generates a strategy for the domain, again in natural language, and 
 3. the LLM then implements that strategy as a Python program, that gets debugged on example planning tasks. <br>
 
 In their work, **only one** strategy is generated and passed directly to the program generation. If the strategy is incorrect, its implementation will therefore result in an incorrect generalized plan. 
 
-**Our contribution**<br>
-Here, we introduce an approach that generates the strategy in the form of pseudocode and enables automatic debugging of the pseudocode, hence allowing us to identify and fix errors prior to the generation of the generalized plan itself. 
+**Our contributions**<br>
+* generation of strategies in the form of **pseudocode**
+* an approach to **automatically debug** the pseudocode
 
-Our goal is to improve the quality of the strategies that the LLM is asked to implement in order to shift most of the work beyond the mere conversion into Python to the step preceding the code generation. <br>
+This approach allows:
+* to shift most of the work beyond the mere conversion into Python to the step preceding the code generation
+* intermediate form of the strategy is closer to the final target output, has a clearer structure and less ambiguity than NL strategies form previous work (see Figure below)
+* to identify and fix errors in the strategy prior to the code generation
 
 <img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="80%"/>
 
-Additionally, we extend the Python debugging phase with a reflection step prompting the LLM to pinpoint the reason for the observed plan failure. Finally, we take inspiration from LLM code generation to produce several program variants and pick the best one.
+* Additionally, we extend the Python debugging phase with a **reflection step** prompting the LLM to pinpoint the reason for the observed plan failure. 
+* We take inspiration from LLM code generation to produce several program variants and pick the best one.
 
-Running experiments on 17 benchmark domains, we show that these extensions substantially improve (and never deteriorate) the quality of the generalized plans. In 12 of the domains, our best Python programs solve all tasks that can be generated with the respective instance generator.
+Running experiments on 17 benchmark domains, we show that these extensions substantially improve (and never deteriorate) the quality of the generalized plans.<br> 
+In 12 of the domains, our best Python programs solve all tasks that can be generated with the respective instance generator.
 
 ## Our pipeline
 
@@ -96,7 +102,7 @@ We also use that NL domain description and two debugging task descriptions as in
 
 <details>
 <summary>
-2. Strategy Generation: generating initial pseudocode
+2.1 Strategy Generation: generating initial pseudocode
 </summary>
 We instruct the LLM to generate the strategy in the form of pseudocode that should be detailed and specific enough to be converted into an executable program in a straightforward way. The prompt for this step consists of the NL descriptions of the domain and two example tasks and instructions to think step-by-step (zero-shot CoT, Kojima et al., 2022).
 <ul>
@@ -115,10 +121,10 @@ We instruct the LLM to generate the strategy in the form of pseudocode that shou
   </li>
 </ul>
 </details>
-<br>
+
 <details>
 <summary>
-2. Strategy Generation: pseudocode debugging 
+2.2 Strategy Generation: pseudocode debugging 
 </summary>
   <ul>
     <li>An LLM is prompted LLM to generate the PDDL plan for a given debugging task (in NL) by following the strategy generated in the previous step. The generated plan is then validated using VAL. </li>
@@ -131,7 +137,7 @@ We instruct the LLM to generate the strategy in the form of pseudocode that shou
   <br>
   <img src="static/images/improvedgeneralizedplanning/PlanGenFeedback.png" width="70%"/>
 </details>
-<br>
+
 <details>
 <summary>
 3. Code Generation
