@@ -49,19 +49,27 @@ bibtex: |
     <img src="static/images/improvedgeneralizedplanning/LogisticsPipelineExample3.png" width="100%"/>
 </center>
 
+
+We introduce an approach for generating improved **generalized plans in PDDL planning** in the form of **Python programs** using **LLMs**. Generalized plans are plans that generalize across the tasks of a given PDDL domain. 
+
+For example, a planning task from the Logistics domain has a specified number of cities which have the same number of locations and each city has one airport. A specified number of airplanes are randomly distributed across all airports. Each task also includes a specified number of trucks, with the only condition that there are at least as many trucks as cities. A specified number of packages is distributed over all possible locations.  There can be multiple objects at the same location. The goal specifies for each package a goal location which can be identical to the initial location.
+
+Our approach generates Python programs that can take any of such tasks from the Logistics domain as input and generates the corresponding plan, i.e. the sequence of actions required to transfomr the specific initial state into a state satisfying the goal constraints. 
+
 ## Overview
-We introduce an approach for **generating Python programs representing generalized plans in PDDL planning**, i.e., plans that generalize across the tasks of a given PDDL domain. 
 
 Previous work (Silver et al. '24') proposed a framework consisting of three steps: 
 1. the LLM first generates a summary of the domain in natural language
 2. the LLM then generates a strategy for the domain, again in natural language, and 
-3. the LLM then implements that strategy as a Python program, that gets debugged on example planning tasks. 
-In that work, **only one** strategy is generated and passed directly to the program generation. If the strategy is incorrect, its implementation will therefore result in an incorrect generalized plan. 
+3. the LLM then implements that strategy as a Python program, that gets debugged on example planning tasks. <br>
+In their work, **only one** strategy is generated and passed directly to the program generation. If the strategy is incorrect, its implementation will therefore result in an incorrect generalized plan. 
 
 **Our contribution**<br>
 Here, we introduce an approach that generates the strategy in the form of pseudocode and enables automatic debugging of the pseudocode, hence allowing us to identify and fix errors prior to the generation of the generalized plan itself. 
 
-<img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="90%"/>
+Our goal is to improve the quality of the strategies that the LLM is asked to implement in order to shift most of the work beyond the mere conversion into Python to the step preceding the code generation. <br>
+
+<img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="80%"/>
 
 Additionally, we extend the Python debugging phase with a reflection step prompting the LLM to pinpoint the reason for the observed plan failure. Finally, we take inspiration from LLM code generation to produce several program variants and pick the best one.
 
@@ -83,16 +91,19 @@ In the Logistics domain we have a specified number of cities which have the same
 
 <details>
 <summary>
-NL Generation
+1. NL Generation
 </summary>
-For the strategy validation approach, we provide the domain and debugging task in NL form. Therefore, we require a separate NL description for each debugging task. We obtain the NL descriptions in a two-step process: First, the LLM is prompted to generate the NL domain description given the PDDL domain. Afterwards, the NL description of each debugging task is generated based on its PDDL definition and the PDDL and NL domain descriptions. We also use that NL domain description and two debugging task descriptions as input for the pseudocode generation.
+For the strategy validation approach, we provide the domain and debugging task in NL form. Therefore, we require a separate NL description for each debugging task. We obtain the NL descriptions in a two-step process: 
+1. First, the LLM is prompted to generate the NL domain description given the PDDL domain. 
+2. Afterwards, the NL description of each debugging task is generated based on its PDDL definition and the PDDL and NL domain descriptions. <br>
+We also use that NL domain description and two debugging task descriptions as input for the pseudocode generation.
 </details>
 <br>
 <details>
 <summary>
-Strategy Generation
+2. Strategy Generation: generating initial pseudocode
 </summary>
-Our goal is to improve the quality of the strategies that the LLM is asked to implement in order to shift most of the work beyond the mere conversion into Python to the previous step of the generation framework. We therefore instruct the LLM to generate the strategy in the form of pseudocode that should be detailed and specific enough to be converted into an executable program in a straightforward way. The prompt for this step consists of the NL descriptions of the domain and two example tasks and instructions to think step-by-step (zero-shot CoT, Kojima et al., 2022) for developing a strategy that can be turned into a program.
+We instruct the LLM to generate the strategy in the form of **pseudocode** that should be detailed and specific enough to be converted into an executable program in a straightforward way. The prompt for this step consists of the NL descriptions of the domain and two example tasks and instructions to think step-by-step (zero-shot CoT, Kojima et al., 2022).
 <ul>
   <li>Pseudocode Generation Prompt:
   <img src="static/images/improvedgeneralizedplanning/LogisticsExampleStrategyPrompt.png" width="80%"/>
@@ -107,11 +118,23 @@ Our goal is to improve the quality of the strategies that the LLM is asked to im
       </li>
     </ul>
   </li>
+</ul>
+</details>
+<br>
+<details>
+<summary>
+2. Strategy Generation: pseudocode debugging 
+</summary>
   <li>Strategy debugging:<br>
-  We provide the pseudocode strategy to an LLM and prompt it to generate the PDDL plan for a given debugging task (in NL) by following the strategy. The generated plan is then validated using VAL. If the plan is incorrect, the validation output is converted into a feedback message.
-
-  Instead of directly prompting the LLM to update the pseudocode based on the feedback, we add a reflection step, inspired by approaches that let LLMs reflect about ways to improve over previous outputs (e.g. Madaan et al. 2023; Shinn et al. 2023). We combine the feedback about the mistake and the generated plan and with instructions to reflect about the part of the pseudocode that caused the mistake and the reason why that part is incorrect. After generating the reflection response based on that prompt, the LLM is then asked to correct the pseudocode by thinking step-by-step. This process is continued until the LLM generates correct plans for all debugging tasks or a maximum number of debugging iterations, K_S, is reached. Then the pseudocode that resulted in the highest number of solved tasks is selected as the pseudocode for the code generation step.
-
+    <ul>
+      <li>We provide the pseudocode strategy to an LLM and prompt it to generate the PDDL plan for a given debugging task (in NL) by following the strategy. </li>
+      <li>The generated plan is then validated using VAL. </li>
+      <li>If the plan is incorrect, the validation output is converted into a feedback message.</li>
+      <li>We combine the feedback about the mistake and the generated plan and with instructions to reflect about the part of the pseudocode that caused the mistake and the reason why that part is incorrect (inspired by e.g. Madaan et al. 2023; Shinn et al. 2023). </li>
+      <li>After generating the reflection response based on that prompt, the LLM is then asked to correct the pseudocode by thinking step-by-step. </li>
+      <li>This process is continued until the LLM generates correct plans for all debugging tasks or a maximum number of debugging iterations, K_S, is reached. </li>
+       <li>The pseudocode that resulted in the highest number of solved tasks is selected as the pseudocode for the code generation step.</li>
+    </ul>
   <br>
   <img src="static/images/improvedgeneralizedplanning/PlanGenFeedback.png" width="80%"/>
   </li>
@@ -120,7 +143,7 @@ Our goal is to improve the quality of the strategies that the LLM is asked to im
 <br>
 <details>
 <summary>
-Code Generation
+3. Code Generation
 </summary>
 
 Last but not least, we prompt the LLM to provide python code that implements the generated pseudocode strategy given the NL description of the domain and the pseudocode strategy.
