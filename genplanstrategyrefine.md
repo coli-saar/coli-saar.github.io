@@ -115,7 +115,7 @@ We also use that NL domain description and two debugging task descriptions as in
 We instruct the LLM to generate the strategy in the form of pseudocode that should be detailed and specific enough to be converted into an executable program in a straightforward way. The prompt for this step consists of the NL descriptions of the domain and two example tasks and instructions to think step-by-step (zero-shot CoT, Kojima et al., 2022).
 <br>
 <br>
-Note: "(...)" indicates abbreviated content for better readability and is not part of the original prompt. Not to be confused with "..." which is part of the original prompt.
+Note: "..." indicates abbreviated content for better readability and is not part of the original prompt.
 <ul>
   <li>Pseudocode Generation Prompt:
   <img src="static/images/improvedgeneralizedplanning/LogisticsExampleStrategyPrompt.png" width="80%"/>
