@@ -63,7 +63,7 @@ Our approach generates Python programs that can take any of such tasks from the 
 ## Overview
 
 **Previous work** (Silver et al. '24') proposed a framework consisting of three steps: 
-1. the LLM first generates a summary of the domain in natural language
+1. the LLM first generates a summary of the domain in natural language,
 2. the LLM then generates a strategy for the domain, again in natural language, and 
 3. the LLM then implements that strategy as a Python program, that gets debugged on example planning tasks. <br>
 
@@ -74,9 +74,9 @@ In their work, **only one** strategy is generated and passed directly to the pro
 * an approach to **automatically debug** the pseudocode
 
 This approach allows:
-* to shift most of the work beyond the mere conversion into Python to the step preceding the code generation
-* intermediate form of the strategy is closer to the final target output, has a clearer structure and less ambiguity than NL strategies form previous work (see Figure below)
-* to identify and fix errors in the strategy prior to the code generation
+* to shift most of the work beyond the mere conversion into Python to the step preceding the code generation.
+* intermediate form of the strategy is closer to the final target output, has a clearer structure and less ambiguity than NL strategies form previous work (see Figure below).
+* to identify and fix errors in the strategy prior to the code generation.
 
 <center>
   <img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="80%"/>
@@ -113,6 +113,8 @@ We also use that NL domain description and two debugging task descriptions as in
 2.1 Strategy Generation: generating initial pseudocode
 </summary>
 We instruct the LLM to generate the strategy in the form of pseudocode that should be detailed and specific enough to be converted into an executable program in a straightforward way. The prompt for this step consists of the NL descriptions of the domain and two example tasks and instructions to think step-by-step (zero-shot CoT, Kojima et al., 2022).
+
+Note: "(...)" indicates abbreviated content for better readability and is not part of the original prompt. Not to be confused with "..." which is part of the original prompt.
 <ul>
   <li>Pseudocode Generation Prompt:
   <img src="static/images/improvedgeneralizedplanning/LogisticsExampleStrategyPrompt.png" width="80%"/>
@@ -158,16 +160,7 @@ We instruct the LLM to generate the strategy in the form of pseudocode that shou
 Last but not least, we prompt the LLM to provide python code that implements the generated pseudocode strategy given the NL description of the domain and the pseudocode strategy.
 <ul>
   <li>First Code Generation Prompt:
-  <img src="static/images/improvedgeneralizedplanning/CodeGenPromptFull.png" width="100%"/>
-  </li>
-  <li>First Code Generation Prompt:
-  <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbr.png" width="100%"/>
-  </li>
-  <li>First Code Generation Prompt:<br>
-  <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbrV2.png" width="60%"/>
-  </li>
-  <li>First Code Generation Prompt:<br>
-  <img src="static/images/improvedgeneralizedplanning/CodeGenPromptAbbrV3.png" width="60%"/>
+  <img src="static/images/improvedgeneralizedplanning/CodeGenPromptColor.png" width="100%"/>
   </li>
   <li>Error Feedback and corresponding Reflection Prompt:  
   <img src="static/images/improvedgeneralizedplanning/Feedback.png" width="70%"/>
@@ -196,10 +189,10 @@ Table 2
 * Metric: Coverage - The percentage of evaluation tasks for which the Python program generates a correct plan.
     * Average: The average coverage over all 3 runs.
     * Best: The coverage of the best run. <br>
-* Time limit of 45 seconds for running the programs
-* Each program is ran 4 times with random ordering of ob objects and initial/goal facts and treated as correct if each ordering results in a correct plan
-* Final evaluaiton based on the best generated program as determined on the debugging data
-* For each configuration, we conducted 3 runs of the complete pipeline, each with a different pair of initial example tasks provided to the LLM
+* Time limit of 45 seconds for running the programs.
+* Each program is ran 4 times with random ordering of ob objects and initial/goal facts and treated as correct if each ordering results in a correct plan.
+* Final evaluation based on the best generated program as determined on the debugging data.
+* For each configuration, we conducted 3 runs of the complete pipeline, each with a different pair of initial example tasks provided to the LLM.
 
 **Our Framework**<br>
 We test our framework for two different combinations of the maximum number of initial programs (N ) and code debugging steps (KC ) and conduct three ablation experiments to assess the effect of our pipeline extensions. <br>
@@ -219,11 +212,11 @@ The set-ups tested are the following:
 | Bas |  0  |  1 |  6 |  7 |  Re-implementation of Silver et al.    |
 
 
-* Re-implementation of Siler et al., adapted for a fairer comparison:
-  * more similar phrasing of prompts, including instructions to think step-by-step for NL strategy generation
-  * separation of the three parts of the pipeline
-  * example task an failed task is provided in the Python format during code generation
-  * selection of final program based on debugging data
+* Re-implementation of Silver et al., adapted for a fairer comparison:
+  * more similar phrasing of prompts, including instructions to think step-by-step for NL strategy generation.
+  * separation of the three parts of the pipeline.
+  * example task an failed task is provided in the Python format during code generation.
+  * selection of final program based on debugging data.
 
 **Symbolic Baselines**<br>
 
