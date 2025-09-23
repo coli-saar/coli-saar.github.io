@@ -79,7 +79,7 @@ This approach allows:
 * to identify and fix errors in the strategy prior to the code generation.
 
 <center>
-  <img src="static/images/improvedgeneralizedplanning/StrategyPseudocodeToPolicy.png" width="80%"/>
+  <img src="static/images/improvedgeneralizedplanning/map_pseudo2code.png" width="90%"/>
 </center>
 
 * Additionally, we extend the Python debugging phase with a **reflection step** prompting the LLM to pinpoint the reason for the observed plan failure. 
