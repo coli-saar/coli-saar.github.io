@@ -139,7 +139,7 @@ Note: "(...)" indicates abbreviated content for better readability and is not pa
 2.2 Strategy Generation: pseudocode debugging 
 </summary>
   <ul>
-    <li>An LLM is prompted LLM to generate the PDDL plan for a given debugging task (in NL) by following the strategy generated in the previous step. The generated plan is then validated using VAL. </li>
+    <li>An LLM is prompted to generate the PDDL plan for a given debugging task (in NL) by following the strategy generated in the previous step. The generated plan is then validated using VAL. </li>
     <li>If the plan is incorrect, the validation output is converted into a feedback message about the mistake.</li>
     <li>The feedback is combined with the generated plan and instructions to reflect about the part of the pseudocode that caused the mistake and the reason why that part is incorrect (inspired by e.g. Madaan et al. 2023; Shinn et al. 2023). </li>
     <li>After generating the reflection response, the LLM is then asked to correct the pseudocode by thinking step-by-step. </li>
