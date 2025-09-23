@@ -70,8 +70,8 @@ Our approach generates Python programs that can take any of such tasks from the 
 In their work, **only one** strategy is generated and passed directly to the program generation. If the strategy is incorrect, its implementation will therefore result in an incorrect generalized plan. 
 
 **Our contributions**<br>
-* generation of strategies in the form of **pseudocode**
-* an approach to **automatically debug** the pseudocode
+* generation of strategies in the form of **pseudocode**.
+* an approach to **automatically debug** the pseudocode.
 
 This approach allows:
 * to shift most of the work beyond the mere conversion into Python to the step preceding the code generation.
@@ -113,7 +113,7 @@ We also use that NL domain description and two debugging task descriptions as in
 2.1 Strategy Generation: generating initial pseudocode
 </summary>
 We instruct the LLM to generate the strategy in the form of pseudocode that should be detailed and specific enough to be converted into an executable program in a straightforward way. The prompt for this step consists of the NL descriptions of the domain and two example tasks and instructions to think step-by-step (zero-shot CoT, Kojima et al., 2022).
-
+<br>
 Note: "(...)" indicates abbreviated content for better readability and is not part of the original prompt. Not to be confused with "..." which is part of the original prompt.
 <ul>
   <li>Pseudocode Generation Prompt:
