@@ -1,22 +1,43 @@
 ---
 layout: default
-title: "EHOP: A Dataset of Everyday NP-hard Optimization Problems"
+title: "A Knapsack by Any Other Name: Presentation impacts LLM performance on NP-hard problems"
 authors:
-- name: Alex Duchnowski 
-  affiliation: 1
-- name: Ellie Pavlick 
-  homepage: https://cs.brown.edu/people/epavlick/
-  affiliation: 2
-- name: Alexander Koller
-  homepage: https://www.coli.uni-saarland.de/~koller/
-  affiliation: 1
+    - name: Alex Duchnowski
+      affiliation: 1
+    - name: Ellie Pavlick
+      homepage: https://cs.brown.edu/people/epavlick/
+      affiliation: 2
+    - name: Alexander Koller
+      homepage: https://www.coli.uni-saarland.de/~koller/
+      affiliation: 1
 affiliations:
-- id: 1
-  name: Saarland University
-- id: 2
-  name: Brown University
-paper: https://arxiv.org/abs/2502.13776
+    - id: 1
+      name: Saarland University
+    - id: 2
+      name: Brown University
+paper: https://doi.org/10.18653/v1/2025.findings-emnlp.352
 code: https://github.com/coli-saar/ehop
+bibtex: |
+    @inproceedings{duchnowski-etal-2025-knapsack,
+        title = "A Knapsack by Any Other Name: Presentation impacts {LLM} performance on {NP}-hard problems",
+        author = "Duchnowski, Alex  and
+          Pavlick, Ellie  and
+          Koller, Alexander",
+        editor = "Christodoulopoulos, Christos  and
+          Chakraborty, Tanmoy  and
+          Rose, Carolyn  and
+          Peng, Violet",
+        booktitle = "Findings of the Association for Computational Linguistics: EMNLP 2025",
+        month = nov,
+        year = "2025",
+        address = "Suzhou, China",
+        publisher = "Association for Computational Linguistics",
+        url = "https://aclanthology.org/2025.findings-emnlp.352/",
+        doi = "10.18653/v1/2025.findings-emnlp.352",
+        pages = "6628--6651",
+        ISBN = "979-8-89176-335-7",
+        abstract = "To investigate the effect of problem presentation on LLMs' ability to solve optimization problems, we introduce the dataset of Everyday Hard Optimization Problems (EHOP), a collection of NP-hard problems expressed in natural language. EHOP includes problem formulations that could be found in computer science textbooks (e.g., graph coloring), versions that are dressed up as problems that could arise in real life (e.g., party planning), and variants with inverted rules. We find that state-of-the-art LLMs, across multiple prompting strategies, systematically solve textbook problems more accurately than their real-life and inverted counterparts. While reasoning models are more capable, they nonetheless show high variance across problem presentations, suggesting they lack a truly robust reasoning mechanism. We argue that this constitutes evidence that LLMs are still heavily dependent on what was seen in training and struggle to generalize to novel problems."
+    }
 ---
 
 <center>
@@ -25,7 +46,7 @@ code: https://github.com/coli-saar/ehop
 
 ## Abstract
 
-We introduce the dataset of Everyday Hard Optimization Problems (EHOP), a collection of NP-hard optimization problems expressed in natural language. EHOP includes problem formulations that could be found in computer science textbooks, versions that are dressed up as problems that could arise in real life, and variants of well-known problems with inverted rules. We find that state-of-the-art LLMs, across multiple prompting strategies, systematically solve textbook problems more accurately than their real-life and inverted counterparts. We argue that this constitutes evidence that LLMs adapt solutions seen during training, rather than leveraging reasoning abilities that would enable them to generalize to novel problems.
+To investigate the effect of problem presentation on LLMs' ability to solve optimization problems, we introduce the dataset of Everyday Hard Optimization Problems (EHOP), a collection of NP-hard problems expressed in natural language. EHOP includes problem formulations that could be found in computer science textbooks (e.g., graph coloring), versions that are dressed up as problems that could arise in real life (e.g., party planning), and variants with inverted rules. We find that state-of-the-art LLMs, across multiple prompting strategies, systematically solve textbook problems more accurately than their real-life and inverted counterparts. While reasoning models are more capable, they nonetheless show high variance across problem presentations, suggesting they lack a truly robust reasoning mechanism. We argue that this constitutes evidence that LLMs are still heavily dependent on what was seen in training and struggle to generalize to novel problems.
 
 ## Background
 
@@ -51,10 +72,10 @@ The EHOP dataset comprises two parts: EHOP-RANDOM and EHOP-HARD. EHOP-RANDOM con
 
 We test GPT-4o and Llama 3.1 70B Instruct on the EHOP dataset using several prompting strategies:
 
-- One-Shot
-- Zero-Shot (CoT)
-- One-Shot CoT
-- ILP Python
+-   One-Shot
+-   Zero-Shot (CoT)
+-   One-Shot CoT
+-   ILP Python
 
 In the case of the ILP Python strategy, we prompt the model to translate the problem into an Integer Linear Programming (ILP) specification, written in Python using the [`gurobipy`](https://docs.gurobi.com/projects/optimizer/en/current/reference/python.html) package. We then run the generated code and provide the result back to the model, asking it to use the output to provide a cleanly formatted solution to the original question.
 
