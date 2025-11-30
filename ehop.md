@@ -40,11 +40,11 @@ bibtex: |
     }
 ---
 
-<center>
-    <img src="static/images/ehop/Variant_Figure.png" width="60%" alt="Illustrations of problems used in EHOP." />
-</center>
-
 # 🚧This page is currently under construction🚧
+
+<center>
+    <img src="static/images/ehop/Variants_Example.svg" width="60%" alt="Illustrations of problems used in EHOP." />
+</center>
 
 ## Abstract
 
@@ -107,7 +107,7 @@ We again see that GPT ILP Python performs well and is more robust than other met
 In general, we find that LLMs perform substantially better when problems are presented in the textbook variant than when the problems are costumed or inverted.
 
 <center>
-    <img src="static/images/ehop/Variant_Table_Random.png" alt="Variant comparison table for the EHOP-RANDOM dataset." />
+    <img src="static/images/ehop/Random_Table.svg" alt="Variant comparison table for the EHOP-RANDOM dataset." />
 </center>
 
 The drop is especially pronounced for the inverted problems, which are worded in ways that make them recognizably related to well-documented archetypes of NP-hard problems. This very likely confuses the LLM, which might not register any difference from the standard problem.
@@ -118,14 +118,10 @@ This suggests that while the model no longer struggles to perform the right comp
 We show results for EHOP-HARD below. The overall pattern in Table 3 is still that the Textbook variant is easier than the others, except for methods that already perform very poorly on Textbook.
 
 <center>
-    <img src="static/images/ehop/Variant_Table_Hard.png" alt="Variant comparison table for the EHOP-HARD dataset." />
+    <img src="static/images/ehop/Hard_Table.svg" alt="Variant comparison table for the EHOP-HARD dataset." />
 </center>
 
 ## Conclusion
 
 We have shown that current LLMs are much better at solving NP-hard optimization problems when they are
 presented in their well-documented textbook form than when they arise as everyday problems or are subtly distorted. This is further evidence that LLMs are often reciting when they appear to be reasoning.
-
-<!-- | Test | Table |
-| --- | --- |
-| `+test`{:.diff} | `-test`{:.diff} | -->
