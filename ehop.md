@@ -40,8 +40,6 @@ bibtex: |
     }
 ---
 
-# 🚧This page is currently under construction🚧
-
 <center>
     <img src="static/images/ehop/Variants_Example.svg" width="50%" alt="Illustrations of problems used in EHOP." />
 </center>
@@ -93,7 +91,7 @@ In the case of the ILP Python strategy, we prompt the model to translate the pro
 The following plot shows performance of GPT and Llama on the EHOP-RANDOM dataset when presented in the textbook formulation:
 
 <center>
-    <img src="static/images/ehop/Scale_Effect_Random.svg" width="100%"alt="Effect of scale across problems on the random dataset." />
+    <img src="static/images/ehop/Scale_Effect_Random.svg" width="100%" alt="Effect of scale across problems on the random dataset." />
 </center>
 
 Across the board, we see that performance drops as instances get bigger. GPT prompted with the ILP Python strategy, however, is more robust to increases in instance size. It also clearly outperforms the other methods in Knapsack and Traveling Salesman. Below are similarly selected results for the EHOP-HARD dataset.
@@ -112,6 +110,7 @@ In general, we find that LLMs perform substantially better when problems are pre
     <img src="static/images/ehop/Random_Table.svg" width="100%" alt="Variant comparison table for the EHOP-RANDOM dataset." />
 </center>
 
+<br>
 The drop is especially pronounced for the inverted problems, which are worded in ways that make them recognizably related to well-documented archetypes of NP-hard problems. This very likely confuses the LLM, which might not register any difference from the standard problem.
 
 While the ILP Python prompting strategy outperforms the others, it is still sensitive to deviations from the textbook presentations.
