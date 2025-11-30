@@ -66,20 +66,23 @@ We contribute to the reasoning vs. reciting debate by introducing the dataset of
     <img src="static/images/ehop/Example_Instances.svg" width="80%" alt="Example instances of problems used in EHOP." />
 </center>
 
-The EHOP dataset consists of generated instances of three base problems: Graph Coloring, Knapsack, and Traveling Salesman. These instances are presented in standard textbook formulations as well as _costumed_ ones which present the problem in another context. For example, the Graph Coloring problem can be expressed as a teacher wanting to put students (vertices) into groups (colors) without having two students who are friends (connected by an edge) in the same group. The instances are also _inverted_, meaning they are modified to have a similar yet different set of rules. In the case of Graph Coloring, we change the constraint from forbidding connected nodes with the same color to forbidding **unconnected** nodes with the same color. The details of inversion are crafted such that an instance is equivalent to its inverted counterpart, in the sense that a solution to one version can be translated in linear time (or faster) to a solution to the other version.
+The EHOP dataset consists of generated instances of three base problems: _Graph Coloring_, _Knapsack_, and _Traveling Salesman_. These instances are presented in standard, _textbook_ formulations as well as _costumed_ ones which present the problem in another context. For example, the Graph Coloring problem can be expressed as a teacher wanting to put students (vertices) into groups (colors) without having two students who are friends (connected by an edge) in the same group. The instances are also _inverted_, meaning they are modified to have a similar yet different set of rules. In the case of Graph Coloring, we change the constraint from forbidding connected nodes with the same color to forbidding **unconnected** nodes with the same color. The details of inversion are crafted such that an instance is equivalent to its inverted counterpart, in the sense that a solution to one version can be translated in linear time (or faster) to a solution to the other version.
 
 The EHOP dataset comprises two parts: EHOP-RANDOM and EHOP-HARD. EHOP-RANDOM consists of randomly generated instances, and EHOP-HARD consists of randomly generated instances which were not solved optimally by a high-performing greedy algorithm. See our paper for more details on dataset generation and the greedy algorithms used.
 
 ### Models & Prompting Strategies
 
-We test GPT-4o and Llama 3.1 70B Instruct on the EHOP dataset using several prompting strategies:
+We test GPT-4o, Llama-3.1-70B Instruct, DeepSeek-R1, and Qwen3-32B (both in thinking mode and non-thinking mode) on the EHOP dataset using a variety of prompting strategies (with some differences depending on whether the model is a reasoning model):
 
+-   Zero-Shot
 -   One-Shot
--   Zero-Shot (CoT)
+-   Zero-Shot Chain-of-Thought (CoT)
 -   One-Shot CoT
 -   ILP Python
+-   ILP LP
+-   OPRO (only for GPT)
 
-In the case of the ILP Python strategy, we prompt the model to translate the problem into an Integer Linear Programming (ILP) specification, written in Python using the [`gurobipy`](https://docs.gurobi.com/projects/optimizer/en/current/reference/python.html) package. We then run the generated code and provide the result back to the model, asking it to use the output to provide a cleanly formatted solution to the original question.
+In the case of the ILP Python strategy, we prompt the model to translate the problem into an Integer Linear Programming (ILP) specification, written in Python using the [`gurobipy`](https://docs.gurobi.com/projects/optimizer/en/current/reference/python.html) package. We then run the generated code and provide the result back to the model, asking it to use the output to provide a cleanly formatted solution to the original question. ILP LP is similar. For more details, please consult Section 4 (Experiments) of our paper.
 
 ## Results
 
@@ -88,13 +91,13 @@ In the case of the ILP Python strategy, we prompt the model to translate the pro
 The following plot shows performance of GPT and Llama on the EHOP-RANDOM dataset when presented in the textbook formulation:
 
 <center>
-    <img src="static/images/ehop/Random_Dataset_Scale_Effect_Detailed.svg" alt="Effect of scale across problems on the random dataset." />
+    <img src="static/images/ehop/Scale_Effect_Random.svg" alt="Effect of scale across problems on the random dataset." />
 </center>
 
 Across the board, we see that performance drops as instances get bigger. GPT prompted with ILP Python strategy, however, is more robust to increases in instance size. It also clearly outperforms the other methods in Knapsack and Traveling Salesman. Below are similarly selected results for the EHOP-HARD dataset.
 
 <center>
-    <img src="static/images/ehop/Hard_Dataset_Scale_Effect_Detailed.svg" alt="Effect of scale across problems on the hard dataset." />
+    <img src="static/images/ehop/Scale_Effect_Hard.svg" alt="Effect of scale across problems on the hard dataset." />
 </center>
 
 We again see that GPT ILP Python performs well and is more robust than other methods. We also see that performance drop substantially for the other methods, indicating that EHOP-RANDOM may have rather easy examples of the NP-hard problems, and when these are filtered out, LLMs struggle to truly reason through the problem and generate an optimal solution.
