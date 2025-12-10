@@ -17,7 +17,7 @@ authors:
 affiliations:
 - id: 1
   name: Saarland University
-paper: https://arxiv.org/abs/2311.09830
+paper: https://ojs.aaai.org/index.php/ICAPS/article/view/36126/38280
 code: https://github.com/minecraft-saar/autoplanbench/tree/main
 data: https://github.com/minecraft-saar/autoplanbench/tree/main/autoplanbench_dataset
 bibtex: |
