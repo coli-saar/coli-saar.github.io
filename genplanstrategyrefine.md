@@ -29,9 +29,9 @@ affiliations:
   name: Aalborg University, Denmark
 - id: 4
   name: IBM Research, US
-paper: https://www.arxiv.org/abs/2508.13876
-code: https://github.com/coli-saar/genplan-strategy-refine #TODO
-data: https://github.com/coli-saar/genplan-strategy-refine/tree/main/data #TODO
+paper: static/papers/generalized_planning.pdf
+code: https://github.com/coli-saar/genplan-strategy-refine 
+data: https://github.com/coli-saar/genplan-strategy-refine/tree/main/data 
 bibtex: |
     @misc{stein2025improvedgeneralizedplanningllms,
       title={Improved Generalized Planning with LLMs through Strategy Refinement and Reflection}, 
@@ -49,12 +49,15 @@ bibtex: |
     <img src="static/images/improvedgeneralizedplanning/LogisticsPipelineExample3.png" width="100%"/>
 </center>
 
+**Note on versions**: 
+* the paper linked at this website is a new version of the paper that is available on Arxiv ([arxiv link](https://arxiv.org/abs/2508.13876))
+* the main additions are experiments with more LLM models 
 
 We introduce an approach for generating improved **generalized plans in PDDL planning** in the form of **Python programs** using **LLMs**. Generalized plans are plans that generalize across the tasks of a given PDDL domain. 
 
 For example, in the Logistics domain the goal is to transport packages from their initial location to their goal location using trucks and airplanes. A planning task from that has a specified number of cities each consisting of the same number of locations out of which one is an airport. A specified number of airplanes is randomly distributed across all airports. Each task also includes a specified number of trucks, such that there is at least one truck per city. A specified number of packages is distributed over all possible locations. The goal specifies for each package a goal location.
 
-Our approach generates Python programs that can take any of such tasks from the Logistics domain as input and generates the corresponding plan, i.e. the sequence of actions required to transfomr the specific initial state into a state satisfying the goal constraints. 
+Our approach generates Python programs that can take any of such tasks from the Logistics domain as input and generates the corresponding plan, i.e. the sequence of actions required to transform the specific initial state into a state satisfying the goal constraints. 
 
 <center>
     <img src="static/images/improvedgeneralizedplanning/illustration_genplan.png" width="80%"/>
