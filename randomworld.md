@@ -14,10 +14,19 @@ authors:
 affiliations:
 - id: 1
   name: Saarland University
-paper: https://arxiv.org/pdf/2506.11045
+paper: https://aclanthology.org/2025.emnlp-main.936/
 code: https://github.com/coli-saar/randomworld
 bibtex: |
-    None (TODO)
+    @inproceedings{sullivan-etal-2025-procedural,
+      title = "Procedural Environment Generation for Tool-Use Agents",
+      author = "Sullivan, Michael  and
+        Hartmann, Mareike  and
+        Koller, Alexander",
+      booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing",
+      year = "2025",
+      address = "Suzhou, China",
+      doi = "10.18653/v1/2025.emnlp-main.936",
+    }
 ---
 
 <center>
