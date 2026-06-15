@@ -89,7 +89,29 @@ $L_\textit{PRM}$ is *clearly* a PRM-aware RL objective equipped with a Monte-Car
 
 This is only interesting if the implicit PRM is non-trivial. If trajectories in a group never share prefixes, the tree is flat, every step is a whole trajectory, and the PRM collapses back into an ordinary ORM. So the next question is empirical: in actual GRPO training, do prefixes overlap enough to matter?
 
-To measure this we trained two DeepSeek-R1-Distill-Qwen-1.5B models (group sizes 6 and 36) on the OpenRS (TODO: cite) math dataset, built the $B(G)$ tree for every group, and tracked two quantities:
+To measure this we trained two DeepSeek-R1-Distill-Qwen-1.5B models (group sizes 6 and 36) on the OpenRS (TODO: cite) math dataset, built the overlapping-prefix tree for every group, and tracked two quantities:
+
+- **Path depth:** how many process steps sit between the root and a leaf. Smaller values mean a flatter, more trivial trees; larger ones mean richer prefix overlap.
+- **Intermediate Proportion:** the fraction of a trajectory's tokens that fall inside a shared prefix (i.e. the share of tokens actually receiving non-trivial process reward).
+
+TODO: graphs figure
+
+At group size 6, only 12 of 6,700 trees were flat (about 0.2%), and at group size 36, not a single one of 1,100 trees was trivial. And 
+both prefix-overlap metrics rise steeply as the policy converges and entropy drops: essentially **every group GRPO ever trained on carried a non-trivial, structured step-level reward signal** secretly derived from the outcome reward.
+
+# Why secrets are bad
+
+Because it's unintentional, it would be optimistic to assume the GRPO's secret PRM is actually a *good* PRM (it's not). Now that we've made the implicit PRM explicit, we can study and evaluate it. Consider the example in the figure below:
+
+TODO: bad PRM ex
+
+The prefix $JKL$ is shared by $JKLM,JKLNQST,JKLNQU$, whose mean reward is 0.33: this is below the group mean of 0.42, so the process step $JKL$ gets a *negative* advantage (-0.22), pushing its probability *down*. Because $JKL$ is repeated in three trajectories, its probability gets pushed down by a factor of -0.22 three times, even though $JKLM$ is the highest-reward trajectory in the group!
+
+# λ-GRPO
+
+To mitigate this imbalanced-freqency effect, we propose normalizing the GRPO loss for each token $y^{(i)}_t$ by the number of trajectories contained in the process step $\lambda^{(i,t)}$ that the token belongs to. THis gives us the PRM-aware λ-GRPO objective:
+
+TODO: λ-GRPO equation
 
 TODO: finish
 
