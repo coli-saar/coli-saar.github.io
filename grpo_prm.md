@@ -52,11 +52,25 @@ Why does this matter? We show that GRPO's implicit PRM carries a flaw: a frequen
   
 For each prompt/query $x$, GRPO samples a group $G$ of $k$ completions $y^{(i)}$ with rewards $r_i$​, and computes the group-relative advantage $a_i$:  
 
-TODO: GRPO adv eq
+<center>
+    <img src="static/images/grpo_prm/grpo_adv.png" width="20%" />
+</center>
 
 GRPO optimizes the policy $\pi_\theta$ (i.e. the LLM we're training) to raise the probability of positive-advantage (above-average reward) completions and lower the probability of the negative-advantage (below-average reward) completions. After generating a group $G$, the policy is optimized for the following objective for $\mu$ iterations (technically, this is the *DAPO* objective; TODO: cite):
 
-TODO: GRPO eqs here
+<center>
+    <img src="static/images/grpo_prm/grpo_loss_full.png" width="60%" />
+</center> 
+
+</br>
+
+<center>
+    <img src="static/images/grpo_prm/pit_eq.png" width="20%" />
+</center>
+
+<center>
+    <img src="static/images/grpo_prm/kl_penalty.png" width="20%" />
+</center>
 
 Notice that every token in completion $y^{(i)}$ is multiplied by the same trajectory-level advantage $a_i$: that uniformity is what makes GRPO look like a purely outcome-reward-based method.
 </details>
