@@ -119,9 +119,31 @@ We evaluated GRPO and λ-GRPO on a toy, synthetic task using GPT-2-small (TODO: 
 
 Take a depth-four binary tree. At each step the model emits one of two tokens, $L$ or $R$ (everything else is masked), tracing a root-to-leaf path. We then rig the rewards to be adversarial:
 
+- Sample one path as the *target* $T$ (say $LLRL$) and give it the maximum reward (+1.0)
+- Pick a prefix length $n$. Every *other* path that shares the first $n$ tokens of $T$ gets a *negative* reward ($r_\textit{neg}<0$)
+- All other paths get a reward of +0.7
+
+TODO: tree env figure
+
+This creates a trap, where the target's own siblings poison its shared prefix: if the trajectories $T = LLRL$, $X = LLLR$, and $Y = LLRR$ are in the same group, then the mean reward of the set {$T, X, Y$} is negative, so the process reward corresponding to the sub-trajectory $LL$ is negative as well.
+
+For GRPO and λ-GRPO, we swept $n∈$ {1, 2} and $r_\textit{neg}∈$ {−0.5, −1.0, −1.5} with a group size of 16 for 250 steps, ran five seeds per configuration, and recorded how often the model produced the target $T$ over the last 50 steps. Under all configurations, λ-GRPO converges on the target $T$ more frequently than standard GRPO:
+
+TODO: table 1
+
+Zooming in on the row $n=1,r_\textit{neg}=-1.0$, we see that GRPO-trained models *do* generate the target early on. They didn't fail to discover $T$: they failed to exploit it, because its prefix had negative step-level reward.
+
+TODO: figure 5
+
+# Downstream results
+
+Next, we evaluated λ-GRPO against GRPO on actual training data and evaluation benchmarks. We fine-tuned DeepSeek-R1-Distill-Qwen-1.5B and Llama-3.2-1B-Instruct on OpenRS with λ-GRPO and standard GRPO under identical settings (two KL coefficients, $β∈$ {0, 0.04}), then evaluated on five reasoning benchmarks. λ-GRPO beats standard GRPO on 15 of 20 benchmark cells and improves over the untuned base on 14 of 20, with gains holding across both model families and both KL settings:
+
+TODO: Table 2
+
+# Conclusion
 
 TODO: finish
-
 
 # References
 
