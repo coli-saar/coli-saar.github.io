@@ -25,6 +25,7 @@ bibtex: |
 
 **UNDER CONSTRUCTION: this blog post is still under construction. It will be finished by ~June 18**
 
+TODO: fig 1
 
 # Main Idea
 
