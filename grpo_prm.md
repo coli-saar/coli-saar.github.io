@@ -25,7 +25,9 @@ bibtex: |
 
 **UNDER CONSTRUCTION: this blog post is still under construction. It will be finished by ~June 18**
 
-TODO: fig 1
+<center>
+    <img src="static/images/grpo_prm/fig1.png" width="65%" />
+</center>
 
 # Main Idea
 
