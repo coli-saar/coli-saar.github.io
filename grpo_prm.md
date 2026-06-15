@@ -113,7 +113,15 @@ To mitigate this imbalanced-freqency effect, we propose normalizing the GRPO los
 
 TODO: λ-GRPO equation
 
+We evaluated GRPO and λ-GRPO on a toy, synthetic task using GPT-2-small (TODO: cite), so that we could assess their robustness to this imbalanced process step/reward frequency effect.
+
+## The environment
+
+Take a depth-four binary tree. At each step the model emits one of two tokens, $L$ or $R$ (everything else is masked), tracing a root-to-leaf path. We then rig the rewards to be adversarial:
+
+
 TODO: finish
+
 
 # References
 
