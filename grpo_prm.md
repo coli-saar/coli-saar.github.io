@@ -23,6 +23,9 @@ bibtex: |
     }
 ---
 
+**UNDER CONSTRUCTION: this blog post is still under construction. It will be finished by ~June 18**
+
+
 # Main Idea
 
 **The short version:** an *outcome* reward model (ORM) scores a whole trajectory with a single number, while a *process* reward model (PRM) scores individual steps, which helps multi-step reasoning but normally demands costly training and step-level annotation. Group Relative Policy Optimization (GRPO; TODO: cite), the popular critic-free reinforcement learning (RL) algorithm, operates at the outcome-level: each completion has a single reward. 
