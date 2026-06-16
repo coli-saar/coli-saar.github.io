@@ -113,27 +113,27 @@ Let's walk through why. Suppose two completions *y*<sup>(1)</sup> and *y*<sup>(2
     <img src="static/images/grpo_prm/grpo_prm_intuition.png" width="75%" />
 </center>
 
-Now let $a_3=+1$, $a_4=+1$, $a_5=−1$ on three completions $y^{(3)}$, $y^{(4)}$, $y^{(5)}$ sharing a prefix $JKL$. The net force on the shared span is (+1) + (+1) + (-1) = 1/3 + 1/3 + 1/3 = 1: identical to the sum of mean advantage of the trajectories passing through it (this is just basic arithmetic). That mean is precisely a Monte-Carlo estimate of the step's expected advantage.
+Now let *a<sub>3</sub> = +1*, *a<sub>4</sub> = +1*, *a<sub>5</sub> = +1* on three completions *y*<sup>(3)</sup>, *y*<sup>(4)</sup>, *y*<sup>(5)</sup> sharing a prefix *JKL*. The net force on the shared span is (+1) + (+1) + (-1) = 1/3 + 1/3 + 1/3 = 1: identical to the sum of mean advantage of the trajectories passing through it (this is just basic arithmetic). That mean is precisely a Monte-Carlo estimate of the step's expected advantage.
 
-**Defining the PRM:** we'll leave the technical derivation and proof of correctness of the PRM to the paper. The point is that because of GRPO's simple advantage estimation term, we can work backward and derive a Monte-Carlo PRM from the Monte-Carlo advantage estimate: averaging advantages is identical to averaging rewards, then computing the advantage of the averaged reward. 
+**Defining the PRM:** we leave the technical derivation and proof of correctness of the PRM to the paper. The point is that because of GRPO's simple advantage estimation term, we can work backward and derive a Monte-Carlo PRM from the Monte-Carlo advantage estimate: averaging advantages is identical to averaging rewards, then computing the advantage of the averaged reward. 
 
-For each trajectory $y^{(i)}$ and each token $t$ in $y^{(i)}$, we define a token-level reward $R_{i,t}$ as the mean outcome-level reward of each trajectory passing through the prefix-overlap-defined process step that $t$ belongs to.
+For each trajectory *y*<sup>(i)</sup> and each token *t* in *y*<sup>(i)</sup>, we define a token-level reward *R<sub>i,t</sub> as the mean outcome-level reward of each trajectory passing through the prefix-overlap-defined process step that *t* belongs to.
 
 TODO: example from slides
 
-Then, we define the step-level advantage $A_{i,t}$ like in GRPO:
+Then, we define the step-level advantage *A<sub>i,t</sub> like in GRPO:
 
 <center>
     <img src="static/images/grpo_prm/grpo_prm_adv.png" width="27%" />
 </center>
 
-Now we plug $A_{i,t}$ into a GRPO-like RL objective:
+Now we plug *A<sub>i,t</sub> into a GRPO-like RL objective:
 
 <center>
     <img src="static/images/grpo_prm/grpo_prm_loss.png" width="55%" />
 </center>
 
-$L_\textit{PRM}$ is *clearly* a PRM-aware RL objective equipped with a Monte-Carlo-estimate PRM. But this is just a trick: $L_\textit{PRM}=L_\textit{GRPO}$&mdash;we can derive one from the other through simple algebraic manipulation. If what we defined above is a PRM-aware RL objective equipped with a Monte-Carlo-estimate PRM, then GRPO must be too, because $L_\textit{PRM}$ *is* $L_\textit{GRPO}$.
+*L<sub>PRM</sub>* is *clearly* a PRM-aware RL objective equipped with a Monte-Carlo-estimate PRM. But this is just a trick: *L<sub>PRM</sub>* = *L<sub>GRPO</sub>*&mdash;we can derive one from the other through simple algebraic manipulation. If what we defined above is a PRM-aware RL objective equipped with a Monte-Carlo-estimate PRM, then GRPO must be too, because *L<sub>PRM</sub>* *is* *L<sub>GRPO</sub>*.
 
 # Does overlap actually happen?
 
