@@ -44,7 +44,7 @@ Why does this matter? We show that GRPO's implicit PRM carries a flaw: a frequen
 
   <br><br>
   
-  <b>ORMs and PRMs:</b> When you train a language model to reason with RL, you have to decide where the reward signal lives. The simplest choice is an ORM, where the model produces a full solution, and we hand back a single scalar for the entire trajectory. This is what we see in most RLVR and math-reasoning pipelines: *r = 1* if the boxed answer matches, *r = 0* otherwise. 
+  <b>ORMs and PRMs:</b> When you train a language model to reason with RL, you have to decide where the reward signal lives. The simplest choice is an ORM, where the model produces a full solution, and we hand back a single scalar for the entire trajectory. This is what we see in most RLVR and math-reasoning pipelines: _r = 1_ if the boxed answer matches, *r = 0* otherwise. 
   
   <br><br>
 
@@ -60,7 +60,7 @@ Why does this matter? We show that GRPO's implicit PRM carries a flaw: a frequen
 
   <br><br>
   
-For each prompt/query *x*, GRPO samples a group *G* of *k* completions *y<sup>(i)</sup>* $y^{(i)}$ with rewards $r_i$​, and computes the group-relative advantage $a_i$:  
+For each prompt/query *x*, GRPO samples a group *G* of *k* completions *y<sup>(i)</sup>* $y^{(i)}$ with rewards *r<sub>i</sub>*, and computes the group-relative advantage *a<sub>i</sub>*:  
 
   <br><br>
 
