@@ -97,7 +97,7 @@ Notice that every token in completion $y^{(i)}$ is multiplied by the same trajec
 
 # Assumptions
 
-Because it is the standard GRPO loss function employed in commonly used RL package, we assume the use of the DAPO objective (a variant of GRPO). For a clean a clean derivation, we assume that the number of update iterations $\mu=1$, so that we can ignore the PPO clipping factor. Under those two assumptions, we have the following GRPO optimization objective:
+Because it is the standard GRPO loss function employed in commonly used RL package, we assume the use of the DAPO objective (a variant of GRPO). For a clean a clean derivation, we assume that the number of update iterations *μ = 1*, so that we can ignore the PPO clipping factor. Under those two assumptions, we have the following GRPO optimization objective:
 
 <center>
     <img src="static/images/grpo_prm/grpo_loss_reduced_eq.png" width="50%" />
