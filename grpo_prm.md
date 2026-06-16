@@ -123,7 +123,7 @@ Now let *a<sub>3</sub> = +1*, *a<sub>4</sub> = +1*, *a<sub>5</sub> = +1* on thre
 
 **Defining the PRM:** we leave the technical derivation and proof of correctness of the PRM to the paper. The point is that because of GRPO's simple advantage estimation term, we can work backward and derive a Monte-Carlo PRM from the Monte-Carlo advantage estimate: averaging advantages is identical to averaging rewards, then computing the advantage of the averaged reward. 
 
-For each trajectory *y*<sup>(i)</sup> and each token *t* in *y*<sup>(i)</sup>, we define a token-level reward *R<sub>i,t</sub> as the mean outcome-level reward of each trajectory passing through the prefix-overlap-defined process step that *t* belongs to.
+For each trajectory *y*<sup>(i)</sup> and each token *t* in *y*<sup>(i)</sup>, we define a token-level reward *R<sub>i,t</sub>*, which is as the mean outcome-level reward of each trajectory passing through the prefix-overlap-defined process step that *t* belongs to.
 
 TODO: example from slides
 
