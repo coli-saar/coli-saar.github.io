@@ -41,36 +41,56 @@ Why does this matter? We show that GRPO's implicit PRM carries a flaw: a frequen
 <summary>
 <b>Background (skip if already familiar with ORMs/PRMs and GRPO)</b>
 </summary>
+
+  <br><br>
   
-  <b>ORMs and PRMs:</b> When you train a language model to reason with RL, you have to decide where the reward signal lives. The simplest choice is an ORM, where the model produces a full solution, and we hand back a single scalar for the entire trajectory. This is what we see in most RLVR and math-reasoning pipelines: $r = 1$ if the boxed answer matches, $r = 0$ otherwise. 
+  <b>ORMs and PRMs:</b> When you train a language model to reason with RL, you have to decide where the reward signal lives. The simplest choice is an ORM, where the model produces a full solution, and we hand back a single scalar for the entire trajectory. This is what we see in most RLVR and math-reasoning pipelines: *r = 1* if the boxed answer matches, *r = 0* otherwise. 
   
   <br><br>
 
-  The problem here is credit assignment. A long chain of reasoning might be 99% correct and stumble on one arithmetic step, or wander for twenty lines before locking onto the right idea. An ORM treats every single token in that trajectory identically: either all the tokens were good ($r = 1$) or all the tokens were bad ($r = 0$). A PRM instead scores intermediate steps, so good early reasoning can be rewarded even when the final answer is wrong (or vice-versa).
+  The problem here is credit assignment. A long chain of reasoning might be 99% correct and stumble on one arithmetic step, or wander for twenty lines before locking onto the right idea. An ORM treats every single token in that trajectory identically: either all the tokens were good (*r = 1*) or all the tokens were bad (*r = 0*). A PRM instead scores intermediate steps, so good early reasoning can be rewarded even when the final answer is wrong (or vice-versa).
+
+  <br><br>
 
   A drawback of *learned* PRMs is that learned they need labor-intensive step-level human annotation, they are off-policy, and they are notoriously easy to reward-hack. On the other hand, *Monte-Carlo* PRMs (e.g. TODO: cite) sample completions from a given step and use their average outcome reward as the step's value&mdash;i.e. a Monte-Carlo estimate of the expected future outcome reward from that step. 
 
-  **GRPO:** effectively the default RL algorithm for reasoning today, precisely because it is cheap: it throws away PPO's critic model and generalized advantage estimation, and instead estimates advantage by comparing each completion against the mean of its group. It firmly, unambiguously operates over outcome-level rewards (the original Deepseek paper *does* define a PRM-aware GRPO, but it is a very different algorithm from the "normal" GRPO).
+  <br><br>
+
+  <b>GRPO:</b> effectively the default RL algorithm for reasoning today, precisely because it is cheap: it throws away PPO's critic model and generalized advantage estimation, and instead estimates advantage by comparing each completion against the mean of its group. It firmly, unambiguously operates over outcome-level rewards (the original Deepseek paper *does* define a PRM-aware GRPO, but it is a very different algorithm from the "normal" GRPO).
+
+  <br><br>
   
-For each prompt/query $x$, GRPO samples a group $G$ of $k$ completions $y^{(i)}$ with rewards $r_i$​, and computes the group-relative advantage $a_i$:  
+For each prompt/query *x*, GRPO samples a group *G* of *k* completions *y<sup>(i)</sup>* $y^{(i)}$ with rewards $r_i$​, and computes the group-relative advantage $a_i$:  
+
+  <br><br>
 
 <center>
     <img src="static/images/grpo_prm/grpo_adv.png" width="20%" />
 </center>
 
-GRPO optimizes the policy $\pi_\theta$ (i.e. the LLM we're training) to raise the probability of positive-advantage (above-average reward) completions and lower the probability of the negative-advantage (below-average reward) completions. After generating a group $G$, the policy is optimized for the following objective for $\mu$ iterations (technically, this is the *DAPO* objective; TODO: cite):
+  <br><br>
+
+GRPO optimizes the policy *π<sub>θ</sub>* (i.e. the LLM we're training) to raise the probability of positive-advantage (above-average reward) completions and lower the probability of the negative-advantage (below-average reward) completions. After generating a group $G$, the policy is optimized for the following objective for $\mu$ iterations (technically, this is the *DAPO* objective; TODO: cite):
+
+  <br><br>
 
 <center>
     <img src="static/images/grpo_prm/grpo_loss_full.png" width="60%" />
 </center> 
 
+  <br><br>
+
 <center>
     <img src="static/images/grpo_prm/pit_eq.png" width="25%" />
 </center>
 
+  <br><br>
+
 <center>
     <img src="static/images/grpo_prm/kl_penalty.png" width="45%" />
 </center>
+
+  <br><br>
 
 Notice that every token in completion $y^{(i)}$ is multiplied by the same trajectory-level advantage $a_i$: that uniformity is what makes GRPO look like a purely outcome-reward-based method.
 </details>
