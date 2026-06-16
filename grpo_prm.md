@@ -42,7 +42,9 @@ Why does this matter? We show that GRPO's implicit PRM carries a flaw: a frequen
 <b>Background (skip if already familiar with ORMs/PRMs and GRPO)</b>
 </summary>
   
-  **ORMs and PRMs:** When you train a language model to reason with RL, you have to decide where the reward signal lives. The simplest choice is an ORM, where the model produces a full solution, and we hand back a single scalar for the entire trajectory. This is what we see in most RLVR and math-reasoning pipelines: $r = 1$ if the boxed answer matches, $r = 0$ otherwise.
+  <b>ORMs and PRMs:</b> When you train a language model to reason with RL, you have to decide where the reward signal lives. The simplest choice is an ORM, where the model produces a full solution, and we hand back a single scalar for the entire trajectory. This is what we see in most RLVR and math-reasoning pipelines: $r = 1$ if the boxed answer matches, $r = 0$ otherwise. 
+  
+  <br><br>
 
   The problem here is credit assignment. A long chain of reasoning might be 99% correct and stumble on one arithmetic step, or wander for twenty lines before locking onto the right idea. An ORM treats every single token in that trajectory identically: either all the tokens were good ($r = 1$) or all the tokens were bad ($r = 0$). A PRM instead scores intermediate steps, so good early reasoning can be rewarded even when the final answer is wrong (or vice-versa).
 
