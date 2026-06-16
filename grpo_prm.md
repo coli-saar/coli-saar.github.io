@@ -163,7 +163,7 @@ The prefix *JKL* is shared by *JKLM*, *JKLNQST*, and *JKLNQU*, whose mean reward
 
 # λ-GRPO
 
-To mitigate this imbalanced-freqency effect, we propose normalizing the GRPO loss for each token $y^{(i)}_t$ by the number of trajectories contained in the process step $\lambda^{(i,t)}$ that the token belongs to. This gives us the PRM-aware λ-GRPO objective:
+To mitigate this imbalanced-freqency effect, we propose normalizing the GRPO loss for each token *y<sub>t</sub>*<sup>(i)</sup> $y^{(i)}_t$ by the number of trajectories contained in the process step *λ*<sup>(i,t)</sup> that the token belongs to. This gives us the PRM-aware λ-GRPO objective:
 
 <center>
     <img src="static/images/grpo_prm/lambda_grpo_eq.png" width="60%" />
