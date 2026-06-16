@@ -99,6 +99,8 @@ Notice that every token in completion <i>y</i><sup>(i)</sup> is multiplied by th
 
 Because it is the standard GRPO loss function employed in commonly used RL package, we assume the use of the DAPO objective (a variant of GRPO). For a clean a clean derivation, we assume that the number of update iterations *μ = 1*, so that we can ignore the PPO clipping factor. Under those two assumptions, we have the following GRPO optimization objective:
 
+<br>
+
 <center>
     <img src="static/images/grpo_prm/grpo_loss_reduced_eq.png" width="50%" />
 </center>
@@ -109,9 +111,13 @@ Within a group, the sampled completions almost never stay disjoint&mdash;they sh
 
 Let's walk through why. Suppose two completions *y*<sup>(1)</sup> and *y*<sup>(2)</sup> share the first two tokens, *AB*, then diverge. Say one ends up with above average reward (*a<sub>1</sub>​ = +1*), and the other below (*a<sub>2</sub>​ = -1*). On the shared tokens *AB*, *the gradient of y*<sup>(2)</sup> *is the inverse of the gradient of y*<sup>(1)</sup>: the gradient from *y*<sup>(1)</sup> pushes the probability up by +1 and that of *y*<sup>(2)</sup> pushes it down by −1&mdash;the forces cancel exactly. The net update on the shared prefix is zero, as if those tokens had been masked out of the loss entirely.
 
+<br>
+
 <center>
     <img src="static/images/grpo_prm/grpo_prm_intuition.png" width="75%" />
 </center>
+
+<br>
 
 Now let *a<sub>3</sub> = +1*, *a<sub>4</sub> = +1*, *a<sub>5</sub> = +1* on three completions *y*<sup>(3)</sup>, *y*<sup>(4)</sup>, *y*<sup>(5)</sup> sharing a prefix *JKL*. The net force on the shared span is (+1) + (+1) + (-1) = 1/3 + 1/3 + 1/3 = 1: identical to the sum of mean advantage of the trajectories passing through it (this is just basic arithmetic). That mean is precisely a Monte-Carlo estimate of the step's expected advantage.
 
@@ -123,15 +129,23 @@ TODO: example from slides
 
 Then, we define the step-level advantage *A<sub>i,t</sub> like in GRPO:
 
+<br>
+
 <center>
     <img src="static/images/grpo_prm/grpo_prm_adv.png" width="21%" />
 </center>
 
+<br>
+
 Now we plug *A<sub>i,t</sub> into a GRPO-like RL objective:
+
+<br>
 
 <center>
     <img src="static/images/grpo_prm/grpo_prm_loss.png" width="55%" />
 </center>
+
+<br>
 
 *L<sub>PRM</sub>* is *clearly* a PRM-aware RL objective equipped with a Monte-Carlo-estimate PRM. But this is just a trick: *L<sub>PRM</sub>* = *L<sub>GRPO</sub>*&mdash;we can derive one from the other through simple algebraic manipulation. If what we defined above is a PRM-aware RL objective equipped with a Monte-Carlo-estimate PRM, then GRPO must be too, because *L<sub>PRM</sub>* *is* *L<sub>GRPO</sub>*.
 
@@ -144,6 +158,8 @@ To measure this, we trained two DeepSeek-R1-Distill-Qwen-1.5B models (group size
 - **Path depth:** how many process steps sit between the root and a leaf. Smaller values mean a flatter, more trivial trees; larger ones mean richer prefix overlap.
 - **Intermediate Proportion:** the fraction of a trajectory's tokens that fall inside a shared prefix (i.e. the share of tokens actually receiving non-trivial process reward).
 
+<br>
+
 <center>
     <img src="static/images/grpo_prm/exp0_res.png" width="90%" />
 </center>
@@ -155,9 +171,13 @@ both prefix-overlap metrics rise steeply as the policy converges and entropy dro
 
 Because it's unintentional, it would be optimistic to assume the GRPO's secret PRM is actually a *good* PRM (it's not). Now that we've made the implicit PRM explicit, we can study and evaluate it. Consider the example in the figure below:
 
+<br>
+
 <center>
     <img src="static/images/grpo_prm/bad_prm_ex.png" width="70%" />
 </center>
+
+<br>
 
 The prefix *JKL* is shared by *JKLM*, *JKLNQST*, and *JKLNQU*, whose mean reward is 0.33: this is below the group mean of 0.42, so the process step $JKL$ gets a *negative* advantage (-0.22), pushing its probability *down*. Because $JKL$ is repeated in three trajectories, its probability gets pushed down by a factor of -0.22 three times, even though $JKLM$ is the highest-reward trajectory in the group!
 
@@ -165,9 +185,13 @@ The prefix *JKL* is shared by *JKLM*, *JKLNQST*, and *JKLNQU*, whose mean reward
 
 To mitigate this imbalanced-freqency effect, we propose normalizing the GRPO loss for each token *y<sub>t</sub>*<sup>(i)</sup> by the number of trajectories contained in the process step *λ*<sup>(i, t)</sup> that the token belongs to. This gives us the PRM-aware λ-GRPO objective:
 
+<br>
+
 <center>
     <img src="static/images/grpo_prm/lambda_grpo_eq.png" width="60%" />
 </center>
+
+<br>
 
 We evaluated GRPO and λ-GRPO on a toy, synthetic task using GPT-2-small (TODO: cite), so that we could assess their robustness to this imbalanced process step/reward frequency effect.
 
@@ -178,20 +202,30 @@ Take a depth-four binary tree. At each step the model emits one of two tokens, *
 - Sample one path as the *target* *T* (say, *LLRL*) and give it the maximum reward (+1.0)
 - Pick a prefix length *n*. Every *other* path that shares the first *n* tokens of *T* gets a *negative* reward (*r<sub>neg</sub>* < 0)
 - All other paths get a reward of +0.7
+
+<br>
   
 <center>
     <img src="static/images/grpo_prm/tree.png" width="50%" />
 </center>
 
+<br>
+
 This creates a trap, where the target's own siblings poison its shared prefix: if the trajectories *T = LLRL*, *X = LLLR*, and *Y = LLRR* are in the same group, then the mean reward of the set {*T*, *X*, *Y*} is negative, so the process reward corresponding to the sub-trajectory *LL* is negative as well.
 
 For GRPO and λ-GRPO, we swept *n* ∈ {1, 2} and *r<sub>neg</sub>* ∈ {−0.5, −1.0, −1.5} with a group size of 16 for 250 steps, ran five seeds per configuration, and recorded how often the model produced the target *T* over the last 50 steps. Under all configurations, λ-GRPO converges on the target *T* more frequently than standard GRPO:
+
+<br>
 
 <center>
     <img src="static/images/grpo_prm/table1.png" width="50%" />
 </center>
 
+<br>
+
 Zooming in on the row *n = 1*, *r<sub>neg</sub>* = -1.0, we see that GRPO-trained models *do* generate the target early on. They didn't fail to discover *T*: they failed to exploit it, because its prefix had negative step-level reward.
+
+<br>
 
 <center>
     <img src="static/images/grpo_prm/target_freq.png" width="40%" />
@@ -201,9 +235,13 @@ Zooming in on the row *n = 1*, *r<sub>neg</sub>* = -1.0, we see that GRPO-traine
 
 Next, we evaluated λ-GRPO against GRPO on actual training data and evaluation benchmarks. We fine-tuned DeepSeek-R1-Distill-Qwen-1.5B and Llama-3.2-1B-Instruct on OpenRS with λ-GRPO and standard GRPO under identical settings (two KL coefficients, *β* ∈ {0, 0.04}), then evaluated on five reasoning benchmarks. λ-GRPO beats standard GRPO on 15 of 20 benchmark cells and improves over the untuned base on 14 of 20, with gains holding across both model families and both KL settings:
 
+<br>
+
 <center>
     <img src="static/images/grpo_prm/table2.png" width="85%" />
 </center>
+
+<br>
 
 # Conclusion
 
