@@ -42,7 +42,7 @@ Why does this matter? We show that GRPO's implicit PRM carries a flaw: a frequen
 <b>Background (skip if already familiar with ORMs/PRMs and GRPO)</b>
 </summary>
 
-  <br><br>
+  <br>
   
   <b>ORMs and PRMs:</b> When you train a language model to reason with RL, you have to decide where the reward signal lives. The simplest choice is an ORM, where the model produces a full solution, and we hand back a single scalar for the entire trajectory. This is what we see in most RLVR and math-reasoning pipelines: <i>r = 1</i> if the boxed answer matches, <i>r = 0</i> otherwise. 
   
@@ -124,7 +124,7 @@ TODO: example from slides
 Then, we define the step-level advantage *A<sub>i,t</sub> like in GRPO:
 
 <center>
-    <img src="static/images/grpo_prm/grpo_prm_adv.png" width="27%" />
+    <img src="static/images/grpo_prm/grpo_prm_adv.png" width="21%" />
 </center>
 
 Now we plug *A<sub>i,t</sub> into a GRPO-like RL objective:
@@ -139,7 +139,7 @@ Now we plug *A<sub>i,t</sub> into a GRPO-like RL objective:
 
 This is only interesting if the implicit PRM is non-trivial. If trajectories in a group never share prefixes, the tree is flat, every step is a whole trajectory, and the PRM collapses back into an ordinary ORM. So the next question is empirical: in actual GRPO training, do prefixes overlap enough to matter?
 
-To measure this we trained two DeepSeek-R1-Distill-Qwen-1.5B models (group sizes 6 and 36) on the OpenRS (TODO: cite) math dataset, built the overlapping-prefix tree for every group, and tracked two quantities:
+To measure this, we trained two DeepSeek-R1-Distill-Qwen-1.5B models (group sizes 6 and 36) on the OpenRS (TODO: cite) math dataset, built the overlapping-prefix tree for every group, and tracked two quantities:
 
 - **Path depth:** how many process steps sit between the root and a leaf. Smaller values mean a flatter, more trivial trees; larger ones mean richer prefix overlap.
 - **Intermediate Proportion:** the fraction of a trajectory's tokens that fall inside a shared prefix (i.e. the share of tokens actually receiving non-trivial process reward).
@@ -159,7 +159,7 @@ Because it's unintentional, it would be optimistic to assume the GRPO's secret P
     <img src="static/images/grpo_prm/bad_prm_ex.png" width="70%" />
 </center>
 
-The prefix $JKL$ is shared by $JKLM,JKLNQST,JKLNQU$, whose mean reward is 0.33: this is below the group mean of 0.42, so the process step $JKL$ gets a *negative* advantage (-0.22), pushing its probability *down*. Because $JKL$ is repeated in three trajectories, its probability gets pushed down by a factor of -0.22 three times, even though $JKLM$ is the highest-reward trajectory in the group!
+The prefix *JKL* is shared by *JKLM*, *JKLNQST*, and *JKLNQU*, whose mean reward is 0.33: this is below the group mean of 0.42, so the process step $JKL$ gets a *negative* advantage (-0.22), pushing its probability *down*. Because $JKL$ is repeated in three trajectories, its probability gets pushed down by a factor of -0.22 three times, even though $JKLM$ is the highest-reward trajectory in the group!
 
 # λ-GRPO
 
