@@ -23,8 +23,6 @@ bibtex: |
     }
 ---
 
-**UNDER CONSTRUCTION: this blog post is still under construction. It will be finished by ~June 18**
-
 <center>
     <img src="static/images/grpo_prm/fig1.png" width="65%" />
 </center>
@@ -35,7 +33,7 @@ bibtex: |
 
 So PRMs and GRPO look pretty unconnected, right? Surprisingly, no. We prove that **GRPO with a plain outcome reward is mathematically equivalent to a PRM-aware RL objective** equipped with a Monte-Carlo-based process reward model. The implicit PRM is built from overlapping trajectory prefixes inside each group, and these overlaps are everywhere in real-world training: in our experiments, 99.8%+ of groups induce non-trivial process rewards.
 
-Why does this matter? We show that GRPO's implicit PRM carries a flaw: a frequency term silently over-weights frequently-occurring process steps, hurting both exploration and exploitation. We introduce λ-GRPO, a variant of GRPO that normalizes these imbalanced frequency effects, and beats GRPO on downstream reasoning and reaches peak validation accuracy in under half the steps, at negligible cost.
+Why does this matter? We show that GRPO's implicit PRM carries a flaw: a frequency term over-weights frequently-occurring process steps, hurting both exploration and exploitation. We introduce λ-GRPO, a variant of GRPO that normalizes these imbalanced frequency effects&mdash; and beats GRPO on downstream reasoning&mdash; at negligible cost.
 
 <details closed>
 <summary>
@@ -56,11 +54,11 @@ Why does this matter? We show that GRPO's implicit PRM carries a flaw: a frequen
 
   <br><br>
 
-  <b>GRPO:</b> This is basically the default RL algorithm for reasoning today, mainly because it is cheap and effective. It throws away PPO's critic model and generalized advantage estimation, and instead estimates advantage by comparing each completion against the mean of its group. It firmly, unambiguously operates over outcome-level rewards (the original Deepseek paper <i>does</i> define a PRM-aware GRPO, but it is a very different algorithm from the "normal" GRPO).
+  <b>GRPO:</b> This is basically the default RL algorithm for reasoning today, mainly because it is cheap and effective. It throws away PPO's critic model and generalized advantage estimation, and instead estimates advantage by comparing each completion against the mean of its group. It firmly, unambiguously operates over outcome-level rewards (the original DeepSeek paper <i>does</i> define a PRM-aware GRPO, but it is a very different algorithm from the "normal" GRPO).
 
   <br><br>
   
-For each prompt/query <i>x</i>, GRPO samples a group <i>G</i> of <i>k</i> completions <i>y</i><sup>(i)</sup> with rewards <i>r<sub>i</sub></i>, and computes the group-relative advantage <i>a<sub>i</sub></i>:  
+For each prompt/query <i>x</i>, GRPO samples a group <i>G</i> of <i>k</i> completions <i>y</i><sup>(i)</sup> with rewards <i>r<sub>i</sub></i>, and computes the group-relative advantage <i>a<sub>i </sub></i>:  
 
   <br><br>
 
@@ -92,7 +90,7 @@ GRPO optimizes the policy <i>π<sub>θ</sub></i> (i.e. the LLM we're training) t
 
   <br><br>
 
-Notice that every token in completion <i>y</i><sup>(i)</sup> is multiplied by the same trajectory-level advantage <i>a<sub>i</sub></i>: that uniformity is what makes GRPO look like a purely outcome-reward-based method.
+Notice that every token in completion <i>y</i><sup>(i)</sup> is multiplied by the same trajectory-level advantage <i>a<sub>i </sub></i>: that uniformity is what makes GRPO look like a purely outcome-reward-based method.
 </details>
 
 # Assumptions
@@ -105,9 +103,21 @@ Because it is the standard GRPO loss function employed in commonly used RL packa
     <img src="static/images/grpo_prm/grpo_loss_reduced_eq.png" width="50%" />
 </center>
 
+<br><br>
+
+<center>
+    <img src="static/images/grpo_prm/pit_eq.png" width="25%" />
+</center>
+
+<br><br>
+
+<center>
+    <img src="static/images/grpo_prm/kl_penalty.png" width="45%" />
+</center>
+
 # Overlapping prefixes induce process steps
 
-Within a group, the sampled completions almost never stay disjoint&mdash;they share prefixes. For example, several trajectories within the same group might all begin "First, let's add 18 to both sides..." before branching apart. The key here is: **whenever a set of trajectories shares an opening prefix, that shared span behaves like a single process step**.
+Within a group, the sampled completions almost never stay disjoint&mdash;they share prefixes. For example, several trajectories within the same group might all begin "First, let's add 18 to both sides..." before branching apart. **Whenever a set of trajectories shares an opening prefix, that shared span behaves like a single process step**.
 
 Let's walk through why. Suppose two completions *y*<sup>(1)</sup> and *y*<sup>(2)</sup> share the first two tokens, *AB*, then diverge. Say one ends up with above average reward (*a<sub>1</sub>​ = +1*), and the other below (*a<sub>2</sub>​ = -1*). On the shared tokens *AB*, *the gradient of y*<sup>(2)</sup> *is the inverse of the gradient of y*<sup>(1)</sup>: the gradient from *y*<sup>(1)</sup> pushes the probability up by +1 and that of *y*<sup>(2)</sup> pushes it down by −1&mdash;the forces cancel exactly. The net update on the shared prefix is zero, as if those tokens had been masked out of the loss entirely.
 
@@ -121,9 +131,9 @@ Let's walk through why. Suppose two completions *y*<sup>(1)</sup> and *y*<sup>(2
 
 Now let *a<sub>3</sub> = +1*, *a<sub>4</sub> = +1*, *a<sub>5</sub> = +1* on three completions *y*<sup>(3)</sup>, *y*<sup>(4)</sup>, *y*<sup>(5)</sup> sharing a prefix *JKL*. The net force on the shared span is (+1) + (+1) + (-1) = 1/3 + 1/3 + 1/3 = 1: identical to the sum of mean advantage of the trajectories passing through it (this is just basic arithmetic). That mean is precisely a Monte-Carlo estimate of the step's expected advantage.
 
-**Defining the PRM:** we leave the technical derivation and proof of correctness of the PRM to the paper. The point is that because of GRPO's simple advantage estimation term, we can work backward and derive a Monte-Carlo PRM from the Monte-Carlo advantage estimate: averaging advantages is identical to averaging rewards, then computing the advantage of the averaged reward. 
+**Defining the PRM:** We leave the technical derivation and proof of correctness of the PRM to the paper. The point is that because of GRPO's simple advantage estimation term, we can work backward and derive a Monte-Carlo PRM from the Monte-Carlo advantage estimate: averaging advantages is identical to averaging rewards, then computing the advantage of the averaged reward. 
 
-For each trajectory *y*<sup>(i)</sup> and each token *t* in *y*<sup>(i)</sup>, we define a token-level reward *R<sub>i,t</sub>*, which is as the mean outcome-level reward of each trajectory passing through the prefix-overlap-defined process step that *t* belongs to.
+For each trajectory *y*<sup>(i)</sup> and each token *t* in *y*<sup>(i)</sup>, we define a token-level reward *R<sub>i,t</sub>*, which is as the mean outcome-level reward of each trajectory passing through the prefix-overlap-defined process step that *t* belongs to. For example, for each token *y<sub>0</sub>*<sup>(3)</sup> ... *y<sub>2</sub>*<sup>(5)</sup> in *JKL* in the figure above, the reward *R<sub>i,t</sub>* for that token is *r<sub>mean</sub>*({*y*<sup>(3)</sup>, *y*<sup>(4)</sup>, *y*<sup>(5)</sup>}).
 
 Now we can define the step-level advantage *A<sub>i,t</sub>*, just like in GRPO:
 
@@ -162,6 +172,8 @@ To measure this, we trained two DeepSeek-R1-Distill-Qwen-1.5B models (group size
     <img src="static/images/grpo_prm/exp0_res.png" width="90%" />
 </center>
 
+<br>
+
 At group size 6, only 12 of 6,700 trees were flat (about 0.2%), and at group size 36, not a single one of 1,100 trees was trivial. And 
 both prefix-overlap metrics rise steeply as the policy converges and entropy drops: essentially **every group GRPO ever trained on carried a non-trivial, structured step-level reward signal** secretly derived from the outcome reward.
 
@@ -177,7 +189,7 @@ Because it's unintentional, it would be optimistic to assume the GRPO's secret P
 
 <br>
 
-The prefix *JKL* is shared by *JKLM*, *JKLNQST*, and *JKLNQU*, whose mean reward is 0.33: this is below the group mean of 0.42, so the process step *JKL* gets a *negative* advantage (-0.22), pushing its probability *down*. Because $JKL$ is repeated in three trajectories, its probability gets pushed down by a factor of -0.22 three times, even though $JKLM$ is the highest-reward trajectory in the group!
+The prefix *JKL* is shared by *JKLM*, *JKLNQST*, and *JKLNQU*, whose mean reward is 0.33: this is below the group mean of 0.42, so the process step *JKL* gets a *negative* advantage (-0.22), pushing its probability *down*. Because *JKL* is repeated in three trajectories, its probability gets pushed down by a factor of -0.22 three times, even though *JKLM* is the highest-reward trajectory in the group!
 
 # λ-GRPO
 
@@ -193,9 +205,7 @@ To mitigate this imbalanced-freqency effect, we propose normalizing the GRPO los
 
 We evaluated GRPO and λ-GRPO on a toy, synthetic task using GPT-2-small (Radford et al., 2018), so that we could assess their robustness to this imbalanced process step/reward frequency effect.
 
-## The environment
-
-Take a depth-four binary tree. At each step the model emits one of two tokens, *L* or *R* (everything else is masked), tracing a root-to-leaf path. We then rig the rewards to be adversarial:
+**The environment:** Take a depth-four binary tree. At each step the model emits one of two tokens, *L* or *R* (everything else is masked), tracing a root-to-leaf path. We then rig the rewards to be adversarial:
 
 - Sample one path as the *target* *T* (say, *LLRL*) and give it the maximum reward (+1.0)
 - Pick a prefix length *n*. Every *other* path that shares the first *n* tokens of *T* gets a *negative* reward (*r<sub>neg</sub>* < 0)
@@ -211,7 +221,7 @@ Take a depth-four binary tree. At each step the model emits one of two tokens, *
 
 This creates a trap, where the target's own siblings poison its shared prefix: if the trajectories *T = LLRL*, *X = LLLR*, and *Y = LLRR* are in the same group, then the mean reward of the set {*T*, *X*, *Y*} is negative, so the process reward corresponding to the sub-trajectory *LL* is negative as well.
 
-For GRPO and λ-GRPO, we swept *n* ∈ {1, 2} and *r<sub>neg</sub>* ∈ {−0.5, −1.0, −1.5} with a group size of 16 for 250 steps, ran five seeds per configuration, and recorded how often the model produced the target *T* over the last 50 steps. Under all configurations, λ-GRPO converges on the target *T* more frequently than standard GRPO:
+**Results:** For GRPO and λ-GRPO, we swept *n* ∈ {1, 2} and *r<sub>neg</sub>* ∈ {−0.5, −1.0, −1.5} with a group size of 16 for 250 steps, ran five seeds per configuration, and recorded how often the model produced the target *T* over the last 50 steps. Under all configurations, λ-GRPO converges on the target *T* more frequently than standard GRPO:
 
 <br>
 
