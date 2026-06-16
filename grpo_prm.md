@@ -145,7 +145,7 @@ Now we plug *A<sub>i,t</sub>* into a GRPO-like RL objective:
 
 <br>
 
-*L<sub>PRM</sub>* is *clearly* a PRM-aware RL objective equipped with a Monte-Carlo-estimate PRM. But this is just a trick: *L<sub>PRM</sub>* = *L<sub>GRPO</sub>*&mdash;we can derive one from the other through simple algebraic manipulation. If what we defined above is a PRM-aware RL objective equipped with a Monte-Carlo-estimate PRM, then GRPO must be too, because *L<sub>PRM</sub>* *is* *L<sub>GRPO</sub>*.
+*L<sub>PRM</sub>* is *clearly* a PRM-aware RL objective equipped with a Monte-Carlo-estimate PRM. But this is just a trick: *L<sub>PRM</sub>* = *L<sub>GRPO</sub>*&mdash;we can derive one from the other through simple algebraic manipulation. If what we defined above is a PRM-aware RL objective equipped with a Monte-Carlo-estimate PRM, then GRPO must be too, because ***L<sub>PRM</sub> is L<sub>GRPO</sub>***.
 
 # Does overlap actually happen?
 
