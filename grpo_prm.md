@@ -60,7 +60,7 @@ Why does this matter? We show that GRPO's implicit PRM carries a flaw: a frequen
 
   <br><br>
   
-For each prompt/query <i>x</i>, GRPO samples a group <i>G</i> of <i>k</i> completions <i>y</i><sup>(<i>i</i>)</sup> with rewards <i>r<sub>i</sub></i>, and computes the group-relative advantage <i>a<sub>i</sub></i>:  
+For each prompt/query <i>x</i>, GRPO samples a group <i>G</i> of <i>k</i> completions <i>y</i><sup>(i)</sup> with rewards <i>r<sub>i</sub></i>, and computes the group-relative advantage <i>a<sub>i</sub></i>:  
 
   <br><br>
 
@@ -92,7 +92,7 @@ GRPO optimizes the policy <i>π<sub>θ</sub></i> (i.e. the LLM we're training) t
 
   <br><br>
 
-Notice that every token in completion <i>y</i><sup>(<i>i</i>)</sup> is multiplied by the same trajectory-level advantage <i>a<sub>i</sub></i>: that uniformity is what makes GRPO look like a purely outcome-reward-based method.
+Notice that every token in completion <i>y</i><sup>(i)</sup> is multiplied by the same trajectory-level advantage <i>a<sub>i</sub></i>: that uniformity is what makes GRPO look like a purely outcome-reward-based method.
 </details>
 
 # Assumptions
