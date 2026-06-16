@@ -127,7 +127,7 @@ For each trajectory *y*<sup>(i)</sup> and each token *t* in *y*<sup>(i)</sup>, w
 
 TODO: example from slides
 
-Then, we define the step-level advantage *A<sub>i,t</sub> like in GRPO:
+Then, we define the step-level advantage *A<sub>i,t</sub>* like in GRPO:
 
 <br>
 
@@ -137,7 +137,7 @@ Then, we define the step-level advantage *A<sub>i,t</sub> like in GRPO:
 
 <br>
 
-Now we plug *A<sub>i,t</sub> into a GRPO-like RL objective:
+Now we plug *A<sub>i,t</sub>* into a GRPO-like RL objective:
 
 <br>
 
