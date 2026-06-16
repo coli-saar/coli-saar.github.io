@@ -31,7 +31,7 @@ bibtex: |
 
 # Main Idea
 
-**The short version:** an *outcome* reward model (ORM) scores a whole trajectory with a single number, while a *process* reward model (PRM) scores individual steps, which helps multi-step reasoning but normally demands costly training and step-level annotation. Group Relative Policy Optimization (GRPO; TODO: cite), the popular critic-free reinforcement learning (RL) algorithm, operates at the outcome-level: each completion has a single reward. 
+**The short version:** an *outcome* reward model (ORM) scores a whole trajectory with a single number, while a *process* reward model (PRM) scores individual steps, which helps multi-step reasoning but normally demands costly training and step-level annotation. Group Relative Policy Optimization (GRPO; Shao et al., 2024), the popular critic-free reinforcement learning (RL) algorithm, operates at the outcome-level: each completion has a single reward. 
 
 So PRMs and GRPO look pretty unconnected, right? Surprisingly, no. We prove that **GRPO with a plain outcome reward is mathematically equivalent to a PRM-aware RL objective** equipped with a Monte-Carlo-based process reward model. The implicit PRM is built from overlapping trajectory prefixes inside each group, and these overlaps are everywhere in real-world training: in our experiments, 99.8%+ of groups induce non-trivial process rewards.
 
@@ -52,7 +52,7 @@ Why does this matter? We show that GRPO's implicit PRM carries a flaw: a frequen
 
   <br><br>
 
-  A drawback of <i>learned</i> PRMs is that learned they need labor-intensive step-level human annotation, they are off-policy, and they are notoriously easy to reward-hack. On the other hand, <i>Monte-Carlo</i> PRMs (e.g. TODO: cite) sample completions from a given step and use their average outcome reward as the step's value&mdash;i.e. a Monte-Carlo estimate of the expected future outcome reward from that step. 
+  A drawback of <i>learned</i> PRMs is that learned they need labor-intensive step-level human annotation, they are off-policy, and they are notoriously easy to reward-hack. On the other hand, <i>Monte-Carlo</i> PRMs (e.g. Kazemnejad et al., 2025) sample completions from a given step and use their average outcome reward as the step's value&mdash;i.e. a Monte-Carlo estimate of the expected future outcome reward from that step. 
 
   <br><br>
 
@@ -70,7 +70,7 @@ For each prompt/query <i>x</i>, GRPO samples a group <i>G</i> of <i>k</i> comple
 
   <br><br>
 
-GRPO optimizes the policy <i>π<sub>θ</sub></i> (i.e. the LLM we're training) to raise the probability of positive-advantage (above-average reward) completions and lower the probability of the negative-advantage (below-average reward) completions. After generating a group <i>G</i>, the policy is optimized for the following objective for <i>μ</i> iterations (technically, this is the <i>DAPO</i> objective; TODO: cite):
+GRPO optimizes the policy <i>π<sub>θ</sub></i> (i.e. the LLM we're training) to raise the probability of positive-advantage (above-average reward) completions and lower the probability of the negative-advantage (below-average reward) completions. After generating a group <i>G</i>, the policy is optimized for the following objective for <i>μ</i> iterations (technically, this is the <i>DAPO</i> objective; Yu et al., 2025):
 
   <br><br>
 
@@ -151,7 +151,7 @@ Now we plug *A<sub>i,t</sub>* into a GRPO-like RL objective:
 
 This is only interesting if the implicit PRM is non-trivial. If trajectories in a group never share prefixes, the tree is flat, every step is a whole trajectory, and the PRM collapses back into an ordinary ORM. So the next question is empirical: in actual GRPO training, do prefixes overlap enough to matter?
 
-To measure this, we trained two DeepSeek-R1-Distill-Qwen-1.5B models (group sizes 6 and 36) on the OpenRS (TODO: cite) math dataset, built the overlapping-prefix tree for every group, and tracked two quantities:
+To measure this, we trained two DeepSeek-R1-Distill-Qwen-1.5B models (group sizes 6 and 36) on the OpenRS (Dang & Ngo, 2025) math dataset, built the overlapping-prefix tree for every group, and tracked two quantities:
 
 - **Path depth:** how many process steps sit between the root and a leaf. Smaller values mean a flatter, more trivial trees; larger ones mean richer prefix overlap.
 - **Intermediate Proportion:** the fraction of a trajectory's tokens that fall inside a shared prefix (i.e. the share of tokens actually receiving non-trivial process reward).
@@ -191,7 +191,7 @@ To mitigate this imbalanced-freqency effect, we propose normalizing the GRPO los
 
 <br>
 
-We evaluated GRPO and λ-GRPO on a toy, synthetic task using GPT-2-small (TODO: cite), so that we could assess their robustness to this imbalanced process step/reward frequency effect.
+We evaluated GRPO and λ-GRPO on a toy, synthetic task using GPT-2-small (Radford et al., 2018), so that we could assess their robustness to this imbalanced process step/reward frequency effect.
 
 ## The environment
 
@@ -245,4 +245,12 @@ Ok, so maybe "GRPO is Secretly a Process Reward Model" is *a bit* inaccurate: to
 
 # References
 
-TODO
+Dang, Q. A. and Ngo, C. Reinforcement Learning for Reasoning in Small LLMs: What Works and What Doesn’t. *arXiv preprint arXiv:2503.16219*, 2025.
+
+Kazemnejad, A., Aghajohari, M., Portelance, E., Sordoni, A., Reddy, S., Courville, A., and Le Roux, N. VinePPO: Refining Credit Assignment in RL Training of LLMs. In *Forty-second International Conference on Machine Learning*, 2025.
+
+Radford, A., Wu, J., Child, R., Luan, D., Amodei, D., and Sutskever, I. Language Models are Unsupervised Multitask Learners. 2018.
+
+Shao, Z., Wang, P., Zhu, Q., Xu, R., Song, J., Bi, X., Zhang, H., Zhang, M., Li, Y., Wu, Y., and Guo, D. DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models. *arXiv preprint arXiv:2402.03300*, 2024.
+
+Yu, Q., Zhang, Z., Zhu, R., Yuan, Y., Zuo, X., Yue, Y., Dai, W., Fan, T., Liu, G., Liu, L., et al. DAPO: An Open-Source LLM Reinforcement Learning System at Scale. arXiv preprint arXiv:2503.14476, 2025.
