@@ -44,7 +44,7 @@ Why does this matter? We show that GRPO's implicit PRM carries a flaw: a frequen
 
   <br><br>
   
-  <b>ORMs and PRMs:</b> When you train a language model to reason with RL, you have to decide where the reward signal lives. The simplest choice is an ORM, where the model produces a full solution, and we hand back a single scalar for the entire trajectory. This is what we see in most RLVR and math-reasoning pipelines: _r = 1_ if the boxed answer matches, *r = 0* otherwise. 
+  <b>ORMs and PRMs:</b> When you train a language model to reason with RL, you have to decide where the reward signal lives. The simplest choice is an ORM, where the model produces a full solution, and we hand back a single scalar for the entire trajectory. This is what we see in most RLVR and math-reasoning pipelines: <i>r = 1</i> if the boxed answer matches, *r = 0* otherwise. 
   
   <br><br>
 
@@ -92,7 +92,7 @@ GRPO optimizes the policy *π<sub>θ</sub>* (i.e. the LLM we're training) to rai
 
   <br><br>
 
-Notice that every token in completion $y^{(i)}$ is multiplied by the same trajectory-level advantage $a_i$: that uniformity is what makes GRPO look like a purely outcome-reward-based method.
+Notice that every token in completion *y<sup>(i)</sup>* is multiplied by the same trajectory-level advantage *a<sub>i</sub>: that uniformity is what makes GRPO look like a purely outcome-reward-based method.
 </details>
 
 # Assumptions
@@ -107,7 +107,7 @@ Because it is the standard GRPO loss function employed in commonly used RL packa
 
 Within a group, the sampled completions almost never stay disjoint&mdash;they share prefixes. For example, several trajectories within the same group might all begin "First, let's add 18 to both sides..." before branching apart. The key here is: **whenever a set of trajectories shares an opening prefix, that shared span behaves like a single process step**.
 
-Let's walk through why. Suppose two completions $y^{(1)}$ and $y^{(2)}$ share the first two tokens, $AB$, then diverge. Say one ends up with above average reward ($a_1​=+1$), and the other below ($a_2=−1$). On the shared tokens $AB$, *the gradient of $y^{(2)}$ is the inverse of the gradient of $y^{(1)}$*: the gradient from $y^{(1)}$ pushes the probability up by +1 and that of $y^{(2)}$ pushes it down by −1&mdash;the forces cancel exactly. The net update on the shared prefix is zero, as if those tokens had been masked out of the loss entirely.
+Let's walk through why. Suppose two completions *y<sup>(1)</sup>* and *y<sup>(2)</sup>* share the first two tokens, $AB$, then diverge. Say one ends up with above average reward ($a_1​=+1$), and the other below ($a_2=−1$). On the shared tokens $AB$, *the gradient of $y^{(2)}$ is the inverse of the gradient of $y^{(1)}$*: the gradient from $y^{(1)}$ pushes the probability up by +1 and that of $y^{(2)}$ pushes it down by −1&mdash;the forces cancel exactly. The net update on the shared prefix is zero, as if those tokens had been masked out of the loss entirely.
 
 <center>
     <img src="static/images/grpo_prm/grpo_prm_intuition.png" width="75%" />
