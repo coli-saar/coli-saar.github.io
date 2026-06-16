@@ -141,7 +141,7 @@ The prefix $JKL$ is shared by $JKLM,JKLNQST,JKLNQU$, whose mean reward is 0.33: 
 
 # λ-GRPO
 
-To mitigate this imbalanced-freqency effect, we propose normalizing the GRPO loss for each token $y^{(i)}_t$ by the number of trajectories contained in the process step $\lambda^{(i,t)}$ that the token belongs to. THis gives us the PRM-aware λ-GRPO objective:
+To mitigate this imbalanced-freqency effect, we propose normalizing the GRPO loss for each token $y^{(i)}_t$ by the number of trajectories contained in the process step $\lambda^{(i,t)}$ that the token belongs to. This gives us the PRM-aware λ-GRPO objective:
 
 <center>
     <img src="static/images/grpo_prm/lambda_grpo_eq.png" width="60%" />
@@ -185,7 +185,7 @@ Next, we evaluated λ-GRPO against GRPO on actual training data and evaluation b
 
 # Conclusion
 
-TODO: finish
+Ok, so maybe "GRPO is Secretly a Process Reward Model" is *a bit* inaccurate: to be fair, "GRPO is Secretly a Process Reward Model-Aware Reinforcement Learning Algorithm Equipped with a Monte Carlo Process Reward Model" isn't nearly as catchy.  But what was so cool about this project for us was that&mdash;even with the fully accurate title&mdash;the idea is not obvious at all, but the reason why is super intuitive: you go from "no way" to "oh yeah, obviously" in about thirty seconds. Then, with the curtain lifted back, we can examine GRPO in a completely different light, and expose some pretty serious problems with that algorithm.
 
 # References
 
