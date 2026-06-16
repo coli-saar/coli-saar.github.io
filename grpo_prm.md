@@ -125,9 +125,7 @@ Now let *a<sub>3</sub> = +1*, *a<sub>4</sub> = +1*, *a<sub>5</sub> = +1* on thre
 
 For each trajectory *y*<sup>(i)</sup> and each token *t* in *y*<sup>(i)</sup>, we define a token-level reward *R<sub>i,t</sub>*, which is as the mean outcome-level reward of each trajectory passing through the prefix-overlap-defined process step that *t* belongs to.
 
-TODO: example from slides
-
-Then, we define the step-level advantage *A<sub>i,t</sub>* like in GRPO:
+Now we can define the step-level advantage *A<sub>i,t</sub>*, just like in GRPO:
 
 <br>
 
@@ -179,7 +177,7 @@ Because it's unintentional, it would be optimistic to assume the GRPO's secret P
 
 <br>
 
-The prefix *JKL* is shared by *JKLM*, *JKLNQST*, and *JKLNQU*, whose mean reward is 0.33: this is below the group mean of 0.42, so the process step $JKL$ gets a *negative* advantage (-0.22), pushing its probability *down*. Because $JKL$ is repeated in three trajectories, its probability gets pushed down by a factor of -0.22 three times, even though $JKLM$ is the highest-reward trajectory in the group!
+The prefix *JKL* is shared by *JKLM*, *JKLNQST*, and *JKLNQU*, whose mean reward is 0.33: this is below the group mean of 0.42, so the process step *JKL* gets a *negative* advantage (-0.22), pushing its probability *down*. Because $JKL$ is repeated in three trajectories, its probability gets pushed down by a factor of -0.22 three times, even though $JKLM$ is the highest-reward trajectory in the group!
 
 # λ-GRPO
 
