@@ -107,7 +107,7 @@ Because it is the standard GRPO loss function employed in commonly used RL packa
 
 Within a group, the sampled completions almost never stay disjoint&mdash;they share prefixes. For example, several trajectories within the same group might all begin "First, let's add 18 to both sides..." before branching apart. The key here is: **whenever a set of trajectories shares an opening prefix, that shared span behaves like a single process step**.
 
-Let's walk through why. Suppose two completions *y<sup>(1)</sup>* and *y<sup>(2)</sup>* share the first two tokens, $AB$, then diverge. Say one ends up with above average reward ($a_1​=+1$), and the other below ($a_2=−1$). On the shared tokens $AB$, *the gradient of $y^{(2)}$ is the inverse of the gradient of $y^{(1)}$*: the gradient from $y^{(1)}$ pushes the probability up by +1 and that of $y^{(2)}$ pushes it down by −1&mdash;the forces cancel exactly. The net update on the shared prefix is zero, as if those tokens had been masked out of the loss entirely.
+Let's walk through why. Suppose two completions *y*<sup>(1)</sup> and *y*<sup>(2)</sup> share the first two tokens, *AB*, then diverge. Say one ends up with above average reward (*a<sub>1</sub>​ = +1*), and the other below (*a<sub>2</sub>​ = -1*). On the shared tokens *AB*, *the gradient of y<sup>(2)</sup> is the inverse of the gradient of y<sup>(1)</sup>*: the gradient from *y<sup>(1)</sup>* pushes the probability up by +1 and that of *y<sup>(2)</sup>* pushes it down by −1&mdash;the forces cancel exactly. The net update on the shared prefix is zero, as if those tokens had been masked out of the loss entirely.
 
 <center>
     <img src="static/images/grpo_prm/grpo_prm_intuition.png" width="75%" />
